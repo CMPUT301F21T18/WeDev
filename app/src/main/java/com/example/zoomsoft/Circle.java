@@ -1,4 +1,4 @@
 package com.example.zoomsoft;
 
-public class Circle {
+public class Circle extends Shape  {
 }
