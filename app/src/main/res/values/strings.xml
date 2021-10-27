@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Zoomsoft</string>
+    <string name="app_name">ZoomSoft</string>
+    <string name="login">Login</string>
+    <string name="track_your_habits">Track Your Habits</string>
+    <string name="signup">Register</string>
+    <string name="zoomsoft">ZOOMSOFT</string>
+    <string name="password">Enter your password</string>
+    <string name="email">Enter your email</string>
+    <string name="register">Register</string>
+    <string name="username">Enter your username</string>
 </resources>
