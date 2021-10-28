@@ -10,9 +10,13 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -27,6 +31,12 @@ public class register extends AppCompatActivity {
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
     public User user;
 
+    //STEPS TAKEN FOR REGISTER
+    //When the user clicks on register,
+    //check to make sure that the user did not provide an empty field value
+    //check to make sure that email does not exist
+    //if it exists, display an alert saying email exists already
+    //else the data into the cloud firebase and make a call to the home activity because the user has been authenticated
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,58 +54,53 @@ public class register extends AppCompatActivity {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 user = new User(username, email, password);
-                //perform validation and make sure the username is unique and does not exist in the collection(Users/username)->can be done later on
-                //add into firebase
                 HashMap<String, String> data = new HashMap<>();
-                if(username.length() > 0 && email.length() > 0 && password.length() > 6) {
-                    data.put("email", email);
+                if(username.length() > 0 && email.length() > 0 && password.length() > 0) {
+                    data.put("username", username);
                     data.put("password", password);
-//                    data.put("username", username);
-                    collectionReference
-                            .document(username)
-                            .set(data)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Log.d(TAG, "Data has been added successfully!");
-                                    //call the home activity from here
-                                    //===========>
+
+                    DocumentReference documentReference = db.collection("User").document(email);
+                    documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                assert document != null;
+                                if(document.exists()) {
+                                    //use the document to login
+                                    Log.d(TAG, "User already exists with the email provided");
+                                    //display alert
                                 }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.d(TAG, "Data could not be added!" + e.toString());
+                                else {
+                                    //not such document
+                                    //create a new document
+                                    collectionReference
+                                            .document(email)
+                                            .set(data)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Log.d(TAG, "Data has been added successfully!");
+                                                    //call the home activity from here
+                                                    //===========>
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.d(TAG, "Data could not be added!" + e.toString());
+                                                    //specify an error value
+                                                }
+                                            });
                                 }
-                            });
+                            } else {
+                                Log.d(TAG, "get failed with ", task.getException());
+                            }
+                        }
+                    });
                 }
             }
         });
     }
 
 }
-
-//    final String cityName = addCityEditText.getText().toString();
-//    final String provinceName = addProvinceEditText.getText().toString();
-//    HashMap<String, String> data = new HashMap<>();
-//                if(cityName.length() > 0 && provinceName.length() > 0) {
-//                        data.put("Province Name", provinceName);
-//                        collectionReference
-//                        .document(cityName)
-//                        .set(data)
-//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-//@Override
-//public void onSuccess(Void aVoid) {
-//// These are a method which gets executed when the task is succeeded
-//        Log.d(TAG, "Data has been added successfully!");
-//        addCityEditText.setText("");
-//        addProvinceEditText.setText("");
-//        }
-//        })
-//        .addOnFailureListener(new OnFailureListener() {
-//@Override
-//public void onFailure(@NonNull Exception e) {
-//// These are a method which gets executed if there’s any problem
-//        Log.d(TAG, "Data could not be added!" + e.toString());
-//        }
-//        });
