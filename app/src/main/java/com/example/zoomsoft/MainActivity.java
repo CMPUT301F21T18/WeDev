@@ -32,4 +32,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    //WorkToDo:
+    //Connect to firebase and fireStore -> success
+
+    //implement the login functionality and register functionality
 }

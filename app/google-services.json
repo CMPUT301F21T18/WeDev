@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "526208350917",
+    "project_id": "habit-c5a5f",
+    "storage_bucket": "habit-c5a5f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526208350917:android:39ef2f14a10eded63e0eac",
+        "android_client_info": {
+          "package_name": "com.example.zoomsoft"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "526208350917-0od6folrmmvavs580ug993nnndumsm4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5sX6VGpJCpKlMK_i_5pepKd3cmGbqQls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "526208350917-0od6folrmmvavs580ug993nnndumsm4q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
