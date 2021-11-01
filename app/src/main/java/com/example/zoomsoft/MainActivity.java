@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         //Home Page-after onClick, user variable is initialized
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent login = new Intent(getApplicationContext(),HabitInfoActivity.class);
+                Intent login = new Intent(getApplicationContext(),login.class);
                 startActivity(login);
             }
         });
