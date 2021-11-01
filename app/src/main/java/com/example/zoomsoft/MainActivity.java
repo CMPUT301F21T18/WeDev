@@ -1,13 +1,11 @@
 package com.example.zoomsoft;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.firebase.firestore.FirebaseFirestore;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         //Home Page-after onClick, user variable is initialized
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent login = new Intent(getApplicationContext(),login.class);
+                Intent login = new Intent(getApplicationContext(),HabitInfoActivity.class);
                 startActivity(login);
             }
         });

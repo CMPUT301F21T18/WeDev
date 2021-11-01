@@ -8,4 +8,7 @@
     <string name="email">Enter your email</string>
     <string name="register">Register</string>
     <string name="username">Enter your username</string>
+    <string name="title_activity_habit_info">HabitInfoActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>
