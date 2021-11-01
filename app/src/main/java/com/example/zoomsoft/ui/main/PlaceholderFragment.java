@@ -6,18 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.zoomsoft.R;
-<<<<<<< HEAD
-import com.example.zoomsoft.databinding.FragmentMainBinding;
-=======
 import com.example.zoomsoft.databinding.FragmentMainPageTabsBinding;
->>>>>>> origin/main
 
 /**
  * A placeholder fragment containing a simple view.
@@ -27,11 +22,7 @@ public class PlaceholderFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     private PageViewModel pageViewModel;
-<<<<<<< HEAD
-    private FragmentMainBinding binding;
-=======
     private FragmentMainPageTabsBinding binding;
->>>>>>> origin/main
 
     public static PlaceholderFragment newInstance(int index) {
         PlaceholderFragment fragment = new PlaceholderFragment();
@@ -57,11 +48,7 @@ public class PlaceholderFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 
-<<<<<<< HEAD
-        binding = FragmentMainBinding.inflate(inflater, container, false);
-=======
         binding = FragmentMainPageTabsBinding.inflate(inflater, container, false);
->>>>>>> origin/main
         View root = binding.getRoot();
 
         final TextView textView = binding.sectionLabel;

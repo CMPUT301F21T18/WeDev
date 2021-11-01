@@ -36,7 +36,5 @@ public class DailyHabitsMainPageFrag extends Fragment {
             //return inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);
         }
 
-
     }
-
 }

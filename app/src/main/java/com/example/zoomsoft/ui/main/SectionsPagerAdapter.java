@@ -8,11 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-<<<<<<< HEAD
-=======
 import com.example.zoomsoft.DailyHabitsMainPageFrag;
 import com.example.zoomsoft.ListOfHabitsMainPageFrag;
->>>>>>> origin/main
 import com.example.zoomsoft.R;
 
 /**
@@ -22,11 +19,7 @@ import com.example.zoomsoft.R;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-<<<<<<< HEAD
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
-=======
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
->>>>>>> origin/main
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -37,9 +30,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
-<<<<<<< HEAD
-        // Return a PlaceholderFragment (defined as a static inner class below).
-=======
         if (position == 0){
             return new ListOfHabitsMainPageFrag();
         }
@@ -49,7 +39,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         if (position == 2){
             //For profile tab
         }
->>>>>>> origin/main
         return PlaceholderFragment.newInstance(position + 1);
     }
 
@@ -62,10 +51,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // Show 2 total pages.
-<<<<<<< HEAD
-        return 2;
-=======
         return 3;
->>>>>>> origin/main
     }
 }

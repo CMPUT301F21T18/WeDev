@@ -18,9 +18,11 @@
         android:id="@+id/add_habit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
         android:clickable="true"
         android:focusable="true"
-        android:layout_gravity="bottom|end"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 </FrameLayout>

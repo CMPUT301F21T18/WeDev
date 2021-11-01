@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HabitInfoActivity">
+    tools:context=".HabitInfo">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -33,16 +34,16 @@
             app:tabRippleColor="#FFFFFF"
             app:tabSelectedTextColor="#FFFFFF"
             app:tabTextColor="#FFFFFF" />
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id ="@+id/info_tab"
-                android:text="Info"/>
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id ="@+id/event_tab"
-                android:text="Event"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id ="@+id/info_tab"
+            android:text="Info"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id ="@+id/event_tab"
+            android:text="Event"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
