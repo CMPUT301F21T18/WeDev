@@ -15,6 +15,11 @@
             android:label="@string/title_activity_habit_info"
             android:theme="@style/Theme.ZoomSoft.NoActionBar" />
         <activity
+            android:name=".MainPageTabs"
+            android:exported="true"
+            android:label="@string/title_activity_main_page_tabs"
+            android:theme="@style/Theme.ZoomSoft.NoActionBar" />
+        <activity
             android:name=".login"
             android:exported="true" />
         <activity

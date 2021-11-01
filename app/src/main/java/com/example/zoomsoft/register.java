@@ -82,7 +82,8 @@ public class register extends AppCompatActivity {
                                                 public void onSuccess(Void unused) {
                                                     Log.d(TAG, "Data has been added successfully!");
                                                     //call the home activity from here
-                                                    //===========>
+                                                    Intent intent = new Intent(register.this, MainPageTabs.class);
+                                                    startActivity(intent);
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
