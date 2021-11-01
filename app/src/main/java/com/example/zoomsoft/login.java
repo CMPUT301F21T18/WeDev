@@ -1,6 +1,7 @@
 package com.example.zoomsoft;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,6 +51,8 @@ public class login extends AppCompatActivity {
                                 //use the document to login
                                 Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                                 //call the home activity
+                                Intent intent = new Intent(login.this, MainPageTabs.class);
+                                startActivity(intent);
                             }
                             else {
                                 //not such document

@@ -8,4 +8,8 @@
     <string name="email">Enter your email</string>
     <string name="register">Register</string>
     <string name="username">Enter your username</string>
+    <string name="title_activity_main_page_tabs">MainPageTabs</string>
+    <string name="tab_text_1">List of Habits</string>
+    <string name="tab_text_2">Today\'s Habits</string>
+    <string name="tab_text_3">Profile</string>
 </resources>
