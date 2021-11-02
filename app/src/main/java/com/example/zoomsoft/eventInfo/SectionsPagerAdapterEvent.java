@@ -1,17 +1,13 @@
-package com.example.zoomsoft.ui.main;
+package com.example.zoomsoft.eventInfo;
 
 import android.content.Context;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 
-import com.example.zoomsoft.EventFragment;
-import com.example.zoomsoft.InfoFragment;
-import com.example.zoomsoft.R;
+import com.example.zoomsoft.ui.main.PlaceholderFragment;
 
 
 /**
@@ -35,10 +31,10 @@ public class SectionsPagerAdapterEvent extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
         // getItem is called to instantiate the fragment for the given page.
         if (position == 0){
-            return new InfoFragment();
+            return new HabitDisplay();
         }
         if (position == 1){
-            return new EventFragment();
+            return new HabitEventDisplay();
         }
         return PlaceholderFragment.newInstance(position + 1);
     }

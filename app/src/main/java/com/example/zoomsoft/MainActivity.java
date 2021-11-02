@@ -21,13 +21,13 @@ public class MainActivity extends AppCompatActivity {
         //Home Page-after onClick, user variable is initialized
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent login = new Intent(getApplicationContext(),login.class);
+                Intent login = new Intent(getApplicationContext(), com.example.zoomsoft.loginandregister.login.class);
                 startActivity(login);
             }
         });
         registerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent register = new Intent(getApplicationContext(),register.class);
+                Intent register = new Intent(getApplicationContext(), com.example.zoomsoft.loginandregister.register.class);
                 startActivity(register);
             }
         });

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ZoomSoft">
-        <activity android:name=".HabitInfo"
+        <activity android:name=".eventInfo.HabitInfo"
             android:exported="true"/>
         <activity
             android:name=".MainPageTabs"
@@ -17,10 +17,10 @@
             android:label="@string/title_activity_main_page_tabs"
             android:theme="@style/Theme.ZoomSoft.NoActionBar" />
         <activity
-            android:name=".login"
+            android:name=".loginandregister.login"
             android:exported="true" />
         <activity
-            android:name=".register"
+            android:name=".loginandregister.register"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
