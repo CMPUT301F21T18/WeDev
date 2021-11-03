@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/custom_end_icon"
+        android:id="@+id/custom_end_icon1"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="219dp"
         android:layout_height="51dp"
@@ -27,7 +27,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/custom_end_icon"
+        android:id="@+id/custom_end_icon2"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="219dp"
         android:layout_height="51dp"
@@ -46,7 +46,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/custom_end_icon"
+        android:id="@+id/custom_end_icon3"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="219dp"
         android:layout_height="51dp"
@@ -82,7 +82,7 @@
         app:popupTheme="@style/Theme.ZoomSoft.PopupOverlay" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/edit_habit_check"
         android:layout_width="78dp"
         android:layout_height="79dp"
         android:layout_gravity="bottom|end"
@@ -94,7 +94,7 @@
         android:scaleType="centerInside" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/edit_habit_stop"
         android:layout_width="78dp"
         android:layout_height="79dp"
         android:layout_gravity="bottom|start"
