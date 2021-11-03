@@ -38,6 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="125dp"
         android:background="#F0F4F3"
+        app:layout_anchor="@+id/textView"
+        app:layout_anchorGravity="top|center"
         app:popupTheme="@style/Theme.ZoomSoft.PopupOverlay" />
 
     <ImageButton
