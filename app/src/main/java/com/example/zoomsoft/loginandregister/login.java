@@ -1,4 +1,4 @@
-package com.example.zoomsoft;
+package com.example.zoomsoft.loginandregister;
 
 
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.zoomsoft.MainPageTabs;
+import com.example.zoomsoft.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;

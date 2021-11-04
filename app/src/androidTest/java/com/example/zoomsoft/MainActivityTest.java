@@ -6,6 +6,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
+import com.example.zoomsoft.loginandregister.login;
+import com.example.zoomsoft.loginandregister.register;
 import com.robotium.solo.Solo;
 
 import org.junit.After;
