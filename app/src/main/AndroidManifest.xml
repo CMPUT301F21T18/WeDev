@@ -8,7 +8,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Zoomsoft">
+        android:theme="@style/Theme.ZoomSoft">
+        <activity android:name=".eventInfo.HabitInfo"
+            android:exported="true"/>
+        <activity
+            android:name=".MainPageTabs"
+            android:exported="true"
+            android:label="@string/title_activity_main_page_tabs"
+            android:theme="@style/Theme.ZoomSoft.NoActionBar" />
+        <activity
+            android:name=".loginandregister.login"
+            android:exported="true" />
+        <activity
+            android:name=".loginandregister.register"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -18,6 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

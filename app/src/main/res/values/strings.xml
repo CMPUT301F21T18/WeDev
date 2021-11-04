@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">Zoomsoft</string>
+    <string name="app_name">ZoomSoft</string>
+    <string name="login">Login</string>
+    <string name="track_your_habits">Track Your Habits</string>
+    <string name="signup">Register</string>
+    <string name="zoomsoft">ZOOMSOFT</string>
+    <string name="password">Enter your password</string>
+    <string name="email">Enter your email</string>
+    <string name="register">Register</string>
+    <string name="username">Enter your username</string>
+    <string name="title_activity_habit_info">HabitInfoActivity</string>
+    <string name="tab_view_1">Tab 1</string>
+    <string name="tab_view_2">Tab 2</string>
+
+    <string name="title_activity_main_page_tabs">MainPageTabs</string>
+    <string name="tab_text_1">List of Habits</string>
+    <string name="tab_text_2">Today\'s Habits</string>
+    <string name="tab_text_3">Profile</string>
+    <string name="title_activity_event_habit">EventHabit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
