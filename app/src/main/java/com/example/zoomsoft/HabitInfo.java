@@ -14,23 +14,33 @@ import com.google.android.material.tabs.TabLayout;
 
 public class HabitInfo extends AppCompatActivity {
 
-    private ActivityHabitInfoBinding binding;
+    private ActivityHabitInfoBinding infoBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityHabitInfoBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        infoBinding = ActivityHabitInfoBinding.inflate(getLayoutInflater());
+        setContentView(infoBinding.getRoot());
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = binding.viewPager;
+        ViewPager viewPager = infoBinding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = binding.habitInfoTabs;
+        TabLayout tabs = infoBinding.habitInfoTabs;
         tabs.setupWithViewPager(viewPager);
-        FloatingActionButton fab = binding.fabDelete;
+        FloatingActionButton edit_fab = infoBinding.fabEdit;
+        FloatingActionButton delete_fab = infoBinding.fabDelete;
 
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        edit_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        delete_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)

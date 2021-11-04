@@ -21,6 +21,9 @@
             android:name=".register"
             android:exported="true" />
         <activity
+            android:name=".HabitInfo"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>
