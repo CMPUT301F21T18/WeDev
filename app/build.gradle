@@ -3,6 +3,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdk 31
 
+    lintOptions {
+        abortOnError false
+    }
     defaultConfig {
         applicationId "com.example.zoomsoft"
         minSdk 21
