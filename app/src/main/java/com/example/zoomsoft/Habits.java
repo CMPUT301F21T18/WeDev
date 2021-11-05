@@ -6,13 +6,13 @@ public class Habits {
     private String startDate;
     private String habitReason;
     private String habitWeekDay;
-    private String privacy; //Public or private status for habits
+    private Boolean privacy; //Public or private status for habits
 
     public Habits(String habitTitle) {
         this.habitTitle = habitTitle;
     }
 
-    public Habits(String habitTitle, String startDate, String habitReason, String habitWeekDay, String privacy) {
+    public Habits(String habitTitle, String startDate, String habitReason, String habitWeekDay, Boolean privacy) {
         this.habitTitle = habitTitle;
         this.startDate = startDate;
         this.habitReason = habitReason;
@@ -52,11 +52,11 @@ public class Habits {
         this.habitWeekDay = habitWeekDay;
     }
 
-    public String getPrivacy() {
+    public boolean getPrivacy() {
         return privacy;
     }
 
-    public void setPrivacy(String privacy) {
+    public void setPrivacy(boolean privacy) {
         this.privacy = privacy;
     }
 }

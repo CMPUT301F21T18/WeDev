@@ -1,17 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdk 31
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
 
     defaultConfig {
         applicationId "com.example.zoomsoft"
-        minSdk 21
-        targetSdk 31
+        minSdkVersion 16
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary true
     }
 
     buildTypes {
@@ -29,6 +31,9 @@ android {
     }
     buildFeatures {
         dataBinding true
+    }
+    lintOptions {
+        ignoreWarnings true
     }
 
 }
