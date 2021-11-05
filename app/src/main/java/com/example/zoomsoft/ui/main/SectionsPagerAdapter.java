@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.example.zoomsoft.DailyHabitsMainPageFrag;
 import com.example.zoomsoft.ListOfHabitsMainPageFrag;
 import com.example.zoomsoft.R;
+import com.example.zoomsoft.profile;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -37,7 +38,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             return new DailyHabitsMainPageFrag();
         }
         if (position == 2){
-            //For profile tab
+            return new profile();
         }
         return PlaceholderFragment.newInstance(position + 1);
     }
