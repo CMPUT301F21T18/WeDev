@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,7 +70,11 @@ public class register extends AppCompatActivity {
                                 DocumentSnapshot document = task.getResult();
                                 assert document != null;
                                 if(document.exists()) {
+                                    // display toast message to the user about the error
+                                    Toast.makeText(register.this,
+                                            "User already exists with the email provided", Toast.LENGTH_LONG).show();
                                     //use the document to login
+
                                     Log.d(TAG, "User already exists with the email provided");
                                     //display alert
                                 }

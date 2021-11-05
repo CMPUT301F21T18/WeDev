@@ -2,6 +2,7 @@ package com.example.zoomsoft.loginandregister;
 
 import java.util.ArrayList;
 
+//User attributes
 public class User {
     private   String email;
     private   String password;
@@ -12,21 +13,23 @@ public class User {
     public User() {
         //unverified
     }
+
     public User(String email, String password, String username) {
         //This is for registration:
         this.email = email;
         this.password = password;
         this.username = username;
     }
-
+    //Constructor
     public User(String email, String password, String username, ArrayList<String> followers, ArrayList<String> requests) {
         //This is for login:
         this.email = email;
         this.password = password;
+        this.username = username;
         this.followers = followers;
         this.requests = requests;
-        this.username = username;
     }
+
 
     public String getEmail() {
         return email;
@@ -64,6 +67,7 @@ public class User {
         this.requests.remove(username);
         this.followers.add(username);
     }
+
     public void declineRequest(String username) {
         if(!this.requests.contains(username)) throw new IllegalArgumentException("User is not in" + username + "requests");
         else this.requests.remove(username);
