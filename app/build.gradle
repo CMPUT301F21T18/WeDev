@@ -5,6 +5,9 @@ android {
     buildToolsVersion "30.0.2"
 
 
+    lintOptions {
+        abortOnError false
+    }
     defaultConfig {
         applicationId "com.example.zoomsoft"
         minSdkVersion 16

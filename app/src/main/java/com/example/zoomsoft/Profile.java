@@ -11,12 +11,10 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 
-public class profile extends Fragment {
+public class Profile extends Fragment {
     private Button addFriendButton;
 
     @Override
@@ -29,7 +27,7 @@ public class profile extends Fragment {
             addFriendButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(getActivity(), addFriends.class);
+                    Intent intent = new Intent(getActivity(), AddFriends.class);
                     startActivity(intent);
                 }
             });

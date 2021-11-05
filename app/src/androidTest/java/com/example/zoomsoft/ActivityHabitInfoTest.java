@@ -89,4 +89,8 @@ public class ActivityHabitInfoTest {
     public void tearDown() throws Exception{
         solo.finishOpenedActivities();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/main
