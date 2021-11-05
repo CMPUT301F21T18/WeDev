@@ -60,7 +60,7 @@ public class login extends AppCompatActivity {
                             else {
                                 // display toast message to the user about the error
                                 Toast.makeText(login.this,
-                                        "Password/Username entered isn't correct", Toast.LENGTH_LONG).show();
+                                        "Password or Username is not correct", Toast.LENGTH_LONG).show();
                                 //not such document
                                 Log.d(TAG, "No such document with the login details");
                             }

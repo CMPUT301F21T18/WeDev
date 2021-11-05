@@ -97,6 +97,26 @@ public class RegistrationActivityTest {
 
     }
 
+    @Test
+    // invalid login
+    public void invalidRegistration(){
+        //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        // Go to next activity Register
+        solo.clickOnButton("Register");
+        solo.assertCurrentActivity("Wrong Activity", register.class);
+
+        // test email that is already in the firebase
+        solo.enterText((EditText) solo.getView(R.id.username), "aidrees");
+        solo.enterText((EditText) solo.getView(R.id.email), "asad@gmail.com");
+        solo.enterText((EditText) solo.getView(R.id.password), "123456");
+        solo.clickOnButton("Register");
+
+        // check if activity stays the same, should be same as login isn't correct
+        solo.assertCurrentActivity("Wrong Activity", register.class);
+
+    }
+
 
     /**
      * Close activity after each test

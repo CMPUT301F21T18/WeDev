@@ -55,10 +55,11 @@ public class LoginActivityTest {
      * to the fields and verify change in activity
      */
     @Test
+    // perfect login
     public void checkLoginProcess(){
         //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        // Go to next activity register
+        // Go to next activity login
         solo.clickOnButton("Login");
         solo.assertCurrentActivity("Wrong Activity", login.class);
 
@@ -72,6 +73,24 @@ public class LoginActivityTest {
 
     }
 
+    @Test
+    // invalid login
+    public void invalidLogin(){
+        //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        // Go to next activity login
+        solo.clickOnButton("Login");
+        solo.assertCurrentActivity("Wrong Activity", login.class);
+
+        // test bad email
+        solo.enterText((EditText) solo.getView(R.id.email), "completely wrong");
+        solo.enterText((EditText) solo.getView(R.id.password), "completely wrong");
+        solo.clickOnButton("Login");
+
+        // check if activity stays the same, should be same as login isn't correct
+        solo.assertCurrentActivity("Wrong Activity", login.class);
+
+    }
 
     /**
      * Close activity after each test
