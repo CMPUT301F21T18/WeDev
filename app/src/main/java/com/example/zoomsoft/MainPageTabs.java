@@ -3,8 +3,10 @@
  */
 package com.example.zoomsoft;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.zoomsoft.eventInfo.HabitInfo;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
@@ -35,4 +37,11 @@ public class MainPageTabs extends AppCompatActivity {
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
     }
+
+    public void getEventInfo(View v) {
+        //not working for now
+        Intent intent = new Intent(this, HabitInfo.class);
+        startActivity(intent);
+    }
+
 }

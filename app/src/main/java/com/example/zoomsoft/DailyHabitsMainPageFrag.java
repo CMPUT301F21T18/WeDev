@@ -4,6 +4,7 @@
  */
 package com.example.zoomsoft;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,12 +17,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.zoomsoft.eventInfo.HabitInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class DailyHabitsMainPageFrag extends Fragment {
@@ -32,7 +36,6 @@ public class DailyHabitsMainPageFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        {
             View view = inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);
 
             ListView habitList = view.findViewById(R.id.habit_list);
@@ -40,32 +43,48 @@ public class DailyHabitsMainPageFrag extends Fragment {
             habitList.setAdapter(habitAdaptor);
 
             FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-            rootRef.collection("Habits").document("a@gmail.com").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
+//            rootRef.collection("Habits").document("a@gmail.com").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                    if (task.isSuccessful()) {
+//                        DocumentSnapshot document = task.getResult();
+//                        if (document.exists()) {
+//                            habitDataList.clear();
+//                            Map<String, Object> map = document.getData();
+//                            for (Map.Entry<String, Object> entry : map.entrySet()) {
+//                                if (entry.getKey().equals("HabitsList")) {
+//                                    Log.d("TAG", entry.getValue().toString());
+//                                    habitDataList.add(new Habits(entry.getValue().toString()));
+//                                }
+//                            }
+//                            habitAdaptor.notifyDataSetChanged();
+//                        }
+//                    }
+//                }
+//            });
+            String email = "a@gmail.com";
+            final CollectionReference collectionReference = rootRef.collection("Habits");
+            collectionReference
+                    .document(email)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             habitDataList.clear();
-                            Map<String, Object> map = document.getData();
-                            for (Map.Entry<String, Object> entry : map.entrySet()) {
-                                if (entry.getKey().equals("HabitsList")) {
-                                    Log.d("TAG", entry.getValue().toString());
-                                    habitDataList.add(new Habits(entry.getValue().toString()));
-                                }
+                            DocumentSnapshot document = task.getResult();
+                            //would recommend populating it to the Habits later on:
+                            //should be completedHabits instead of habitsList 
+                            List<String> arrayListHabit = (List<String>) document.get("HabitsList");
+                            for (String str : arrayListHabit) {
+                                habitDataList.add(new Habits(str));
                             }
                             habitAdaptor.notifyDataSetChanged();
                         }
-                    }
-                }
-            });
+                    });
 
             return view;
 
             //return inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);
-
-        }
-
-
     }
+    
 }

@@ -5,6 +5,7 @@
 */
 package com.example.zoomsoft;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.zoomsoft.eventInfo.HabitInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -54,7 +56,6 @@ public class ListOfHabitsMainPageFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        {
             View view = inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);
 
             ListView habitList = view.findViewById(R.id.habit_list);
@@ -88,10 +89,11 @@ public class ListOfHabitsMainPageFrag extends Fragment {
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            habitDataList.clear();
                             DocumentSnapshot document = task.getResult();
                             //would recommend populating it to the Habits later on:
                             List<String> arrayListHabit = (List<String>) document.get("HabitsList");
-                            for(String str : arrayListHabit) {
+                            for (String str : arrayListHabit) {
                                 habitDataList.add(new Habits(str));
                             }
                             habitAdaptor.notifyDataSetChanged();
@@ -100,10 +102,12 @@ public class ListOfHabitsMainPageFrag extends Fragment {
             return view;
 
             //return inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);
-
-        }
-
-
     }
+
+//    public void getEventInfo(View v) {
+//
+//        Intent intent = new Intent(getActivity(), HabitInfo.class);
+//        startActivity(intent);
+//    }
 
 }
