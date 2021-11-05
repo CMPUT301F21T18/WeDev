@@ -6,8 +6,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
-import com.example.zoomsoft.loginandregister.login;
-import com.example.zoomsoft.loginandregister.register;
+import com.example.zoomsoft.loginandregister.Login;
+import com.example.zoomsoft.loginandregister.Register;
 import com.robotium.solo.Solo;
 
 import org.junit.After;
@@ -54,7 +54,7 @@ public class MainActivityTest {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity showActivity
         solo.clickOnButton("Login");
-        solo.assertCurrentActivity("Wrong Activity", login.class);
+        solo.assertCurrentActivity("Wrong Activity", Login.class);
     }
 
     /**
@@ -66,7 +66,7 @@ public class MainActivityTest {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity showActivity
         solo.clickOnButton("Register");
-        solo.assertCurrentActivity("Wrong Activity", register.class);
+        solo.assertCurrentActivity("Wrong Activity", Register.class);
     }
 
 

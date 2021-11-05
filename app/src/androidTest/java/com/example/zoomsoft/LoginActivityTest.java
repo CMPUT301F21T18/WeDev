@@ -7,7 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
-import com.example.zoomsoft.loginandregister.login;
+import com.example.zoomsoft.loginandregister.Login;
 import com.robotium.solo.Solo;
 
 import org.junit.After;
@@ -61,7 +61,7 @@ public class LoginActivityTest {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity login
         solo.clickOnButton("Login");
-        solo.assertCurrentActivity("Wrong Activity", login.class);
+        solo.assertCurrentActivity("Wrong Activity", Login.class);
 
         // enter the data and test
         solo.enterText((EditText) solo.getView(R.id.email), "asad@gmail.com");
@@ -80,7 +80,7 @@ public class LoginActivityTest {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity login
         solo.clickOnButton("Login");
-        solo.assertCurrentActivity("Wrong Activity", login.class);
+        solo.assertCurrentActivity("Wrong Activity", Login.class);
 
         // test bad email
         solo.enterText((EditText) solo.getView(R.id.email), "completely wrong");
@@ -88,7 +88,7 @@ public class LoginActivityTest {
         solo.clickOnButton("Login");
 
         // check if activity stays the same, should be same as login isn't correct
-        solo.assertCurrentActivity("Wrong Activity", login.class);
+        solo.assertCurrentActivity("Wrong Activity", Login.class);
 
     }
 

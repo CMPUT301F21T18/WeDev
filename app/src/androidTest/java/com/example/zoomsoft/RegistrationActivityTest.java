@@ -11,7 +11,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
-import com.example.zoomsoft.loginandregister.register;
+import com.example.zoomsoft.loginandregister.Register;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -66,7 +66,7 @@ public class RegistrationActivityTest {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity register
         solo.clickOnButton("Register");
-        solo.assertCurrentActivity("Wrong Activity", register.class);
+        solo.assertCurrentActivity("Wrong Activity", Register.class);
 
         // enter the data and test
         solo.enterText((EditText) solo.getView(R.id.username), "asad70");
@@ -104,7 +104,7 @@ public class RegistrationActivityTest {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity Register
         solo.clickOnButton("Register");
-        solo.assertCurrentActivity("Wrong Activity", register.class);
+        solo.assertCurrentActivity("Wrong Activity", Register.class);
 
         // test email that is already in the firebase
         solo.enterText((EditText) solo.getView(R.id.username), "aidrees");
@@ -113,7 +113,7 @@ public class RegistrationActivityTest {
         solo.clickOnButton("Register");
 
         // check if activity stays the same, should be same as login isn't correct
-        solo.assertCurrentActivity("Wrong Activity", register.class);
+        solo.assertCurrentActivity("Wrong Activity", Register.class);
 
     }
 

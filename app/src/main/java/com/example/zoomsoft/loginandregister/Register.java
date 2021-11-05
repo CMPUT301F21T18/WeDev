@@ -24,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class register extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 
     protected EditText usernameEditText;
     protected EditText emailEditText;
@@ -71,7 +71,7 @@ public class register extends AppCompatActivity {
                                 assert document != null;
                                 if(document.exists()) {
                                     // display toast message to the user about the error
-                                    Toast.makeText(register.this,
+                                    Toast.makeText(Register.this,
                                             "User already exists with the email provided", Toast.LENGTH_LONG).show();
                                     //use the document to login
 
@@ -89,7 +89,7 @@ public class register extends AppCompatActivity {
                                                 public void onSuccess(Void unused) {
                                                     Log.d(TAG, "Data has been added successfully!");
                                                     //call the home activity from here
-                                                    Intent intent = new Intent(register.this, MainPageTabs.class);
+                                                    Intent intent = new Intent(Register.this, MainPageTabs.class);
                                                     startActivity(intent);
                                                 }
                                             })

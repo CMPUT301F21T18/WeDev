@@ -21,7 +21,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class login extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     protected EditText emailEditText;
     protected EditText passwordEditText;
@@ -50,16 +50,16 @@ public class login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
-                            if(document.exists()) {
+                            if(document.exists() && password.equals(document.get("password"))) {
                                 //use the document to login
                                 Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                                 //call the home activity
-                                Intent intent = new Intent(login.this, MainPageTabs.class);
+                                Intent intent = new Intent(Login.this, MainPageTabs.class);
                                 startActivity(intent);
                             }
                             else {
                                 // display toast message to the user about the error
-                                Toast.makeText(login.this,
+                                Toast.makeText(Login.this,
                                         "Password or Username is not correct", Toast.LENGTH_LONG).show();
                                 //not such document
                                 Log.d(TAG, "No such document with the login details");
