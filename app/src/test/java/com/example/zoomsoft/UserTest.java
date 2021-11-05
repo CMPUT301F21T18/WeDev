@@ -1,7 +1,5 @@
 package com.example.zoomsoft;
-
 import static junit.framework.TestCase.assertEquals;
-
 import static org.junit.Assert.assertThrows;
 
 import com.example.zoomsoft.loginandregister.User;
