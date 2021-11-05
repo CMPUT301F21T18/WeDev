@@ -1,8 +1,10 @@
+/*The main activity that sets up the tab display
+  It is called when a user logs in or registers
+ */
 package com.example.zoomsoft;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 

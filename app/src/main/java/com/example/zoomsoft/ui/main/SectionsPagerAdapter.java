@@ -1,3 +1,7 @@
+/*A [FragmentPagerAdapter] that returns a fragment corresponding to
+  one of the sections/tabs/pages
+ */
+
 package com.example.zoomsoft.ui.main;
 
 import android.content.Context;
@@ -12,10 +16,6 @@ import com.example.zoomsoft.DailyHabitsMainPageFrag;
 import com.example.zoomsoft.ListOfHabitsMainPageFrag;
 import com.example.zoomsoft.R;
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
- */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
