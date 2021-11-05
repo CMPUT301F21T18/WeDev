@@ -56,12 +56,12 @@ public class ListOfHabitsMainPageFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);
+        View view = inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);
 
-            ListView habitList = view.findViewById(R.id.habit_list);
-            habitAdaptor = new HabitCustomList(this.getContext(), habitDataList);
-            habitList.setAdapter(habitAdaptor);
-            FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+        ListView habitList = view.findViewById(R.id.habit_list);
+        habitAdaptor = new HabitCustomList(this.getContext(), habitDataList);
+        habitList.setAdapter(habitAdaptor);
+        FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
 //            rootRef.collection("Habits").document("a@gmail.com").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
 //                @Override
 //                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -81,27 +81,27 @@ public class ListOfHabitsMainPageFrag extends Fragment {
 //                    }
 //                }
 //            });
-            String email = "a@gmail.com";
-            final CollectionReference collectionReference = rootRef.collection("Habits");
-            collectionReference
-                    .document(email)
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            habitDataList.clear();
-                            DocumentSnapshot document = task.getResult();
-                            //would recommend populating it to the Habits later on:
-                            List<String> arrayListHabit = (List<String>) document.get("HabitsList");
-                            for (String str : arrayListHabit) {
-                                habitDataList.add(new Habits(str));
-                            }
-                            habitAdaptor.notifyDataSetChanged();
+        String email = "a@gmail.com";
+        final CollectionReference collectionReference = rootRef.collection("Habits");
+        collectionReference
+                .document(email)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        habitDataList.clear();
+                        DocumentSnapshot document = task.getResult();
+                        //would recommend populating it to the Habits later on:
+                        List<String> arrayListHabit = (List<String>) document.get("HabitsList");
+                        for (String str : arrayListHabit) {
+                            habitDataList.add(new Habits(str));
                         }
-                    });
-            return view;
+                        habitAdaptor.notifyDataSetChanged();
+                    }
+                });
+        return view;
 
-            //return inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);
+        //return inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);
     }
 
 //    public void getEventInfo(View v) {

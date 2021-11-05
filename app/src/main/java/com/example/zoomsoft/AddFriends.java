@@ -22,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class addFriends extends AppCompatActivity {
+public class AddFriends extends AppCompatActivity {
     ListView userList;
     ArrayAdapter<User> userAdapter;
     ArrayList<User> userDataList;
@@ -63,11 +63,11 @@ public class addFriends extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     if(task.getResult().exists()){
-                                        Toast.makeText(addFriends.this, "Follow request sent",Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(addFriends.this, profile.class));
+                                        Toast.makeText(AddFriends.this, "Follow request sent",Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(AddFriends.this, Profile.class));
 
                                     }else{
-                                        Toast.makeText(addFriends.this, "This user does not exist in the database",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AddFriends.this, "This user does not exist in the database",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
