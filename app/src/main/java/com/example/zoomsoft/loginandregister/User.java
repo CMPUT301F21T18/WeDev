@@ -9,8 +9,8 @@ public class User {
     private   ArrayList<String> followers = new ArrayList<>(); //the list here contains the username->since it's unique within the database
     private   ArrayList<String> requests = new ArrayList<>(); //the list here contains the username->since it's unique within the database
 
-    public User() {
-        //unverified
+    public User(String username) {
+        this.username = username;
     }
     public User(String email, String password, String username) {
         //This is for registration:

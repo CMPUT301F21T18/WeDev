@@ -1,3 +1,6 @@
+/*Custom adapter to display habits in a list
+
+ */
 package com.example.zoomsoft;
 
 import android.content.Context;

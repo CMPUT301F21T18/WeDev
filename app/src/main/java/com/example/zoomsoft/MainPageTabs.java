@@ -1,8 +1,12 @@
+/*The main activity that sets up the tab display
+  It is called when a user logs in or registers
+ */
 package com.example.zoomsoft;
 
+import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.zoomsoft.eventInfo.HabitInfo;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
@@ -32,6 +36,12 @@ public class MainPageTabs extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
-
     }
+
+    public void getEventInfo(View v) {
+        //not working for now
+        Intent intent = new Intent(this, HabitInfo.class);
+        startActivity(intent);
+    }
+
 }

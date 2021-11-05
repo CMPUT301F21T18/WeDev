@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class register extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 
     protected EditText usernameEditText;
     protected EditText emailEditText;
@@ -69,7 +70,11 @@ public class register extends AppCompatActivity {
                                 DocumentSnapshot document = task.getResult();
                                 assert document != null;
                                 if(document.exists()) {
+                                    // display toast message to the user about the error
+                                    Toast.makeText(Register.this,
+                                            "User already exists with the email provided", Toast.LENGTH_LONG).show();
                                     //use the document to login
+
                                     Log.d(TAG, "User already exists with the email provided");
                                     //display alert
                                 }
@@ -84,7 +89,7 @@ public class register extends AppCompatActivity {
                                                 public void onSuccess(Void unused) {
                                                     Log.d(TAG, "Data has been added successfully!");
                                                     //call the home activity from here
-                                                    Intent intent = new Intent(register.this, MainPageTabs.class);
+                                                    Intent intent = new Intent(Register.this, MainPageTabs.class);
                                                     startActivity(intent);
                                                 }
                                             })

@@ -1,13 +1,13 @@
 package com.example.zoomsoft;
 
 import android.app.Activity;
+import android.widget.EditText;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
 import com.example.zoomsoft.loginandregister.Login;
-import com.example.zoomsoft.loginandregister.Register;
 import com.robotium.solo.Solo;
 
 import org.junit.After;
@@ -15,13 +15,17 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+
 /**
- * Test class for MainActivity. All the UI tests are written here. Robotium test framework is
+ * Test class for Login Activity. All the UI tests are written here. Robotium test framework is
  used.
- UI tested: change in activity from Main to login and registration
+ UI tested: change in activity from Main to login and verify the data
  */
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class LoginActivityTest {
+
+
     private Solo solo;
     @Rule
     public ActivityTestRule<MainActivity> rule =
@@ -45,30 +49,48 @@ public class MainActivityTest {
         Activity activity = rule.getActivity();
     }
 
+
     /**
-     * Tests the MainPage UI goes to Login page and checks the activity
+     * Tests the MainPage UI goes to Login page and checks the activity and adds the data
+     * to the fields and verify change in activity
      */
     @Test
-    public void checkChangeActivityToLogin(){
+    // perfect login
+    public void checkLoginProcess(){
         //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        // Go to next activity showActivity
+        // Go to next activity login
         solo.clickOnButton("Login");
         solo.assertCurrentActivity("Wrong Activity", Login.class);
+
+        // enter the data and test
+        solo.enterText((EditText) solo.getView(R.id.email), "asad@gmail.com");
+        solo.enterText((EditText) solo.getView(R.id.password), "123456");
+        solo.clickOnButton("Login");
+
+        // check if activity switched properly
+        solo.assertCurrentActivity("Wrong Activity", MainPageTabs.class);
+
     }
 
-    /**
-     * Tests the MainPage UI goes to Registration page and checks the activity
-     */
     @Test
-    public void checkChangeActivityToRegistration(){
+    // invalid login
+    public void invalidLogin(){
         //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        // Go to next activity showActivity
-        solo.clickOnButton("Register");
-        solo.assertCurrentActivity("Wrong Activity", Register.class);
-    }
+        // Go to next activity login
+        solo.clickOnButton("Login");
+        solo.assertCurrentActivity("Wrong Activity", Login.class);
 
+        // test bad email
+        solo.enterText((EditText) solo.getView(R.id.email), "completely wrong");
+        solo.enterText((EditText) solo.getView(R.id.password), "completely wrong");
+        solo.clickOnButton("Login");
+
+        // check if activity stays the same, should be same as login isn't correct
+        solo.assertCurrentActivity("Wrong Activity", Login.class);
+
+    }
 
     /**
      * Close activity after each test
@@ -78,6 +100,6 @@ public class MainActivityTest {
     public void tearDown() throws Exception{
         solo.finishOpenedActivities();
     }
+
+
 }
-
-

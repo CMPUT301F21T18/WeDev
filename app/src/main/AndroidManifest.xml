@@ -9,18 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ZoomSoft">
-        <activity android:name=".eventInfo.HabitInfo"
-            android:exported="true"/>
         <activity
             android:name=".MainPageTabs"
             android:exported="true"
             android:label="@string/title_activity_main_page_tabs"
             android:theme="@style/Theme.ZoomSoft.NoActionBar" />
         <activity
-            android:name=".loginandregister.login"
+            android:name=".loginandregister.Login"
             android:exported="true" />
         <activity
-            android:name=".loginandregister.register"
+            android:name=".loginandregister.Register"
+            android:exported="true" />
+        <activity
+            android:name=".eventInfo.HabitInfo"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

@@ -1,3 +1,7 @@
+/*A [FragmentPagerAdapter] that returns a fragment corresponding to
+  one of the sections/tabs/pages
+ */
+
 package com.example.zoomsoft.ui.main;
 
 import android.content.Context;
@@ -11,11 +15,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.example.zoomsoft.DailyHabitsMainPageFrag;
 import com.example.zoomsoft.ListOfHabitsMainPageFrag;
 import com.example.zoomsoft.R;
+import com.example.zoomsoft.profile;
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
- */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
@@ -37,7 +38,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             return new DailyHabitsMainPageFrag();
         }
         if (position == 2){
-            //For profile tab
+            return new profile();
         }
         return PlaceholderFragment.newInstance(position + 1);
     }
