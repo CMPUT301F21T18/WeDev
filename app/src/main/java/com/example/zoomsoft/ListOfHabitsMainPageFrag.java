@@ -11,9 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -81,6 +83,7 @@ public class ListOfHabitsMainPageFrag extends Fragment {
 //                    }
 //                }
 //            });
+        
         String email = "a@gmail.com";
         final CollectionReference collectionReference = rootRef.collection("Habits");
         collectionReference
@@ -99,15 +102,14 @@ public class ListOfHabitsMainPageFrag extends Fragment {
                         habitAdaptor.notifyDataSetChanged();
                     }
                 });
+            habitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent(getActivity(), HabitInfo.class);
+                    startActivity(intent);
+                }
+            });
         return view;
-
         //return inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);
     }
-
-//    public void getEventInfo(View v) {
-//
-//        Intent intent = new Intent(getActivity(), HabitInfo.class);
-//        startActivity(intent);
-//    }
-
 }
