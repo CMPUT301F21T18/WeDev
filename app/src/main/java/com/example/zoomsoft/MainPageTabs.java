@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.zoomsoft.ui.main.SectionsPagerAdapter;
 import com.example.zoomsoft.databinding.ActivityMainPageTabsBinding;
@@ -30,18 +31,10 @@ public class MainPageTabs extends AppCompatActivity {
 
         binding = ActivityMainPageTabsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
     }
-
-    public void getEventInfo(View v) {
-        //not working for now
-        Intent intent = new Intent(this, HabitInfo.class);
-        startActivity(intent);
-    }
-
 }
