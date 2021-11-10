@@ -13,18 +13,6 @@
         android:background="@color/white"
         android:theme="@style/Theme.ZoomSoft.AppBarOverlay">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?actionBarSize"
-            android:padding="@dimen/appbar_padding"
-            android:text="Habits"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-            android:textColor="#3C444C"
-            android:textStyle="bold" />
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/habit_info_tabs"
             android:layout_width="match_parent"

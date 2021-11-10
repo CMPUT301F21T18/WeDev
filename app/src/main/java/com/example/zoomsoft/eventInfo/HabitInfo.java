@@ -9,7 +9,7 @@ import com.example.zoomsoft.databinding.ActivityHabitInfoBinding;
 import com.example.zoomsoft.eventInfo.SectionsPagerAdapterEvent;
 import com.google.android.material.tabs.TabLayout;
 
-public class HabitInfo extends AppCompatActivity {
+public class HabitInfo extends AppCompatActivity  {
 
     private ActivityHabitInfoBinding binding;
 
