@@ -54,7 +54,7 @@ public class ListOfHabitsMainPageFrag extends Fragment {
     ArrayList<Habits> habitDataList = new ArrayList<>();
     ArrayAdapter habitAdaptor;
     private String TAG = "SAMPLE";
-
+    public static String email = MainPageTabs.email;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

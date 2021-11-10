@@ -24,13 +24,15 @@ import com.example.zoomsoft.databinding.ActivityMainPageTabsBinding;
 public class MainPageTabs extends AppCompatActivity {
 
     private ActivityMainPageTabsBinding binding;
-
+    public static String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainPageTabsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Intent intent = getIntent();
+        email = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);

@@ -14,7 +14,7 @@ import com.example.zoomsoft.loginandregister.Register;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    public static final String EXTRA_MESSAGE = "com.example.zoomsoft";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

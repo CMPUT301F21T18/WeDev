@@ -32,7 +32,7 @@ public class AddFriends extends AppCompatActivity {
     FirebaseFirestore db;
     final String TAG = "Sample";
     private String myUser = "you@gmail.com";
-
+    public static String email = MainPageTabs.email;
 
 
     @Override

@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,12 +26,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
-    LatLng TamWorth = new LatLng(-31.083332, 150.916672);
-    LatLng NewCastle = new LatLng(-32.916668, 151.750000);
-    LatLng Brisbane = new LatLng(-27.470125, 153.021072);
-    LatLng sydney = new LatLng(-34, 151);
     private ArrayList<String> list = new ArrayList<>();
     private ArrayList<LatLng> locationArrayList;
+    public static String email = MainPageTabs.email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,28 +40,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        locationArrayList = new ArrayList<>();
-
-//        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-//            @Override
-//            public void onMapClick(@NonNull LatLng latLng) {
-//                Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(getResources().getResourceName(R.drawable.pin), "drawable", getPackageName()));
-//                Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, 38, 38, false);
-//
-//                googleMap.addMarker(new MarkerOptions()
-//                        .position(new LatLng(point.latitude, point.longitude))
-//                        .anchor(0.5f, 0.1f)
-//                        .title("")
-//                        .snippet("")
-//                        .icon(BitmapDescriptorFactory.fromBitmap(resizedBitmap)));
-//            }
-//        });
-        // on below line we are adding our
-        // locations in our array list.
-        locationArrayList.add(sydney); list.add("Sydney");
-        locationArrayList.add(TamWorth); list.add("TamWorth");
-        locationArrayList.add(NewCastle); list.add("NewCastle");
-        locationArrayList.add(Brisbane); list.add("Brisbane");
     }
 
     /**
@@ -77,6 +53,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        //need to implement snapshot listener over here first with passed email
+
         TextView textView = findViewById(R.id.textView6);
         mMap = googleMap;
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {

@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 
 public class Profile extends Fragment {
     private Button addFriendButton;
-
+    public static String email = MainPageTabs.email;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         {

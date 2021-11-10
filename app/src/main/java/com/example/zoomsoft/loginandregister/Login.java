@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -53,8 +54,10 @@ public class Login extends AppCompatActivity {
                             if(document.exists() && password.equals(document.get("password"))) {
                                 //use the document to login
                                 Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                String userEmail = email;
                                 //call the home activity
                                 Intent intent = new Intent(Login.this, MainPageTabs.class);
+                                intent.putExtra(MainActivity.EXTRA_MESSAGE, userEmail);
                                 startActivity(intent);
                             }
                             else {
