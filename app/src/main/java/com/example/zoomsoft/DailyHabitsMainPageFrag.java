@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -32,7 +33,7 @@ public class DailyHabitsMainPageFrag extends Fragment {
 
     ArrayList<Habits> habitDataList = new ArrayList<>();
     ArrayAdapter habitAdaptor;
-
+    public static String email = MainPageTabs.email;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -81,7 +82,13 @@ public class DailyHabitsMainPageFrag extends Fragment {
                             habitAdaptor.notifyDataSetChanged();
                         }
                     });
-
+            habitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent(getActivity(), HabitInfo.class);
+                    startActivity(intent);
+                }
+            });
             return view;
 
             //return inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);

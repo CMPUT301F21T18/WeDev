@@ -32,7 +32,7 @@ public class AddFriends extends AppCompatActivity {
     FirebaseFirestore db;
     final String TAG = "Sample";
     private String myUser = "you@gmail.com";
-
+    public static String email = MainPageTabs.email;
 
 
     @Override
@@ -41,7 +41,7 @@ public class AddFriends extends AppCompatActivity {
         setContentView(R.layout.add_friends_fragment);
 
         userList = findViewById(R.id.user_list);
-        addFriendButton = findViewById(R.id.add_friend_button);
+        addFriendButton = findViewById(R.id.add_friend_button); //null
         addUserEditText = findViewById(R.id.add_friend_field);
 
         db = FirebaseFirestore.getInstance();

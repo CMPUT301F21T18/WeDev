@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +34,7 @@ public class Register extends AppCompatActivity {
     final String TAG = "Sample";
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
     public User user;
+
 
     //STEPS TAKEN FOR REGISTER
     //When the user clicks on register,
@@ -90,6 +92,7 @@ public class Register extends AppCompatActivity {
                                                     Log.d(TAG, "Data has been added successfully!");
                                                     //call the home activity from here
                                                     Intent intent = new Intent(Register.this, MainPageTabs.class);
+                                                    intent.putExtra(MainActivity.EXTRA_MESSAGE, email);
                                                     startActivity(intent);
                                                 }
                                             })

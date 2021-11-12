@@ -33,10 +33,10 @@ public class SectionsPagerAdapterEvent extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
         // getItem is called to instantiate the fragment for the given page.
         if (position == 0){
-            return new HabitDisplay();
+            return new HabitEventDisplay();
         }
         if (position == 1){
-            return new HabitEventDisplay();
+            return new HabitDisplay();
         }
         return PlaceholderFragment.newInstance(position + 1);
     }
@@ -45,9 +45,9 @@ public class SectionsPagerAdapterEvent extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "EVENT";
-            case 1:
                 return "INFO";
+            case 1:
+                return "EVENT";
         }
         return null;
     }

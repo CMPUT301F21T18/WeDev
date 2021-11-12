@@ -9,18 +9,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import com.example.zoomsoft.loginandregister.User;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Profile extends Fragment {
     private Button addFriendButton;
-
+    public static String email = MainPageTabs.email;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         {
-
+            User user = new User("alpha123");
+            List<User> list = new ArrayList<>();
             View view = inflater.inflate(R.layout.profile, container, false);
 
             addFriendButton = view.findViewById(R.id.addFriend);
