@@ -5,6 +5,8 @@
 */
 package com.example.zoomsoft;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,9 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,12 +29,7 @@ import com.example.zoomsoft.eventInfo.HabitInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -54,6 +53,7 @@ public class ListOfHabitsMainPageFrag extends Fragment {
     ArrayList<Habits> habitDataList = new ArrayList<>();
     ArrayAdapter habitAdaptor;
     private String TAG = "SAMPLE";
+    FloatingActionButton addHabitButton;
 
     @Nullable
     @Override
@@ -109,7 +109,27 @@ public class ListOfHabitsMainPageFrag extends Fragment {
                     startActivity(intent);
                 }
             });
+        //OnClickListener for the floating action button to add new entries
+        addHabitButton = view.findViewById(R.id.add_habit_button);
+        addHabitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View viewDialog = inflater.inflate(R.layout.add_habit_fragment_layout, null);
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                alert.setView(viewDialog);
+                alert.setMessage("Add Habit");
+                alert.setNegativeButton("Cancel", null);
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getContext(), "Good", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                alert.show();
+            }
+        });
         return view;
         //return inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);
     }
+
 }
