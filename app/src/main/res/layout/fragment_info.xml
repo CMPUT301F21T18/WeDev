@@ -8,9 +8,7 @@
     tools:context=".ui.main.PlaceholderFragment">
     <!-- TODO: Update blank fragment layout -->
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="28dp"
-            android:layout_marginBottom="176dp"
+            android:layout_marginBottom="188dp"
             android:textOff="off"
             android:textOn="on"
             android:thumb="@drawable/thumb"
@@ -55,9 +53,9 @@
             android:textOn="on"
             android:thumb="@drawable/thumb"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switchCompat4"
             app:showText="true"
-            app:track="@drawable/track"
-            tools:layout_editor_absoluteY="345dp" />
+            app:track="@drawable/track" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switchCompat3"
@@ -68,9 +66,9 @@
             android:textOn="on"
             android:thumb="@drawable/thumb"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switchCompat5"
             app:showText="true"
-            app:track="@drawable/track"
-            tools:layout_editor_absoluteY="399dp" />
+            app:track="@drawable/track" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switchCompat2"
@@ -81,9 +79,9 @@
             android:textOn="on"
             android:thumb="@drawable/thumb"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switchCompat3"
             app:showText="true"
-            app:track="@drawable/track"
-            tools:layout_editor_absoluteY="449dp" />
+            app:track="@drawable/track" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switchCompat4"
@@ -108,11 +106,12 @@
             android:textOn="on"
             android:thumb="@drawable/thumb"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switchCompat6"
             app:showText="true"
-            app:track="@drawable/track"
-            tools:layout_editor_absoluteY="243dp" />
+            app:track="@drawable/track" />
 
         <TextView
+            android:textSize="30dp"
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -140,10 +139,13 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_marginStart="28dp"
-            android:layout_marginTop="212dp"
+
+            android:layout_marginTop="192dp"
             android:text="Monday"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/switchCompat6"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -154,6 +156,7 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="32dp"
             android:text="Tuesday"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -164,6 +167,7 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="32dp"
             android:text="Friday"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -174,6 +178,7 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="32dp"
             android:text="Thursday"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -184,6 +189,7 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="32dp"
             android:text="Saturday"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -194,6 +200,7 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="32dp"
             android:text="Sunday"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -204,6 +211,7 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="32dp"
             android:text="Wednesday"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
     </androidx.constraintlayout.widget.ConstraintLayout>
