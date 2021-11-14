@@ -32,6 +32,9 @@
             android:value="@string/map_key" />
 
         <activity
+            android:name=".AddFriends"
+            android:exported="true" />
+        <activity
             android:name=".eventInfo.MapsActivity"
             android:exported="true"
             android:label="@string/title_activity_maps" />
