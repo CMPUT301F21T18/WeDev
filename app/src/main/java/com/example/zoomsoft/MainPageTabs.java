@@ -6,20 +6,12 @@ package com.example.zoomsoft;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.zoomsoft.eventInfo.HabitInfo;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
-
-import com.example.zoomsoft.ui.main.SectionsPagerAdapter;
 import com.example.zoomsoft.databinding.ActivityMainPageTabsBinding;
+import com.example.zoomsoft.ui.main.SectionsPagerAdapter;
+import com.google.android.material.tabs.TabLayout;
 
 public class MainPageTabs extends AppCompatActivity {
 
