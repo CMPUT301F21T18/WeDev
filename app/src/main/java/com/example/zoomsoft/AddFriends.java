@@ -41,7 +41,7 @@ public class AddFriends extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         userList = findViewById(R.id.user_list);
-        addFriendButton = findViewById(R.id.add_friend_button);
+        addFriendButton = findViewById(R.id.add_friend_button); //null
         addUserEditText = findViewById(R.id.add_friend_field);
 
         db = FirebaseFirestore.getInstance();

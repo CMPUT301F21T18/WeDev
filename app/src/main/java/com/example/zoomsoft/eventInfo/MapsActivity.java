@@ -3,11 +3,13 @@ package com.example.zoomsoft.eventInfo;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -19,8 +21,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.zoomsoft.databinding.ActivityMapsBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -29,6 +33,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ArrayList<String> list = new ArrayList<>();
     private ArrayList<LatLng> locationArrayList;
     public static String email = MainPageTabs.email;
+    public Double latitude = 25.2;
+    public Double longitude = 21.3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,21 +59,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        //need to implement snapshot listener over here first with passed email
-
-        TextView textView = findViewById(R.id.textView6);
         mMap = googleMap;
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(@NonNull LatLng latLng) {
-                mMap.clear();
-                mMap.addMarker(new MarkerOptions()
-                    .position(latLng)
-                    .title("Location")
-                );
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            }
-        });
+        Intent intent = getIntent();
+        String positionString = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        String[] split = positionString.split(" ");
+        latitude = Double.parseDouble(split[0]);
+        longitude = Double.parseDouble(split[1]);
+        // Add a marker in Sydney and move the camera
+        LatLng position = new LatLng(latitude, longitude);
+        mMap.addMarker(new MarkerOptions()
+                .position(position)
+                .title("Habit"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
     }
 }
 
