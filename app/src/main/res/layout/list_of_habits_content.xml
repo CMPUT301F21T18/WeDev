@@ -5,15 +5,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/content_habit_name"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textSize="25sp"
-        android:clickable="true"
-    >
+        android:orientation="horizontal">
 
-    </TextView>
+        <TextView
+            android:id="@+id/content_habit_name"
+            android:text="Habit Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="25sp"
+            android:clickable="true">
+        </TextView>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </View>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@drawable/circle"
+            android:progress="60">
+        </ProgressBar>
+
+    </LinearLayout>
 
 </LinearLayout>

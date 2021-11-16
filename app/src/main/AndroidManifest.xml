@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ZoomSoft">
         <activity
+            android:name=".AddHabit"
+            android:exported="true" />
+        <activity
             android:name=".eventInfo.MapSearch"
             android:exported="true" />
         <!--
