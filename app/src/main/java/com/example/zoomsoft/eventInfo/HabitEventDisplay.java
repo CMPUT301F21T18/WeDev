@@ -138,10 +138,10 @@ public class HabitEventDisplay extends Fragment {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        HashMap<String, Object> objectHashMap = (HashMap<String, Object>) map.get(dateList.get(i));
-                        String[] objects = (String[]) objectHashMap.get("Location");
-                        String comment = (String) objectHashMap.get("comment");
-                        EventFragment eventFragment = new EventFragment(objects[0], objects[1], dateList.get(i), comment);
+//                        HashMap<String, Object> objectHashMap = (HashMap<String, Object>) map.get(dateList.get(i));
+//                        String[] objects = (String[]) objectHashMap.get("Location");
+//                        String comment = (String) objectHashMap.get("comment");
+                        EventFragment eventFragment = new EventFragment();
                         eventFragment.show(getActivity().getSupportFragmentManager(),"Fragment");
                     }
                 });
