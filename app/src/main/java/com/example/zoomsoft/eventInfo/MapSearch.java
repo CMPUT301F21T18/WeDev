@@ -1,14 +1,5 @@
 package com.example.zoomsoft.eventInfo;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
-import com.example.zoomsoft.AddFriends;
-import com.example.zoomsoft.MainActivity;
-import com.example.zoomsoft.R;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,9 +13,16 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import com.example.zoomsoft.MainActivity;
+import com.example.zoomsoft.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.util.List;

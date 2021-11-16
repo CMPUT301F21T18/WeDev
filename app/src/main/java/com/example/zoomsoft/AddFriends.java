@@ -1,6 +1,5 @@
 package com.example.zoomsoft;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -12,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.zoomsoft.databinding.AddFriendBinding;
 import com.example.zoomsoft.loginandregister.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AddFriends extends AppCompatActivity {
+    AddFriendBinding binding;
     ListView userList;
     ArrayAdapter<User> userAdapter;
     ArrayList<User> userDataList;
@@ -30,15 +31,14 @@ public class AddFriends extends AppCompatActivity {
     EditText addUserEditText;
     UserCustomList customList;
     FirebaseFirestore db;
-    final String TAG = "Sample";
-    private String myUser = "you@gmail.com";
     public static String email = MainPageTabs.email;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_friends_fragment);
+
+        binding = AddFriendBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         userList = findViewById(R.id.user_list);
         addFriendButton = findViewById(R.id.add_friend_button); //null
@@ -48,13 +48,12 @@ public class AddFriends extends AppCompatActivity {
         final CollectionReference collectionReference = db.collection("User");
 
 
-
         addFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final String userName = addUserEditText.getText().toString();
                 HashMap<String, String> data = new HashMap<>();
-                if (userName.length()>0) {
+                if (userName.length() > 0) {
                     data.put("UserName", userName);
                     collectionReference
                             .document(userName)
@@ -62,12 +61,13 @@ public class AddFriends extends AppCompatActivity {
                             .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if(task.getResult().exists()){
-                                        Toast.makeText(AddFriends.this, "Follow request sent",Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(AddFriends.this, Profile.class));
+                                    if (task.getResult().exists()) {
+                                        Toast.makeText(AddFriends.this, "Follow request sent", Toast.LENGTH_SHORT).show();
 
-                                    }else{
-                                        Toast.makeText(AddFriends.this, "This user does not exist in the database",Toast.LENGTH_SHORT).show();
+//                                        startActivity(new Intent(AddFriends.this, Profile.class));
+
+                                    } else {
+                                        Toast.makeText(AddFriends.this, "This user does not exist in the database", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -75,12 +75,9 @@ public class AddFriends extends AppCompatActivity {
             }
         });
 
-        userDataList = new ArrayList<User>();
-        userAdapter = new UserCustomList(this, userDataList);
+        userDataList = new ArrayList<>();
+        userAdapter = new UserCustomList(AddFriends.this, userDataList);
         userList.setAdapter(userAdapter);
 
     }
-
-
-
 }
