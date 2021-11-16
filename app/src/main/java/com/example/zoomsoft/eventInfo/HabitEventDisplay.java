@@ -7,9 +7,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,12 +66,87 @@ public class HabitEventDisplay extends Fragment {
         }
     }
 
+    TextView habitNameTextView;
+    TextView descriptionTextView;
+    ListView listView;
+    ArrayAdapter<String> dateAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_event, container, false);
-        
+        habitNameTextView = view.findViewById(R.id.name);
+        descriptionTextView = view.findViewById(R.id.description);
+        listView = view.findViewById(R.id.listView);
+        //Update the habit
+        HabitEventFirebase habitEventFirebase = new HabitEventFirebase("Walk a dog");
+        habitEventFirebase.getHabitDescription(new HabitEventFirebase.MyCallBack() {
+            @Override
+            public void updateComment(String s) {
+                String description = s;
+                habitNameTextView.setText("Habit:" + "Walk a dog");
+                descriptionTextView.setText("Description:"+ description);
+            }
+
+            @Override
+            public void getAllDates(List<String> list) {
+                //
+            }
+
+            @Override
+            public void getHabitComment(HashMap<String, Object> map) {
+
+            }
+        });
+
+        habitEventFirebase.getAllDates(new HabitEventFirebase.MyCallBack() {
+            String description;
+            ArrayList<String> dateList;
+            HashMap<String, Object> map;
+            @Override
+            public void updateComment(String s) {
+                //do nothing
+            }
+
+            @Override
+            public void getAllDates(List<String> list) {
+                dateList = new ArrayList<>(list);
+                dateAdapter = new DateCustomListAdapter(getActivity(), dateList);
+                listView.setAdapter(dateAdapter);
+            }
+
+            @Override
+            public void getHabitComment(HashMap<String,Object> map) {
+
+            }
+        });
+
+        habitEventFirebase.getHabitClickedDetails(new HabitEventFirebase.MyCallBack() {
+            List<String> dateList;
+            @Override
+            public void updateComment(String s) {
+
+            }
+
+            @Override
+            public void getAllDates(List<String> list) {
+                this.dateList = list;
+            }
+
+            @Override
+            public void getHabitComment(HashMap<String, Object> map) {
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                        HashMap<String, Object> objectHashMap = (HashMap<String, Object>) map.get(dateList.get(i));
+//                        String[] objects = (String[]) objectHashMap.get("Location");
+//                        String comment = (String) objectHashMap.get("comment");
+                        EventFragment eventFragment = new EventFragment();
+                        eventFragment.show(getActivity().getSupportFragmentManager(),"Fragment");
+                    }
+                });
+            }
+        });
         return view;
     }
 }

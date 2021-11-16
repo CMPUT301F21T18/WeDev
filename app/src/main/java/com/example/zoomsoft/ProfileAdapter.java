@@ -27,7 +27,7 @@ public class ProfileAdapter extends ArrayAdapter<Profile> {
 
 
         TextView item = convertView.findViewById(R.id.profile_item);
-        item.setText(profileItem.item);
+//        item.setText(profileItem.item); //error here too
 
         return convertView;
     }

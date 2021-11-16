@@ -26,10 +26,10 @@ public class ProfileMainPageFrag extends Fragment {
 
         String[] itemList = {"View Friends","Pending Requests", "Received Requests", "Add Friend"};
         profileDataList.clear();
-        for (String s : itemList) {
-            Profile profile = new Profile(s);
-            profileDataList.add(profile);
-        }
+//        for (String s : itemList) {
+//            Profile profile = new Profile(s);
+//            profileDataList.add(profile);
+//        }
 
 
         profileAdaptor = new ProfileAdapter(this.getContext(), profileDataList);
