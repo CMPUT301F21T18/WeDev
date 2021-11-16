@@ -28,7 +28,7 @@ public class Profile extends Fragment {
             List<User> list = new ArrayList<>();
             View view = inflater.inflate(R.layout.profile, container, false);
 
-            addFriendButton = view.findViewById(R.id.addFriend);
+//            addFriendButton = view.findViewById(R.id.addFriend); //can't find the widget by androidStudio @Raji
             addFriendButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
