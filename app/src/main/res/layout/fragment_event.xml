@@ -15,21 +15,30 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="129dp"
+            android:layout_height="106dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:text="Habit:"
-                android:textSize="29dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="16dp"
+                android:text="Habit: "
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/description"
-                android:layout_width="326dp"
-                android:layout_height="76dp"
-                android:text="Description:"
+                android:layout_width="393dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Description: "
                 android:textSize="20dp" />
 
         </LinearLayout>
@@ -37,15 +46,21 @@
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
-            android:layout_height="61dp"
-            android:textSize="45dp"
-            android:text="Occurred on:" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="Occurred on:"
+            android:textColor="#000000"
+            android:textSize="30dp" />
 
         <ListView
+            android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/listView"
-            />
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp" />
 
     </LinearLayout>
 </FrameLayout>
