@@ -80,9 +80,7 @@ public class MapSearch extends AppCompatActivity {
     }
 
     private void getLocation() throws IOException {
-
         //Check Permissions again
-
         if (ActivityCompat.checkSelfPermission(MapSearch.this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MapSearch.this,
 
                 Manifest.permission.ACCESS_COARSE_LOCATION) !=PackageManager.PERMISSION_GRANTED)
@@ -96,31 +94,48 @@ public class MapSearch extends AppCompatActivity {
             Location LocationNetwork=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             Location LocationPassive=locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
 
-//            if (LocationGps !=null)
-//            {
-//                double lat=LocationGps.getLatitude();
-//                double longi=LocationGps.getLongitude();
-//
-//                latitude=String.valueOf(lat);
-//                longitude=String.valueOf(longi);
-//
-//                showLocationTxt.setText("Your Location:"+"\n"+"Latitude= "+latitude+"\n"+"Longitude= "+longitude);
-//            }
-//            else if (LocationNetwork !=null)
-//            {
-//                double lat=LocationNetwork.getLatitude();
-//                double longi=LocationNetwork.getLongitude();
-//
-//                latitude=String.valueOf(lat);
-//                longitude=String.valueOf(longi);
-//
-//                showLocationTxt.setText("Your Location:"+"\n"+"Latitude= "+latitude+"\n"+"Longitude= "+longitude);
-//            }
+            if (LocationGps !=null)
+            {
+                double lat=LocationGps.getLatitude();
+                double longi=LocationGps.getLongitude();
+                latitude=lat;
+                longitude = longi;
+                Geocoder geocoder;
+                List<Address> addresses;
+                geocoder = new Geocoder(this, Locale.getDefault());
+                addresses = geocoder.getFromLocation(lat, longi,1);
+                String address = addresses.get(0).getAddressLine(0);
+                String city = addresses.get(0).getLocality();
+                String state = addresses.get(0).getAdminArea();
+                String zip = addresses.get(0).getPostalCode();
+                String country = addresses.get(0).getCountryName();
+                showLocationTxt.setText("Your Location:"+"\n"+"Latitude= "+latitude+"\n"+"Longitude= "+longitude);
+                viewLocationMap.setVisibility(View.VISIBLE);
+            }
+            else if (LocationNetwork !=null)
+            {
+                double lat=LocationNetwork.getLatitude();
+                double longi=LocationNetwork.getLongitude();
+
+                latitude = lat;
+                longitude = longi;
+                Geocoder geocoder;
+                List<Address> addresses;
+                geocoder = new Geocoder(this, Locale.getDefault());
+                addresses = geocoder.getFromLocation(lat, longi,1);
+                String address = addresses.get(0).getAddressLine(0);
+                String city = addresses.get(0).getLocality();
+                String state = addresses.get(0).getAdminArea();
+                String zip = addresses.get(0).getPostalCode();
+                String country = addresses.get(0).getCountryName();
+                showLocationTxt.setText("Your Location:"+"\n"+"Latitude= "+latitude+"\n"+"Longitude= "+longitude);
+                viewLocationMap.setVisibility(View.VISIBLE);
+            }
             if (LocationPassive !=null)
             {
+
                 double lat=LocationPassive.getLatitude();
                 double longi=LocationPassive.getLongitude();
-
                 latitude=lat;
                 longitude=longi;
                 Geocoder geocoder;
@@ -139,8 +154,6 @@ public class MapSearch extends AppCompatActivity {
             {
                 Toast.makeText(MapSearch.this, "Can't Get Your Location", Toast.LENGTH_SHORT).show();
             }
-
-            //Thats All Run Your App
         }
 
     }

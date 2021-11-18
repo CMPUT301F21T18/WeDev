@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -28,12 +30,6 @@ public class EventFragment extends DialogFragment {
     private double latitude;
     private String comment;
     private String date;
-    //private OnFragmentInteractionListener listener;
-    //my interface that includes the inter
-//    public interface OnFragmentInteractionListener {
-//        void onOkPressed();
-//        void onDeletePressed();
-//    }
 
     public EventFragment(String longitude, String latitude, String date, String comment) {
         this.latitude = Double.parseDouble(longitude);
@@ -54,17 +50,25 @@ public class EventFragment extends DialogFragment {
 //        }
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+    }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.date_dialog_fragment, null);
         Button button = view.findViewById(R.id.map_button);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), MapsActivity.class);
+                Intent intent = new Intent(getContext(), MapSearch.class);
                 intent.putExtra(MainActivity.EXTRA_MESSAGE, 53.5232 + " " + 13.5263);
                 startActivity(intent);
             }
