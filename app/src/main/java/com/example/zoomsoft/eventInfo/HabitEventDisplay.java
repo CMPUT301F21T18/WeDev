@@ -79,7 +79,7 @@ public class HabitEventDisplay extends Fragment {
         descriptionTextView = view.findViewById(R.id.description);
         listView = view.findViewById(R.id.listView);
         //Update the habit
-        HabitEventFirebase habitEventFirebase = new HabitEventFirebase("Walk a dog");
+        HabitEventFirebase habitEventFirebase = new HabitEventFirebase("Walk a dog"); //will replace with the clickedHabit
         habitEventFirebase.getHabitDescription(new HabitEventFirebase.MyCallBack() {
             @Override
             public void updateComment(String s) {
