@@ -5,15 +5,23 @@
 */
 package com.example.zoomsoft;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,12 +31,7 @@ import com.example.zoomsoft.eventInfo.HabitInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -52,6 +55,11 @@ public class ListOfHabitsMainPageFrag extends Fragment {
     ArrayList<Habits> habitDataList = new ArrayList<>();
     ArrayAdapter habitAdaptor;
     private String TAG = "SAMPLE";
+    FloatingActionButton addHabitButton;
+    private EditText habitTitle;
+    private EditText habitReason;
+    private DatePicker startDate;
+    private ProgressBar progressBar;
 
     @Nullable
     @Override
@@ -81,6 +89,7 @@ public class ListOfHabitsMainPageFrag extends Fragment {
 //                    }
 //                }
 //            });
+        //Get list of habits and display it
         String email = "a@gmail.com";
         final CollectionReference collectionReference = rootRef.collection("Habits");
         collectionReference
@@ -99,15 +108,50 @@ public class ListOfHabitsMainPageFrag extends Fragment {
                         habitAdaptor.notifyDataSetChanged();
                     }
                 });
+
+        //OnClickListener for item clicked in listview
+        habitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), HabitInfo.class);
+                startActivity(intent);
+            }
+        });
+
+        //OnClickListener for the floating action button to add new entries
+        addHabitButton = view.findViewById(R.id.add_habit_button);
+        addHabitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(view.getContext(), AddHabit.class);
+                startActivity(intent);
+                //Inflating view for the DialogFragment
+//                View viewDialog = inflater.inflate(R.layout.new_habit, null);
+//                habitTitle = viewDialog.findViewById(R.id.habit_title_editText);
+//                habitReason = viewDialog.findViewById(R.id.habit_reason_editText);
+//                startDate = viewDialog.findViewById(R.id.datePicker);
+//                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+//                alert.setView(viewDialog);
+//                alert.setMessage("Add Habit");
+//                alert.setNegativeButton("Cancel", null);
+//                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        String title = habitTitle.getText().toString();
+//                        String reason = habitReason.getText().toString();
+//                        int newDay = startDate.getDayOfMonth();
+//                        int newMonth = startDate.getMonth() + 1;
+//                        int newYear = startDate.getYear();
+//                        String date = newYear+"-"+newMonth+"-"+newDay;
+//                        habitAdaptor.add(new Habits(title));
+//                        //Implement addition to Firestore, would use onOkPressed Function below
+//                        habitList.setAdapter(habitAdaptor);
+//                    }
+//                });
+//                alert.show();
+            }
+        });
         return view;
-
-        //return inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);
     }
-
-//    public void getEventInfo(View v) {
-//
-//        Intent intent = new Intent(getActivity(), HabitInfo.class);
-//        startActivity(intent);
-//    }
-
 }

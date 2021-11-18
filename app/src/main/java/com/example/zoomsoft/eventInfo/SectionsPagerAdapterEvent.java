@@ -45,9 +45,9 @@ public class SectionsPagerAdapterEvent extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "EVENT";
-            case 1:
                 return "INFO";
+            case 1:
+                return "EVENT";
         }
         return null;
     }

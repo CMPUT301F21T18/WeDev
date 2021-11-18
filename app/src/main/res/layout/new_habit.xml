@@ -160,11 +160,13 @@
         android:layout_marginLeft="60dp"
         android:layout_marginBottom="240dp">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/habit_title_edit_text"
             android:layout_width="213dp"
             android:layout_height="37dp"
             android:layout_gravity="center"
             android:layout_marginRight="0dp"
             android:layout_marginBottom="240dp"
+            android:maxLength="20"
             android:hint="Title" />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

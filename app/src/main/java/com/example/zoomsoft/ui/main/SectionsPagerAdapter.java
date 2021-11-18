@@ -14,15 +14,16 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.zoomsoft.DailyHabitsMainPageFrag;
 import com.example.zoomsoft.ListOfHabitsMainPageFrag;
+import com.example.zoomsoft.MainPageTabs;
+import com.example.zoomsoft.ProfileMainPageFrag;
 import com.example.zoomsoft.R;
-import com.example.zoomsoft.Profile;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
     private final Context mContext;
-
+    public static String email = MainPageTabs.email;
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
@@ -38,7 +39,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             return new DailyHabitsMainPageFrag();
         }
         if (position == 2){
-            return new Profile();
+            return new ProfileMainPageFrag();
         }
         return PlaceholderFragment.newInstance(position + 1);
     }

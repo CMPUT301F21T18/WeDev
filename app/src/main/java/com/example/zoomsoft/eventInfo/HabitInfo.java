@@ -5,14 +5,15 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.databinding.ActivityHabitInfoBinding;
 import com.example.zoomsoft.eventInfo.SectionsPagerAdapterEvent;
 import com.google.android.material.tabs.TabLayout;
 
-public class HabitInfo extends AppCompatActivity {
+public class HabitInfo extends AppCompatActivity  {
 
     private ActivityHabitInfoBinding binding;
-
+    public static String email = MainPageTabs.email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
