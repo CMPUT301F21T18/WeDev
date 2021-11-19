@@ -141,7 +141,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map_button"
         app:layout_constraintVertical_bias="0.897"
-        app:srcCompat="@drawable/delete" />
+        app:srcCompat="@android:drawable/ic_input_delete" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton2"
@@ -159,7 +159,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map_button"
         app:layout_constraintVertical_bias="0.897"
-        app:srcCompat="@drawable/edit" />
+        app:srcCompat="@android:drawable/ic_menu_edit" />
 
     <ImageView
         android:id="@+id/imageView2"
