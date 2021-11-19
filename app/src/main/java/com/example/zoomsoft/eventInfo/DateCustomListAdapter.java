@@ -26,6 +26,15 @@ public class DateCustomListAdapter extends ArrayAdapter<String> {
         this.dataList = dataList;
     }
 
+    //Habit
+    //Description
+    TextView textView;
+    //Date
+    //Comment
+    //Photo
+    //Camera
+    //Location
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

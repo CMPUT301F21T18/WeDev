@@ -94,7 +94,7 @@ public class HabitEventDisplay extends Fragment {
             }
 
             @Override
-            public void getHabitComment(HashMap<String, Object> map) {
+            public void getHabitDetails(HashMap<String, Object> map) {
 
             }
         });
@@ -116,7 +116,7 @@ public class HabitEventDisplay extends Fragment {
             }
 
             @Override
-            public void getHabitComment(HashMap<String,Object> map) {
+            public void getHabitDetails(HashMap<String,Object> map) {
 
             }
         });
@@ -134,7 +134,7 @@ public class HabitEventDisplay extends Fragment {
             }
 
             @Override
-            public void getHabitComment(HashMap<String, Object> map) {
+            public void getHabitDetails(HashMap<String, Object> map) {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
