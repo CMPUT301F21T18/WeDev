@@ -1,11 +1,15 @@
 package com.example.zoomsoft.eventInfo;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +22,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -42,7 +50,7 @@ public class EventFragment extends DialogFragment {
         this.comment = comment;
         this.date = date;
     }
-
+    ImageView imageView;
     public EventFragment() {super();}
 
     @Override
@@ -81,6 +89,18 @@ public class EventFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.date_dialog_fragment, null);
         Button button = view.findViewById(R.id.map_button);
+        Button cameraButton = view.findViewById(R.id.bt_open);
+        imageView = view.findViewById(R.id.camera_pic);
+        ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == RESULT_OK) {
+                    Bitmap captureImage = (Bitmap) result.getData().getExtras().get("data");
+                    imageView.setImageBitmap(captureImage);
+                }
+            }
+        });
+
         HabitInfoFirebase habitInfoFirebase = new HabitInfoFirebase("Walk a dog"); //clicked habit
 
         habitView = view.findViewById(R.id.name);
@@ -141,6 +161,13 @@ public class EventFragment extends DialogFragment {
                 Intent intent = new Intent(getContext(), MapSearch.class);
                 intent.putExtra(MainActivity.EXTRA_MESSAGE, 53.5232 + " " + 13.5263);
                 startActivity(intent);
+            }
+        });
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                launcher.launch(intent);
             }
         });
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
