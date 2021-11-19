@@ -52,8 +52,6 @@ import java.util.Map;
 public class ListOfHabitsMainPageFrag extends Fragment {
 
 
-    ArrayList<Habits> habitDataList = new ArrayList<>();
-    ArrayAdapter habitAdaptor;
     private String TAG = "SAMPLE";
     FloatingActionButton addHabitButton;
     private EditText habitTitle;
@@ -67,47 +65,40 @@ public class ListOfHabitsMainPageFrag extends Fragment {
         View view = inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);
 
         ListView habitList = view.findViewById(R.id.habit_list);
-        habitAdaptor = new HabitCustomList(this.getContext(), habitDataList);
-        habitList.setAdapter(habitAdaptor);
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-//            rootRef.collection("Habits").document("a@gmail.com").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                @Override
-//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                    if (task.isSuccessful()) {
-//                        DocumentSnapshot document = task.getResult();
-//                        if (document.exists()) {
-//                            habitDataList.clear();
-//                            Map<String, Object> map = document.getData();
-//                            for (Map.Entry<String, Object> entry : map.entrySet()) {
-//                                if (entry.getKey().equals("HabitsList")) {
-//                                    Log.d("TAG", entry.getValue().toString());
-//                                    habitDataList.add(new Habits(entry.getValue().toString()));
-//                                }
-//                            }
-//                            habitAdaptor.notifyDataSetChanged();
-//                        }
-//                    }
-//                }
-//            });
+
         //Get list of habits and display it
-        String email = "a@gmail.com";
-        final CollectionReference collectionReference = rootRef.collection("Habits");
-        collectionReference
-                .document(email)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        habitDataList.clear();
-                        DocumentSnapshot document = task.getResult();
-                        //would recommend populating it to the Habits later on:
-                        List<String> arrayListHabit = (List<String>) document.get("HabitsList");
-                        for (String str : arrayListHabit) {
-                            habitDataList.add(new Habits(str));
-                        }
-                        habitAdaptor.notifyDataSetChanged();
-                    }
-                });
+//        String email = "a@gmail.com";
+//        final CollectionReference collectionReference = rootRef.collection("Habits");
+//        collectionReference
+//                .document(email)
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                        habitDataList.clear();
+//                        DocumentSnapshot document = task.getResult();
+//                        //would recommend populating it to the Habits later on:
+//                        List<String> arrayListHabit = (List<String>) document.get("HabitsList");
+//                        for (String str : arrayListHabit) {
+//                            habitDataList.add(new Habits(str));
+//                        }
+//                        habitAdaptor.notifyDataSetChanged();
+//                    }
+//                });
+        MainPageFirebase mainPageFirebase = new MainPageFirebase();
+        mainPageFirebase.getListOfHabits(new MainPageFirebase.MainPageInterface() {
+            @Override
+            public void getHabitInterface(ArrayList<String> habitArrayList) {
+                ArrayAdapter habitAdaptor = new HabitCustomList(getContext(), habitArrayList);
+                habitList.setAdapter(habitAdaptor);
+            }
+
+            @Override
+            public void getNewHabitDetails(Habits habits) {
+
+            }
+        });
 
         //OnClickListener for item clicked in listview
         habitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -123,33 +114,8 @@ public class ListOfHabitsMainPageFrag extends Fragment {
         addHabitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(view.getContext(), AddHabit.class);
                 startActivity(intent);
-                //Inflating view for the DialogFragment
-//                View viewDialog = inflater.inflate(R.layout.new_habit, null);
-//                habitTitle = viewDialog.findViewById(R.id.habit_title_editText);
-//                habitReason = viewDialog.findViewById(R.id.habit_reason_editText);
-//                startDate = viewDialog.findViewById(R.id.datePicker);
-//                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-//                alert.setView(viewDialog);
-//                alert.setMessage("Add Habit");
-//                alert.setNegativeButton("Cancel", null);
-//                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        String title = habitTitle.getText().toString();
-//                        String reason = habitReason.getText().toString();
-//                        int newDay = startDate.getDayOfMonth();
-//                        int newMonth = startDate.getMonth() + 1;
-//                        int newYear = startDate.getYear();
-//                        String date = newYear+"-"+newMonth+"-"+newDay;
-//                        habitAdaptor.add(new Habits(title));
-//                        //Implement addition to Firestore, would use onOkPressed Function below
-//                        habitList.setAdapter(habitAdaptor);
-//                    }
-//                });
-//                alert.show();
             }
         });
         return view;

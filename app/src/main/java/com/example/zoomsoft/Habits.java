@@ -12,10 +12,11 @@ public class Habits {
         this.habitTitle = habitTitle;
     }
 
-    public Habits(String habitTitle, String startDate, String habitReason) {
+    public Habits(String habitTitle, String startDate, String habitReason, String habitWeekDay) {
         this.habitTitle = habitTitle;
         this.startDate = startDate;
         this.habitReason = habitReason;
+        this.habitWeekDay = habitWeekDay;
     }
 
     public Habits(String habitTitle, String startDate, String habitReason, String habitWeekDay, Boolean privacy) {
