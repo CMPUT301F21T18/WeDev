@@ -26,7 +26,7 @@ public class HabitEventFirebase {
     interface MyCallBack {
         void updateComment(String s); //should be updateDescription
         void getAllDates(List<String> list);
-        void getHabitComment(HashMap<String, Object> map);
+        void getHabitDetails(HashMap<String, Object> map);
     }
 
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -88,7 +88,7 @@ public class HabitEventFirebase {
                         List<String> list = new ArrayList<>();
                         HashMap hashMap = (HashMap) map.get("Walk a dog");
                         for(String str : (Set<String>) hashMap.keySet()) {
-                            if (str.equals("description")) continue;
+                            if (str.equals("description") || str.equals("reason") || str.equals("days")) continue;
                             list.add(str);
                         }
                         myCallBack.getAllDates(list);
@@ -118,7 +118,7 @@ public class HabitEventFirebase {
                         Map<String, Object> map = documentSnapshot.getData();
                         List<String> list = new ArrayList<>();
                         HashMap<String, Object> hashMap = (HashMap) map.get("Walk a dog");
-                        myCallBack.getHabitComment(hashMap);
+                        myCallBack.getHabitDetails(hashMap);
                     }
                 }
             }

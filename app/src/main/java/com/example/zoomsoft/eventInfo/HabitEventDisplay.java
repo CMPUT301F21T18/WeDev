@@ -79,7 +79,7 @@ public class HabitEventDisplay extends Fragment {
         descriptionTextView = view.findViewById(R.id.description);
         listView = view.findViewById(R.id.listView);
         //Update the habit
-        HabitEventFirebase habitEventFirebase = new HabitEventFirebase("Walk a dog");
+        HabitEventFirebase habitEventFirebase = new HabitEventFirebase("Walk a dog"); //will replace with the clickedHabit
         habitEventFirebase.getHabitDescription(new HabitEventFirebase.MyCallBack() {
             @Override
             public void updateComment(String s) {
@@ -94,7 +94,7 @@ public class HabitEventDisplay extends Fragment {
             }
 
             @Override
-            public void getHabitComment(HashMap<String, Object> map) {
+            public void getHabitDetails(HashMap<String, Object> map) {
 
             }
         });
@@ -116,7 +116,7 @@ public class HabitEventDisplay extends Fragment {
             }
 
             @Override
-            public void getHabitComment(HashMap<String,Object> map) {
+            public void getHabitDetails(HashMap<String,Object> map) {
 
             }
         });
@@ -134,7 +134,7 @@ public class HabitEventDisplay extends Fragment {
             }
 
             @Override
-            public void getHabitComment(HashMap<String, Object> map) {
+            public void getHabitDetails(HashMap<String, Object> map) {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
