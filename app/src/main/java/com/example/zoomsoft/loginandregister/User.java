@@ -1,8 +1,10 @@
 package com.example.zoomsoft.loginandregister;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 
-public class User {
+public class User extends AppCompatActivity {
     private   String email;
     private   String password;
     private   String username;
