@@ -32,6 +32,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -100,58 +101,36 @@ public class EventFragment extends DialogFragment {
                 }
             }
         });
-
-        HabitInfoFirebase habitInfoFirebase = new HabitInfoFirebase("Walk a dog"); //clicked habit
-
         habitView = view.findViewById(R.id.name);
         textView = view.findViewById(R.id.description);
         dateView = view.findViewById(R.id.date);
         commentView = view.findViewById(R.id.textView9);
         descriptionView = view.findViewById(R.id.description);
-        habitView.setText("Walk a dog");//clicked habit
+        habitView.setText(HabitInfo.clickedHabit);//clicked habit
+
 
         //clicked date needs to be passed
-        HabitEventFirebase habitEventFirebase = new HabitEventFirebase("Walk a dog");//clicked habit
+        HabitEventFirebase habitEventFirebase = new HabitEventFirebase();//clicked habit
         habitEventFirebase.getHabitClickedDetails(new HabitEventFirebase.MyCallBack() {
             @Override
-            public void updateComment(String s) {
-
+            public void getDescription(String s) {
+                descriptionView.setText("Description:" + s);
             }
-
             @Override
             public void getAllDates(List<String> list) {
 
             }
-
             @Override
             public void getHabitDetails(HashMap<String, Object> map) {
-                HashMap hashMap = (HashMap) map.get("09:02:21");
+                HashMap hashMap = (HashMap) map.get(HabitEventDisplay.clickedDate);
                 //get the habit comment
                 String comment  = (String) hashMap.get("comment");
                 if(comment != null) commentView.setText("Comment:" + comment);
                 //get the date
-                dateView.setText("Date:" + "09:02:21");
+                dateView.setText("Date:" + HabitEventDisplay.clickedDate);
                 //get the long and lat
                 ArrayList<Double> list = (ArrayList<Double>) hashMap.get("Location");
                 //will need to call on viewLocation
-
-                //get the description
-                habitEventFirebase.getHabitDescription(new HabitEventFirebase.MyCallBack() {
-                    @Override
-                    public void updateComment(String s) {
-                        descriptionView.setText("Description:" + s);
-                    }
-
-                    @Override
-                    public void getAllDates(List<String> list) {
-
-                    }
-
-                    @Override
-                    public void getHabitDetails(HashMap<String, Object> map) {
-
-                    }
-                });
                 //=============
             }
         });
@@ -170,11 +149,20 @@ public class EventFragment extends DialogFragment {
                 launcher.launch(intent);
             }
         });
+        
+        FloatingActionButton delete = view.findViewById(R.id.floatingActionButton5);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DeleteDialogFragment deleteDialogFragment = new DeleteDialogFragment(); //clicked event
+                deleteDialogFragment.show(getActivity().getSupportFragmentManager(),"Fragment");
+                if(DeleteDialogFragment.isDeleted) getActivity().onBackPressed();
+            }
+        });
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         return builder
                 .setView(view)
-                .setTitle("Dialog Fragment")
-                .setNegativeButton("Cancel", null)
+                .setTitle("Events Recorded On:" + HabitEventDisplay.clickedDate)
                 .create();
     }
 }

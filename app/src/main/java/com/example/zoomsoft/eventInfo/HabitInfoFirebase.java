@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.zoomsoft.MainPageTabs;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -20,8 +21,8 @@ import java.util.Set;
 
 public class HabitInfoFirebase {
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
-    public String email = "a@gmail.com";
-    public String habitName;
+    public String email = MainPageTabs.email;
+    public String habitName = HabitInfo.clickedHabit;
     Source source = Source.SERVER;
 
     interface MyCallBack {
@@ -29,8 +30,7 @@ public class HabitInfoFirebase {
         void getReason(String reason);
     }
 
-    public HabitInfoFirebase(String habitName) {
-        this.habitName = habitName;
+    public HabitInfoFirebase() {
     }
 
     /*
@@ -48,7 +48,7 @@ public class HabitInfoFirebase {
                     if (documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
                         List<String> list = new ArrayList<>();
-                        HashMap hashMap = (HashMap) map.get("Walk a dog");
+                        HashMap hashMap = (HashMap) map.get(habitName);
                         ArrayList<Long> dayList = (ArrayList<Long>) hashMap.get("days");
                         myCallBack.getDays(dayList);
                     }
@@ -72,7 +72,7 @@ public class HabitInfoFirebase {
                     if(documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
                         Log.d("Map provided: ", map.toString());
-                        HashMap hashMap = (HashMap) map.get("Walk a dog");
+                        HashMap hashMap = (HashMap) map.get(habitName);
                         String reason = (String) hashMap.get("reason");
                         myCallBack.getReason(reason);
                     }

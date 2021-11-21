@@ -16,7 +16,7 @@ public class ProfileAdapter extends ArrayAdapter<Profile> {
     public ProfileAdapter(Context context, ArrayList<Profile> userArrayList) {
         super(context, R.layout.profile_content,userArrayList);
     }
-
+    // Creates the profile page and ad
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -27,7 +27,7 @@ public class ProfileAdapter extends ArrayAdapter<Profile> {
 
 
         TextView item = convertView.findViewById(R.id.profile_item);
-//        item.setText(profileItem.item); //error here too
+        item.setText(profileItem.item);
 
         return convertView;
     }

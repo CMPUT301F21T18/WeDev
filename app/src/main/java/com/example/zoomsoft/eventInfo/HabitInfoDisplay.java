@@ -85,7 +85,7 @@ public class HabitInfoDisplay extends Fragment {
         thursdaySwitch = view.findViewById(R.id.thursday_switch);
         fridaySwitch = view.findViewById(R.id.friday_switch);
         saturdaySwitch = view.findViewById(R.id.saturday_switch);
-        HabitInfoFirebase habitInfoFirebase = new HabitInfoFirebase("Walk a dog"); //replace with clicked habit
+        HabitInfoFirebase habitInfoFirebase = new HabitInfoFirebase(); //replace with clicked habit
 
         habitInfoFirebase.getDaysSelected(new HabitInfoFirebase.MyCallBack() {
             @Override
@@ -164,7 +164,7 @@ public class HabitInfoDisplay extends Fragment {
             }
         });
 
-        textView.setText("Habit:" + "Walk a dog"); //pass in the clicked habit
+        textView.setText("Habit:" + HabitInfo.clickedHabit); //pass in the clicked habit
         return view;
     }
 }

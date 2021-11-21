@@ -21,7 +21,6 @@ public class MainPageFirebase {
     }
 
     public MainPageFirebase() {
-
     }
 
     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();

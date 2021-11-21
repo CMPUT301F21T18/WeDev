@@ -67,7 +67,7 @@ public class ListOfHabitsMainPageFrag extends Fragment {
         ListView habitList = view.findViewById(R.id.habit_list);
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
 
-        //Get list of habits and display it
+//        Get list of habits and display it
 //        String email = "a@gmail.com";
 //        final CollectionReference collectionReference = rootRef.collection("Habits");
 //        collectionReference
@@ -99,7 +99,9 @@ public class ListOfHabitsMainPageFrag extends Fragment {
         habitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String clickedHabit = (String) habitList.getItemAtPosition(i);
                 Intent intent = new Intent(getActivity(), HabitInfo.class);
+                intent.putExtra(MainActivity.EXTRA_MESSAGE + "1", clickedHabit);
                 startActivity(intent);
             }
         });
