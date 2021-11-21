@@ -45,10 +45,12 @@ public class AddHabit extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Habits habit = new Habits(title, date, reason, days);
-
+                //Habits habit = new Habits(title, date, reason, days);
+                Habits habit = new Habits(title);
+                MainPageFirebase mainPageFirebase = new MainPageFirebase();
+                mainPageFirebase.addNewHabit(habit);
                 //To return back to MainPage once the habit has been added
-                Intent intent = new Intent(AddHabit.this, ListOfHabitsMainPageFrag.class);
+                Intent intent = new Intent(AddHabit.this, MainPageTabs.class);
                 startActivity(intent);
             }
         });

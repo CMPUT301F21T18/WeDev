@@ -93,11 +93,6 @@ public class ListOfHabitsMainPageFrag extends Fragment {
                 ArrayAdapter habitAdaptor = new HabitCustomList(getContext(), habitArrayList);
                 habitList.setAdapter(habitAdaptor);
             }
-
-            @Override
-            public void getNewHabitDetails(Habits habits) {
-
-            }
         });
 
         //OnClickListener for item clicked in listview

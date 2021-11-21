@@ -10,6 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,6 @@ public class MainPageFirebase {
 
     interface MainPageInterface {
         void getHabitInterface(ArrayList<String> habitArrayList);
-        void getNewHabitDetails(Habits habits);
     }
 
     public MainPageFirebase() {
@@ -25,7 +25,7 @@ public class MainPageFirebase {
     }
 
     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-    final CollectionReference collectionReference = rootRef.collection("Events");
+    final CollectionReference collectionReference = rootRef.collection("Habits");
     String email = "a@gmail.com";
     Source source = Source.SERVER;
 
@@ -51,8 +51,29 @@ public class MainPageFirebase {
                 });
     }
 
-    public void addNewHabit(MainPageInterface mainPageInterface){
+    public void addNewHabit(Habits habits){
 
+        //get the title
+        String title = habits.getHabitTitle();
+        //get the reason
+        String reason = habits.getHabitReason();
+        //get the start date
+        String date = habits.getStartDate();
+        //get days of week (Need to change implementation over to ArrayList
+        String days = habits.getHabitWeekDay();
+
+        HashMap<String, String> temp = new HashMap<>();
+        temp.put("reason", "Because I should");
+        temp.put("description", "doing the thing");
+
+        HashMap<String, ArrayList<Integer>> temp2 = new HashMap<>();
+
+        HashMap<String, HashMap<String, String>> data = new HashMap<>();
+        data.put("Test", temp);
+
+        collectionReference
+                .document(email)
+                .set(data);
     }
 
 
