@@ -61,11 +61,11 @@ public class HabitsTest {
         assertEquals("Why not",habit.getHabitReason());
     }
 
-    @Test
-    public void testGetHabitWeekDay(){
-        Habits habit = mockHabits();
-        assertEquals("Friday",habit.getHabitWeekDay());
-    }
+//    @Test
+//    public void testGetHabitWeekDay(){
+//        Habits habit = mockHabits();
+//        assertEquals("Friday",habit.getHabitWeekDay());
+//    }
 
 //    @Test
 //    public void testSetHabitWeekDay(){
