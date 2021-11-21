@@ -34,7 +34,7 @@ public class HabitInfoFirebase {
     }
 
     /*
-    This function is reponsible for getting the days that the user has selected and populates them
+    This function is responsible for getting the days that the user has selected and populates them
     in info fragment
      */
     public void getDaysSelected(MyCallBack myCallBack) {
