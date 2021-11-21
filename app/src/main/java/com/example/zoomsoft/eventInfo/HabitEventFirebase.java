@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Source;
 
@@ -24,18 +25,18 @@ import java.util.Set;
 public class HabitEventFirebase {
 
     interface MyCallBack {
-        void updateComment(String s); //should be updateDescription
+        void getDescription(String s); //should be getDescription
         void getAllDates(List<String> list);
         void getHabitDetails(HashMap<String, Object> map);
     }
 
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
-    public String email = "a@gmail.com";
-    public String habitName;
+    public String email = MainPageTabs.email;
+    public String habitName = HabitInfo.clickedHabit;
     Source source = Source.SERVER;
 
-    public HabitEventFirebase(String habitName) {
-        this.habitName = habitName;
+    public HabitEventFirebase() {
+
     }
 
 
@@ -59,9 +60,9 @@ public class HabitEventFirebase {
                     if(documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
                         Log.d("Map provided: ", map.toString());
-                        HashMap hashMap = (HashMap) map.get("Walk a dog");
+                        HashMap hashMap = (HashMap) map.get(habitName);
                         String description = (String) hashMap.get("description");
-                        myCallBack.updateComment(description);
+                        myCallBack.getDescription(description);
                     }
                 }
                 else {
@@ -86,7 +87,7 @@ public class HabitEventFirebase {
                     if(documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
                         List<String> list = new ArrayList<>();
-                        HashMap hashMap = (HashMap) map.get("Walk a dog");
+                        HashMap hashMap = (HashMap) map.get(habitName);
                         for(String str : (Set<String>) hashMap.keySet()) {
                             if (str.equals("description") || str.equals("reason") || str.equals("days")) continue;
                             list.add(str);
@@ -117,12 +118,41 @@ public class HabitEventFirebase {
                     if(documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
                         List<String> list = new ArrayList<>();
-                        HashMap<String, Object> hashMap = (HashMap) map.get("Walk a dog");
+                        HashMap<String, Object> hashMap = (HashMap) map.get(habitName);
                         myCallBack.getHabitDetails(hashMap);
+                        myCallBack.getDescription((String) hashMap.get("description"));
                     }
                 }
             }
         });
     }
 
+    /**
+     * This function deletes an event
+     * @param event
+     */
+    public void deleteHabitEvent(String event) {
+        final CollectionReference collectionReference = db.collection("Events");
+        DocumentReference documentReference = collectionReference.document(email);
+        Map<String,Object> updates = new HashMap<>();
+        updates.put(habitName+ "." + event, FieldValue.delete());
+        documentReference.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                    Log.w("TAG", "Deleted from firebase");
+                else
+                    Log.w("TAG", "Error deleting document");
+            }
+        });
+    }
+    /*
+       Map<String, Object> deleteSong = new HashMap<>();
+    deleteSong.put("songList.songName3", FieldValue.delete());
+
+    FirebaseFirestore.getInstance()
+        .collection("yourCollection")
+        .document("yourDocument")
+        .update(deleteSong);
+     */
 }

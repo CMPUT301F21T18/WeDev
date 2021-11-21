@@ -1,5 +1,6 @@
 package com.example.zoomsoft.eventInfo;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -39,6 +40,8 @@ public class HabitEventDisplay extends Fragment {
         // Required empty public constructor
     }
 
+    public static String clickedDate;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -65,7 +68,7 @@ public class HabitEventDisplay extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    public static Boolean isDone;
     TextView habitNameTextView;
     TextView descriptionTextView;
     ListView listView;
@@ -79,20 +82,18 @@ public class HabitEventDisplay extends Fragment {
         descriptionTextView = view.findViewById(R.id.description);
         listView = view.findViewById(R.id.listView);
         //Update the habit
-        HabitEventFirebase habitEventFirebase = new HabitEventFirebase("Walk a dog"); //will replace with the clickedHabit
+        HabitEventFirebase habitEventFirebase = new HabitEventFirebase(); //will replace with the clickedHabit
         habitEventFirebase.getHabitDescription(new HabitEventFirebase.MyCallBack() {
             @Override
-            public void updateComment(String s) {
+            public void getDescription(String s) {
                 String description = s;
-                habitNameTextView.setText("Habit:" + "Walk a dog");
+                habitNameTextView.setText("Habit:" + HabitInfo.clickedHabit);
                 descriptionTextView.setText("Description:"+ description);
             }
-
             @Override
             public void getAllDates(List<String> list) {
                 //
             }
-
             @Override
             public void getHabitDetails(HashMap<String, Object> map) {
 
@@ -104,7 +105,7 @@ public class HabitEventDisplay extends Fragment {
             ArrayList<String> dateList;
             HashMap<String, Object> map;
             @Override
-            public void updateComment(String s) {
+            public void getDescription(String s) {
                 //do nothing
             }
 
@@ -124,7 +125,7 @@ public class HabitEventDisplay extends Fragment {
         habitEventFirebase.getHabitClickedDetails(new HabitEventFirebase.MyCallBack() {
             List<String> dateList;
             @Override
-            public void updateComment(String s) {
+            public void getDescription(String s) {
 
             }
 
@@ -135,13 +136,12 @@ public class HabitEventDisplay extends Fragment {
 
             @Override
             public void getHabitDetails(HashMap<String, Object> map) {
+                isDone = (Boolean) map.get("done");
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                        HashMap<String, Object> objectHashMap = (HashMap<String, Object>) map.get(dateList.get(i));
-//                        String[] objects = (String[]) objectHashMap.get("Location");
-//                        String comment = (String) objectHashMap.get("comment");
                         EventFragment eventFragment = new EventFragment();
+                        clickedDate = (String) listView.getItemAtPosition(i);
                         eventFragment.show(getActivity().getSupportFragmentManager(),"Fragment");
                     }
                 });

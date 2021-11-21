@@ -18,12 +18,14 @@ import java.util.Date;
 public class DateCustomListAdapter extends ArrayAdapter<String> {
 
     private ArrayList<String> dataList;
+    private ArrayList<Boolean> doneList;
     private Context context;
 
-    public DateCustomListAdapter(Context context, ArrayList<String> dataList) {
+    public DateCustomListAdapter(Context context, ArrayList<String> dataList, ArrayList<Boolean> doneList) {
         super(context, 0, dataList);
         this.context = context;
         this.dataList = dataList;
+        this.doneList = doneList;
     }
 
     //Habit
