@@ -26,14 +26,18 @@ public class HabitEventFirebase {
 
     interface MyCallBack {
         void getDescription(String s); //should be getDescription
-        void getAllDates(List<String> list);
+
+        void getAllDates(List<String> list, List<Boolean> dateList);
+
         void getHabitDetails(HashMap<String, Object> map);
     }
-
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
     public String email = MainPageTabs.email;
     public String habitName = HabitInfo.clickedHabit;
     Source source = Source.SERVER;
+
+    //Snapshot method:
+
 
     public HabitEventFirebase() {
 
@@ -88,11 +92,19 @@ public class HabitEventFirebase {
                         Map<String, Object> map = documentSnapshot.getData();
                         List<String> list = new ArrayList<>();
                         HashMap hashMap = (HashMap) map.get(habitName);
+                        List<Boolean> dateList = new ArrayList<>();
                         for(String str : (Set<String>) hashMap.keySet()) {
                             if (str.equals("description") || str.equals("reason") || str.equals("days")) continue;
-                            list.add(str);
+                            list.add(str); //str is a date that the event occurred
+                            HashMap hashMap1 = (HashMap) hashMap.get(str);
+                            for(String date : (Set<String>) hashMap1.keySet()){
+                                if(date.equals("done")) {
+                                    dateList.add((Boolean) hashMap1.get("done"));
+                                    break;
+                                }
+                            }
                         }
-                        myCallBack.getAllDates(list);
+                        myCallBack.getAllDates(list, dateList);
                     }
                 }
                 else {

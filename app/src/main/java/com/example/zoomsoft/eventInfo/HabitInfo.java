@@ -24,7 +24,7 @@ public class HabitInfo extends AppCompatActivity  {
         binding = ActivityHabitInfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Intent intent = getIntent();
-        this.clickedHabit = intent.getStringExtra(MainActivity.EXTRA_MESSAGE+"1");
+        clickedHabit = intent.getStringExtra(MainActivity.EXTRA_MESSAGE+"1");
         SectionsPagerAdapterEvent sectionsPagerAdapterEvent = new SectionsPagerAdapterEvent(this, getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapterEvent);

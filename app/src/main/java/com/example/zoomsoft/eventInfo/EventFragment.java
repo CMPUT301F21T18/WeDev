@@ -89,6 +89,7 @@ public class EventFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.date_dialog_fragment, null);
+        if(DeleteDialogFragment.isDeleted) getActivity().getFragmentManager().popBackStack();
         Button button = view.findViewById(R.id.map_button);
         Button cameraButton = view.findViewById(R.id.bt_open);
         imageView = view.findViewById(R.id.camera_pic);
@@ -117,7 +118,7 @@ public class EventFragment extends DialogFragment {
                 descriptionView.setText("Description:" + s);
             }
             @Override
-            public void getAllDates(List<String> list) {
+            public void getAllDates(List<String> list, List<Boolean> list2) {
 
             }
             @Override
@@ -154,9 +155,9 @@ public class EventFragment extends DialogFragment {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DeleteDialogFragment deleteDialogFragment = new DeleteDialogFragment(); //clicked event
-                deleteDialogFragment.show(getActivity().getSupportFragmentManager(),"Fragment");
-                if(DeleteDialogFragment.isDeleted) getActivity().onBackPressed();
+                HabitEventFirebase habitEventFirebase = new HabitEventFirebase();
+                habitEventFirebase.deleteHabitEvent(HabitEventDisplay.clickedDate);
+                getParentFragmentManager().beginTransaction().remove(EventFragment.this).commit();
             }
         });
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

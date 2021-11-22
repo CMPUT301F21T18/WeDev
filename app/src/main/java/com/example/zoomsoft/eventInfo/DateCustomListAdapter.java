@@ -14,16 +14,19 @@ import com.example.zoomsoft.R;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DateCustomListAdapter extends ArrayAdapter<String> {
 
     private ArrayList<String> dataList;
+    private List<Boolean> doneList;
     private Context context;
 
-    public DateCustomListAdapter(Context context, ArrayList<String> dataList) {
+    public DateCustomListAdapter(Context context, ArrayList<String> dataList, List<Boolean> doneList) {
         super(context, 0, dataList);
         this.context = context;
         this.dataList = dataList;
+        this.doneList = doneList;
     }
 
     //Habit
@@ -44,6 +47,8 @@ public class DateCustomListAdapter extends ArrayAdapter<String> {
         }
         String val = dataList.get(position);
         TextView textView = view.findViewById(R.id.dateContent);
+        TextView textView1 = view.findViewById(R.id.done);
+        if(!doneList.get(position).booleanValue()) textView1.setText("not done");
         textView.setText(val);
         return view;
     }

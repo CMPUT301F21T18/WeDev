@@ -37,7 +37,6 @@ public class DeleteDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         HabitEventFirebase habitEventFirebase = new HabitEventFirebase();
                         habitEventFirebase.deleteHabitEvent(HabitEventDisplay.clickedDate);
-                        isDeleted = true;
                         Log.d("TAG", "DELETED");
                     }
                 })
