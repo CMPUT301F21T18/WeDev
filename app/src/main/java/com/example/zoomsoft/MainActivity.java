@@ -1,12 +1,16 @@
 package com.example.zoomsoft;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.zoomsoft.eventInfo.HabitInfo;
 import com.example.zoomsoft.loginandregister.Login;
@@ -36,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(register);
             }
         });
+        //Asks for permission to use the camera,
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[] {
+                            Manifest.permission.CAMERA
+                    }, 100);
+        }
         //===================================================
     }
 

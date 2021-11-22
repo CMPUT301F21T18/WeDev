@@ -45,33 +45,37 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                DocumentReference documentReference = db.collection("User").document(email);
-                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if(document.exists() && password.equals(document.get("password"))) {
-                                //use the document to login
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                                String userEmail = email;
-                                //call the home activity
-                                Intent intent = new Intent(Login.this, MainPageTabs.class);
-                                intent.putExtra(MainActivity.EXTRA_MESSAGE, userEmail);
-                                startActivity(intent);
+                if (email.isEmpty() || password.isEmpty())
+                    Toast.makeText(Login.this,
+                        "Please fill in the empty fields", Toast.LENGTH_LONG).show();
+                else {
+                    DocumentReference documentReference = db.collection("User").document(email);
+                    documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists() && password.equals(document.get("password"))) {
+                                    //use the document to login
+                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                    String userEmail = email;
+                                    //call the home activity
+                                    Intent intent = new Intent(Login.this, MainPageTabs.class);
+                                    intent.putExtra(MainActivity.EXTRA_MESSAGE, userEmail);
+                                    startActivity(intent);
+                                } else {
+                                    // display toast message to the user about the error
+                                    Toast.makeText(Login.this,
+                                            "Password or Username is not correct", Toast.LENGTH_LONG).show();
+                                    //not such document
+                                    Log.d(TAG, "No such document with the login details");
+                                }
+                            } else {
+                                Log.d(TAG, "get failed with ", task.getException());
                             }
-                            else {
-                                // display toast message to the user about the error
-                                Toast.makeText(Login.this,
-                                        "Password or Username is not correct", Toast.LENGTH_LONG).show();
-                                //not such document
-                                Log.d(TAG, "No such document with the login details");
-                            }
-                        } else {
-                            Log.d(TAG, "get failed with ", task.getException());
                         }
-                    }
-                });
+                    });
+                }
             }
         });
     }

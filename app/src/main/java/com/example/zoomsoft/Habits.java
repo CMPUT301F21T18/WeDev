@@ -1,18 +1,27 @@
 package com.example.zoomsoft;
 
+import java.util.ArrayList;
+
 public class Habits {
 
     private String habitTitle;
     private String startDate;
     private String habitReason;
-    private String habitWeekDay;
+    private ArrayList<Integer> habitWeekDay;
     private Boolean privacy; //Public or private status for habits
 
     public Habits(String habitTitle) {
         this.habitTitle = habitTitle;
     }
 
-    public Habits(String habitTitle, String startDate, String habitReason, String habitWeekDay, Boolean privacy) {
+    public Habits(String habitTitle, String startDate, String habitReason, ArrayList<Integer> habitWeekDay) {
+        this.habitTitle = habitTitle;
+        this.startDate = startDate;
+        this.habitReason = habitReason;
+        this.habitWeekDay = habitWeekDay;
+    }
+
+    public Habits(String habitTitle, String startDate, String habitReason, ArrayList<Integer> habitWeekDay, Boolean privacy) {
         this.habitTitle = habitTitle;
         this.startDate = startDate;
         this.habitReason = habitReason;
@@ -44,11 +53,11 @@ public class Habits {
         this.habitReason = habitReason;
     }
 
-    public String getHabitWeekDay() {
+    public ArrayList<Integer> getHabitWeekDay() {
         return habitWeekDay;
     }
 
-    public void setHabitWeekDay(String habitWeekDay) {
+    public void setHabitWeekDay(ArrayList<Integer> habitWeekDay) {
         this.habitWeekDay = habitWeekDay;
     }
 
