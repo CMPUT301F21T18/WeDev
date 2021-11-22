@@ -5,7 +5,6 @@ import static android.app.Activity.RESULT_OK;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -13,14 +12,10 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -32,10 +27,10 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.R;
+import com.example.zoomsoft.loginandregister.Login;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -130,17 +125,28 @@ public class EventFragment extends DialogFragment {
                 //get the date
                 dateView.setText("Date:" + HabitEventDisplay.clickedDate);
                 //get the long and lat
-                ArrayList<Double> list = (ArrayList<Double>) hashMap.get("Location");
+                ArrayList<String> list = (ArrayList<String>) hashMap.get("location");
                 //will need to call on viewLocation
                 //=============
-            }
-        });
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), MapSearch.class);
-                intent.putExtra(MainActivity.EXTRA_MESSAGE, 53.5232 + " " + 13.5263);
-                startActivity(intent);
+                Button button1 = view.findViewById(R.id.map_button);
+                button1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String[] locationArray = new String[2];
+                        locationArray[0] = list.get(0);
+                        locationArray[1] = list.get(1);
+                        if(locationArray[0].equals("N") && locationArray[1].equals("N")) {
+                            //set Toast, no location was chosen
+                            Toast.makeText(getContext(),
+                                    "No Location has been added, click on edit to add", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Intent intent = new Intent(getContext(), MapsActivity.class);
+                            intent.putExtra(MainActivity.EXTRA_MESSAGE, locationArray[0] + " " + locationArray[1]);
+                            startActivity(intent);
+                        }
+                    }
+                });
             }
         });
         cameraButton.setOnClickListener(new View.OnClickListener() {

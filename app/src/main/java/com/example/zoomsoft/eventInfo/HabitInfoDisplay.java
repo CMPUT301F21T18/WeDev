@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -17,6 +18,8 @@ import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -161,6 +164,30 @@ public class HabitInfoDisplay extends Fragment {
             @Override
             public void getReason(String reason) {
                 textView2.setText("Reason:" + reason);
+            }
+        });
+
+        HabitEventFirebase habitEventFirebase = new HabitEventFirebase();
+        habitEventFirebase.getAllDates(new HabitEventFirebase.MyCallBack() {
+            @Override
+            public void getDescription(String s) {
+
+            }
+
+            @Override
+            public void getAllDates(List<String> list, List<Boolean> dateList) {
+                ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.simpleProgressBar);
+                int totalEvents = list.size();
+                int totalDone = dateList.size();
+                progressBar.setMax(totalEvents);
+                progressBar.setProgress(totalDone);
+                TextView textView = view.findViewById(R.id.progress);
+                textView.setText("Progress: " + "You have completed " + totalDone + " event(s) out of " + totalEvents);
+            }
+
+            @Override
+            public void getHabitDetails(HashMap<String, Object> map) {
+
             }
         });
 

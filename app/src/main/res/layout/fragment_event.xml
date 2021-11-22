@@ -63,4 +63,9 @@
             android:layout_marginRight="10dp" />
 
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/simpleProgressBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
 </FrameLayout>

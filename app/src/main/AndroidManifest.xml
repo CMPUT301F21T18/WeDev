@@ -18,10 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ZoomSoft">
         <activity
+            android:name=".eventInfo.EditEventActivity"
+            android:exported="true" />
+        <activity
             android:name=".AddHabit"
             android:exported="true" />
         <activity
-            android:name=".eventInfo.MapSearch"
+            android:name=".eventInfo.ViewLocationMap"
             android:exported="true" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -65,7 +68,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
