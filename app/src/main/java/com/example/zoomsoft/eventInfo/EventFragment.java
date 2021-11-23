@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_OK;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,6 +86,7 @@ public class EventFragment extends DialogFragment {
     private Button SelectImage;
     private StorageReference Storage;
     private static final int GALLERY_INTENT = 2;
+    private ProgressDialog ProgressDialog;
     //Photo
     //Camera
     //Location
@@ -101,6 +104,7 @@ public class EventFragment extends DialogFragment {
 
         Storage = FirebaseStorage.getInstance().getReference();
         SelectImage = (Button) view.findViewById(R.id.bt_gallery);
+        //ProgressDialog = new ProgressDialog(this); this is not working either
         SelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,7 +211,8 @@ public class EventFragment extends DialogFragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK){
-
+            ProgressDialog.setMessage("Uploading...");
+            ProgressDialog.show();
             Uri uri = data.getData();
             StorageReference filepath = Storage.child("Photos").child(uri.getLastPathSegment());
             filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
