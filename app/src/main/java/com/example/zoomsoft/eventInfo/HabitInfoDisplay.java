@@ -153,6 +153,11 @@ public class HabitInfoDisplay extends Fragment {
             public void getReason(String reason) {
                 //do nothing yet
             }
+
+            @Override
+            public void getStartDate(String startDate) {
+
+            }
         });
 
         habitInfoFirebase.getHabitReason(new HabitInfoFirebase.MyCallBack() {
@@ -164,6 +169,11 @@ public class HabitInfoDisplay extends Fragment {
             @Override
             public void getReason(String reason) {
                 textView2.setText("Reason:" + reason);
+            }
+
+            @Override
+            public void getStartDate(String startDate) {
+
             }
         });
 
@@ -188,6 +198,24 @@ public class HabitInfoDisplay extends Fragment {
             @Override
             public void getHabitDetails(HashMap<String, Object> map) {
 
+            }
+        });
+
+        habitInfoFirebase.getHabitStartDate(new HabitInfoFirebase.MyCallBack() {
+            @Override
+            public void getDays(ArrayList<Long> days) {
+
+            }
+
+            @Override
+            public void getReason(String reason) {
+
+            }
+
+            @Override
+            public void getStartDate(String date) {
+                TextView textView1 = view.findViewById(R.id.start_date);
+                textView1.setText("Start Date:" + date);
             }
         });
 
