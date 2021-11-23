@@ -60,11 +60,9 @@ public class PendingRequests<dataBase> extends AppCompatActivity{
                 Context context = getApplicationContext();
                 Toast.makeText(context,"Request removed", Toast.LENGTH_LONG).show();
 
-
                 db = FirebaseFirestore.getInstance();
                 String selectedFromList = (String) (pendingRequestsListView.getItemAtPosition(i));
                 Log.d("123LOP", selectedFromList);
-
 
                 final CollectionReference collectionReference = db.collection("Pending Requests");
                 DocumentReference documentReference = collectionReference.document(MainPageTabs.email);
