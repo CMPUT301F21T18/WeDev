@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -28,8 +29,11 @@ import androidx.fragment.app.DialogFragment;
 import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.R;
 import com.example.zoomsoft.loginandregister.Login;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,17 +83,37 @@ public class EventFragment extends DialogFragment {
     private TextView commentView;
     private Button SelectImage;
     private StorageReference Storage;
+    private static final int GALLERY_INTENT = 2;
     //Photo
     //Camera
     //Location
-
+    /* @Override
+    protected void  onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.EventFragment);
+    }*/
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.date_dialog_fragment, null);
         if(DeleteDialogFragment.isDeleted) getActivity().getFragmentManager().popBackStack();
         Button button = view.findViewById(R.id.map_button);
+
+        Storage = FirebaseStorage.getInstance().getReference();
         SelectImage = (Button) view.findViewById(R.id.bt_gallery);
+        SelectImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+
+                startActivityForResult(intent,GALLERY_INTENT); // need to check here
+
+
+            }
+        });
+
         Button cameraButton = view.findViewById(R.id.bt_open);
         //Button
         imageView = view.findViewById(R.id.camera_pic);
@@ -176,5 +200,22 @@ public class EventFragment extends DialogFragment {
                 .setView(view)
                 .setTitle("Events Recorded On:" + HabitEventDisplay.clickedDate)
                 .create();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) { //also crossed
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK){
+
+            Uri uri = data.getData();
+            StorageReference filepath = Storage.child("Photos").child(uri.getLastPathSegment());
+            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    //Toast.makeText(EventFragment.this, "upload done", Toast.LENGTH_LONG.show()); //error
+                }
+            });//can add failure too
+        }
     }
 }
