@@ -1,12 +1,17 @@
 package com.example.zoomsoft.eventInfo;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.zoomsoft.MainActivity;
+import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import android.Manifest;
 import android.content.Context;
@@ -19,12 +24,15 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -33,10 +41,12 @@ public class ViewLocationMap extends AppCompatActivity {
     private static final int REQUEST_LOCATION = 1;
 
     Button currentLocationButton;
-    Button viewLocationMap;
+    Button confirmButton;
+    Button searchLocationMap;
     TextView showLocationTxt;
     LocationManager locationManager;
     Double latitude, longitude;
+    String temp = "a@gmail.com";
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -44,7 +54,7 @@ public class ViewLocationMap extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_search);
         currentLocationButton = findViewById(R.id.current);
-        viewLocationMap = findViewById(R.id.view_location);
+        searchLocationMap = findViewById(R.id.search_location);
         showLocationTxt = findViewById(R.id.location);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
         currentLocationButton.setOnClickListener(new View.OnClickListener() {
@@ -66,13 +76,59 @@ public class ViewLocationMap extends AppCompatActivity {
                 }
             }
         });
-        viewLocationMap.setOnClickListener(new View.OnClickListener() {
+        searchLocationMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //call the mapActivity to see the location
                 Intent intent = new Intent(ViewLocationMap.this, MapsActivity.class);
-                intent.putExtra(MainActivity.EXTRA_MESSAGE, latitude + " " + longitude);
+                intent.putExtra("isSearching", "true");
                 startActivity(intent);
+            }
+        });
+
+        HabitEventFirebase habitEventFirebase = new HabitEventFirebase();
+        habitEventFirebase.db.collection("Events").document(temp).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                habitEventFirebase.getHabitClickedDetails(new HabitEventFirebase.MyCallBack() {
+                    @Override
+                    public void getDescription(String s) {
+
+                    }
+
+                    @Override
+                    public void getAllDates(List<String> list, List<Boolean> dateList) {
+
+                    }
+
+                    @Override
+                    public void getHabitDetails(HashMap<String, Object> map) {
+                        HashMap hashMap = (HashMap) map.get("October 21st, 2021");
+                        ArrayList<String> location;
+                        location = (ArrayList<String>) hashMap.get("location");
+                        if(location.get(0).equals("N") || location.get(1).equals("N")) return;
+                        double lat = Double.parseDouble(location.get(0));
+                        double longi = Double.parseDouble(location.get(1));
+                        Geocoder geocoder;
+                        List<Address> addresses;
+                        geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                        try {
+                            addresses = geocoder.getFromLocation(lat, longi,1);
+                            String address = addresses.get(0).getAddressLine(0);
+                            String city = addresses.get(0).getLocality();
+                            String state = addresses.get(0).getAdminArea();
+                            String zip = addresses.get(0).getPostalCode();
+                            String country = addresses.get(0).getCountryName();
+                            showLocationTxt.setText("Your Location:"+"\n"+"Address= "+address+"\n"+"City= "+city+"\n"+"State= "+state+"\n"+"Zip= "+zip+"\n"+"Country= "+country);
+                            searchLocationMap.setVisibility(View.VISIBLE);
+                            confirmButton = findViewById(R.id.confirm_button);
+                            confirmButton.setVisibility(View.VISIBLE);
+                        }
+                        catch (Exception e) {
+                            Log.d("Exception:", e.getLocalizedMessage());
+                        }
+                    }
+                });
             }
         });
     }
@@ -107,8 +163,8 @@ public class ViewLocationMap extends AppCompatActivity {
                 String state = addresses.get(0).getAdminArea();
                 String zip = addresses.get(0).getPostalCode();
                 String country = addresses.get(0).getCountryName();
-                showLocationTxt.setText("Your Location:"+"\n"+"Latitude= "+latitude+"\n"+"Longitude= "+longitude);
-                viewLocationMap.setVisibility(View.VISIBLE);
+                showLocationTxt.setText("Your Location:"+"\n"+"Address= "+address+"\n"+"City= "+city+"\n"+"State= "+state+"\n"+"Zip= "+zip+"\n"+"Country= "+country);
+                searchLocationMap.setVisibility(View.VISIBLE);
             }
             else if (LocationNetwork !=null)
             {
@@ -126,8 +182,8 @@ public class ViewLocationMap extends AppCompatActivity {
                 String state = addresses.get(0).getAdminArea();
                 String zip = addresses.get(0).getPostalCode();
                 String country = addresses.get(0).getCountryName();
-                showLocationTxt.setText("Your Location:"+"\n"+"Latitude= "+latitude+"\n"+"Longitude= "+longitude);
-                viewLocationMap.setVisibility(View.VISIBLE);
+                showLocationTxt.setText("Your Location:"+"\n"+"Address= "+address+"\n"+"City= "+city+"\n"+"State= "+state+"\n"+"Zip= "+zip+"\n"+"Country= "+country);
+                searchLocationMap.setVisibility(View.VISIBLE);
             }
             if (LocationPassive !=null)
             {
@@ -146,7 +202,7 @@ public class ViewLocationMap extends AppCompatActivity {
                 String zip = addresses.get(0).getPostalCode();
                 String country = addresses.get(0).getCountryName();
                 showLocationTxt.setText("Your Location:"+"\n"+"Address= "+address+"\n"+"City= "+city+"\n"+"State= "+state+"\n"+"Zip= "+zip+"\n"+"Country= "+country);
-                viewLocationMap.setVisibility(View.VISIBLE);
+                searchLocationMap.setVisibility(View.VISIBLE);
             }
             else
             {

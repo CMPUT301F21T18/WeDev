@@ -27,10 +27,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.R;
-import com.example.zoomsoft.loginandregister.Login;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -104,7 +101,7 @@ public class EventFragment extends DialogFragment {
         dateView = view.findViewById(R.id.date);
         commentView = view.findViewById(R.id.textView9);
         descriptionView = view.findViewById(R.id.description);
-        habitView.setText(HabitInfo.clickedHabit);//clicked habit
+        habitView.setText("Habit:" + HabitInfo.clickedHabit);//clicked habit
 
 
         //clicked date needs to be passed
@@ -145,6 +142,7 @@ public class EventFragment extends DialogFragment {
                         else {
                             Intent intent = new Intent(getContext(), MapsActivity.class);
                             intent.putExtra(MainActivity.EXTRA_MESSAGE, locationArray[0] + " " + locationArray[1]);
+                            intent.putExtra("isSearching", "false");
                             startActivity(intent);
                         }
                     }
@@ -158,7 +156,7 @@ public class EventFragment extends DialogFragment {
                 launcher.launch(intent);
             }
         });
-        
+
         FloatingActionButton delete = view.findViewById(R.id.floatingActionButton5);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override

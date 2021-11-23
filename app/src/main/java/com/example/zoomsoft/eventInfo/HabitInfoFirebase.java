@@ -29,6 +29,7 @@ public class HabitInfoFirebase {
         void getDays(ArrayList<Long> days);
         void getReason(String reason);
         void getStartDate(String date);
+        void getStatus(String status);
     }
 
     public HabitInfoFirebase() {
@@ -99,6 +100,30 @@ public class HabitInfoFirebase {
                         HashMap hashMap = (HashMap) map.get(habitName);
                         String startDate = (String) hashMap.get("startDate");
                         myCallBack.getStartDate(startDate);
+                    }
+                }
+                else {
+                    int x = 6; //will decide on this later
+                }
+            }
+        });
+    }
+
+    public void getHabitStatus(MyCallBack myCallBack) {
+        String habitReason = "";
+        final CollectionReference collectionReference = db.collection("Events");
+        DocumentReference documentReference = collectionReference.document(email);
+        documentReference.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if(documentSnapshot.exists()) {
+                        Map<String, Object> map = documentSnapshot.getData();
+//                        Log.d("Map provided: ", map.toString());
+                        HashMap hashMap = (HashMap) map.get(habitName);
+                        String reason = (String) hashMap.get("status");
+                        myCallBack.getStatus(reason);
                     }
                 }
                 else {
