@@ -18,6 +18,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddHabit extends AppCompatActivity {
@@ -25,10 +26,9 @@ public class AddHabit extends AppCompatActivity {
     EditText habitTitle;
     EditText habitReason;
     Switch status;
-    LinearLayout daysOfWeek;
+    Switch dayOfWeek;
     DatePicker startDate;
     ImageButton addButton;
-    FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +41,9 @@ public class AddHabit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //Need to make some changes in new_habit.xml such that daysOfWeek is received
-                //as an ArrayList<Integer>
                 habitTitle = findViewById(R.id.habit_title_edit_text);
                 habitReason = findViewById(R.id.habit_reason_edit_text);
                 status = (Switch) findViewById(R.id.public_private_switch);
-                daysOfWeek = findViewById(R.id.habit_days_edit_text);
                 startDate = (DatePicker) findViewById(R.id.datePicker);
 
                 String privacy;
@@ -64,12 +61,64 @@ public class AddHabit extends AppCompatActivity {
                 int newYear = startDate.getYear();
                 String date = newYear+"-"+newMonth+"-"+newDay;
                 String reason = habitReason.getText().toString();
-                //String days = daysOfWeek.getText().toString();
+                ArrayList<Integer> days = new ArrayList<>();
 
-                //Habits habit = new Habits(title, date, reason, days, privacy);
-                Habits habit = new Habits(title);
+                //Reading the switches and setting days of the week
+                dayOfWeek = findViewById(R.id.switch_1);
+                if (dayOfWeek.isChecked()){
+                    days.add(1);
+                }
+                else {
+                    days.add(0);
+                }
+                dayOfWeek = findViewById(R.id.switch_2);
+                if (dayOfWeek.isChecked()){
+                    days.add(1);
+                }
+                else {
+                    days.add(0);
+                }
+                dayOfWeek = findViewById(R.id.switch_3);
+                if (dayOfWeek.isChecked()){
+                    days.add(1);
+                }
+                else {
+                    days.add(0);
+                }
+                dayOfWeek = findViewById(R.id.switch_4);
+                if (dayOfWeek.isChecked()){
+                    days.add(1);
+                }
+                else {
+                    days.add(0);
+                }
+                dayOfWeek = findViewById(R.id.switch_5);
+                if (dayOfWeek.isChecked()){
+                    days.add(1);
+                }
+                else {
+                    days.add(0);
+                }
+                dayOfWeek = findViewById(R.id.switch_6);
+                if (dayOfWeek.isChecked()){
+                    days.add(1);
+                }
+                else {
+                    days.add(0);
+                }
+                dayOfWeek = findViewById(R.id.switch_7);
+                if (dayOfWeek.isChecked()){
+                    days.add(1);
+                }
+                else {
+                    days.add(0);
+                }
+
+
+                Habits habit = new Habits(title, date, reason, days, privacy);
                 MainPageFirebase mainPageFirebase = new MainPageFirebase();
                 mainPageFirebase.addNewHabit(habit);
+
                 //To return back to MainPage once the habit has been added
                 Intent intent = new Intent(AddHabit.this, MainPageTabs.class);
                 startActivity(intent);

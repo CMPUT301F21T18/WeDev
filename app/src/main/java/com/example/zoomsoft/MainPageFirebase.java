@@ -62,15 +62,15 @@ public class MainPageFirebase {
         //get the start date
         String date = habits.getStartDate();
         //get days of week (Need to change implementation over to ArrayList
-//        ArrayList<Integer> days = habits.getHabitWeekDay();
-        ArrayList<Integer> days = new ArrayList<>();
-        for (int i = 0; i<7; i++){
-            days.add(0);
-        }
+        ArrayList<Integer> days = habits.getHabitWeekDay();
+        //get privacy status
+        String privacy = habits.getPrivacy();
 
         HashMap<String, Object> temp = new HashMap<>();
-        temp.put("reason", "Because I can");
+        temp.put("startDate", date);
+        temp.put("reason", reason);
         temp.put("days", days);
+        temp.put("status", privacy);
 
         HashMap<String, HashMap<String, Object>> data = new HashMap<>();
         data.put(title, temp);
