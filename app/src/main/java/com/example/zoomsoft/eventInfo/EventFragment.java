@@ -114,7 +114,7 @@ public class EventFragment extends DialogFragment {
         dateView = view.findViewById(R.id.date);
         commentView = view.findViewById(R.id.textView9);
         descriptionView = view.findViewById(R.id.description);
-        habitView.setText(HabitInfo.clickedHabit);//clicked habit
+        habitView.setText("Habit:" + HabitInfo.clickedHabit);//clicked habit
 
 
         //clicked date needs to be passed
@@ -155,6 +155,7 @@ public class EventFragment extends DialogFragment {
                         else {
                             Intent intent = new Intent(getContext(), MapsActivity.class);
                             intent.putExtra(MainActivity.EXTRA_MESSAGE, locationArray[0] + " " + locationArray[1]);
+                            intent.putExtra("isSearching", "false");
                             startActivity(intent);
                         }
                     }
@@ -185,7 +186,7 @@ public class EventFragment extends DialogFragment {
                 }
             }
         });
-        
+
         FloatingActionButton delete = view.findViewById(R.id.floatingActionButton5);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
