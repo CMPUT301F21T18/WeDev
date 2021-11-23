@@ -30,6 +30,8 @@ import com.example.zoomsoft.R;
 import com.example.zoomsoft.loginandregister.Login;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -164,6 +166,15 @@ public class EventFragment extends DialogFragment {
                 HabitEventFirebase habitEventFirebase = new HabitEventFirebase();
                 habitEventFirebase.deleteHabitEvent(HabitEventDisplay.clickedDate);
                 getParentFragmentManager().beginTransaction().remove(EventFragment.this).commit();
+            }
+        });
+        FloatingActionButton edit = view.findViewById(R.id.floatingActionButton2);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditEventActivity editEventActivity = new EditEventActivity();
+                Intent intent = new Intent(getContext(), EditEventActivity.class);
+                startActivity(intent);
             }
         });
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
