@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +36,12 @@ public class ProfileMainPageFragment extends Fragment {
              if (i == 0) {
                  Intent intent = new Intent(getActivity(), ViewFriend.class);
                  startActivity(intent);
+             }else if (i == 1){
+                 Intent intentPendingRequests = new Intent(getActivity(), PendingRequests.class);
+                 startActivity(intentPendingRequests);
+             }else if (i == 2){
+                 Intent intentReceivedRequests = new Intent(getActivity(), ReceivedRequests.class);
+                 startActivity(intentReceivedRequests);
              }else if (i == 3){
                  Intent in = new Intent(getActivity(), AddFriends.class);
                  startActivity(in);
