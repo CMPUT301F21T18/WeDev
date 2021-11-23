@@ -2,12 +2,15 @@ package com.example.zoomsoft.eventInfo;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,16 +26,27 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.R;
 import com.example.zoomsoft.loginandregister.Login;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,6 +55,8 @@ public class EventFragment extends DialogFragment {
     private double latitude;
     private String comment;
     private String date;
+    private String photoPath;
+    public static final int CAMERA_REQUEST_CODE = 102;
 
     public EventFragment(String longitude, String latitude, String date, String comment) {
         this.latitude = Double.parseDouble(longitude);
@@ -79,6 +95,7 @@ public class EventFragment extends DialogFragment {
     //Comment
     private TextView commentView;
     //Photo
+    private StorageReference storage;
     //Camera
     //Location
 
@@ -90,15 +107,8 @@ public class EventFragment extends DialogFragment {
         Button button = view.findViewById(R.id.map_button);
         Button cameraButton = view.findViewById(R.id.bt_open);
         imageView = view.findViewById(R.id.camera_pic);
-        ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-            @Override
-            public void onActivityResult(ActivityResult result) {
-                if (result.getResultCode() == RESULT_OK) {
-                    Bitmap captureImage = (Bitmap) result.getData().getExtras().get("data");
-                    imageView.setImageBitmap(captureImage);
-                }
-            }
-        });
+        storage = FirebaseStorage.getInstance().getReference();
+
         habitView = view.findViewById(R.id.name);
         textView = view.findViewById(R.id.description);
         dateView = view.findViewById(R.id.date);
@@ -154,8 +164,25 @@ public class EventFragment extends DialogFragment {
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                launcher.launch(intent);
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                // Ensure that there's a camera activity to handle the intent
+                if (takePictureIntent.resolveActivity(view.getContext().getPackageManager()) != null) {
+                    // Create the File where the photo should go
+                    File photoFile = null;
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException ex) {
+
+                    }
+                    // Continue only if the File was successfully created
+                    if (photoFile != null) {
+                        Uri photoURI = FileProvider.getUriForFile(view.getContext(),
+                                "com.example.zoomsoft.android.fileprovider",
+                                photoFile);
+                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                        startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
+                    }
+                }
             }
         });
         
@@ -182,5 +209,54 @@ public class EventFragment extends DialogFragment {
                 .setView(view)
                 .setTitle("Events Recorded On:" + HabitEventDisplay.clickedDate)
                 .create();
+    }
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        photoPath = image.getAbsolutePath();
+        return image;
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == CAMERA_REQUEST_CODE){
+            if(resultCode == Activity.RESULT_OK){
+                File file = new File(photoPath);
+                //imageView.setImageURI(Uri.fromFile(file));
+//                Picasso.get()
+//                        .load(Uri.fromFile(file))
+//                        .into(imageView);
+                Uri contUri = Uri.fromFile(file);
+                uploadFirebase(file.getName(), contUri);
+            }
+        }
+    }
+    private void uploadFirebase(String name, Uri uri) {
+        StorageReference photo = storage.child("images/events/" + name);
+        photo.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                photo.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).fit().centerCrop().into(imageView);
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                //Error messages
+            }
+        });
     }
 }
