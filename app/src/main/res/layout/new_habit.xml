@@ -12,27 +12,119 @@
         android:layout_width="219dp"
         android:layout_height="51dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="60dp">
+        android:layout_marginLeft="80dp"
+        android:layout_marginBottom="50dp">
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/custom_end_icon1"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="219dp"
-        android:layout_height="51dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="340dp">
-        <com.google.android.material.textfield.TextInputEditText
+        android:layout_marginTop="450dp">
+        <LinearLayout
             android:id="@+id/habit_days_edit_text"
-            android:layout_width="213dp"
-            android:layout_height="37dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
             android:layout_gravity="center"
             android:layout_marginRight="0dp"
-            android:layout_marginBottom="240dp"
-            android:hint="Days"
-            android:inputType="text" />
+            android:layout_marginBottom="240dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monday"
+                    android:textSize="20dp">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tuesday"
+                    android:textSize="20dp">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wednesday"
+                    android:textSize="20dp">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thursday"
+                    android:textSize="20dp">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Friday"
+                    android:textSize="20dp">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Saturday"
+                    android:textSize="20dp">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sunday"
+                    android:textSize="20dp">
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <Switch
+                    android:id="@+id/switch_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </Switch>
+                <Switch
+                    android:id="@+id/switch_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </Switch>
+                <Switch
+                    android:id="@+id/switch_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </Switch>
+                <Switch
+                    android:id="@+id/switch_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </Switch>
+                <Switch
+                    android:id="@+id/switch_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </Switch>
+                <Switch
+                    android:id="@+id/switch_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </Switch>
+                <Switch
+                    android:id="@+id/switch_7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </Switch>
+            </LinearLayout>
+
+        </LinearLayout>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -42,7 +134,7 @@
         android:layout_height="51dp"
         android:layout_gravity="center"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="200dp">
+        android:layout_marginTop="100dp">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/habit_reason_edit_text"
             android:layout_width="213dp"
@@ -61,8 +153,8 @@
         android:layout_width="219dp"
         android:layout_height="51dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="60dp"
-        android:layout_marginBottom="100dp">
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="180dp">
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.appbar.AppBarLayout
@@ -128,7 +220,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginRight="270dp"
-        android:layout_marginBottom="260dp"
+        android:layout_marginBottom="300dp"
         android:text="Input text |"
         android:textSize="24sp" />
     <TextView
@@ -137,15 +229,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginRight="270dp"
-        android:layout_marginBottom="100dp"
-        android:text="Private     |"
+        android:layout_marginBottom="180dp"
+        android:text="Private    |"
         android:textSize="24sp" />
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="100dp"
         android:layout_marginRight="270dp"
         android:text="Input text |"
         android:textSize="24sp" />
@@ -154,7 +246,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="240dp"
         android:layout_marginRight="270dp"
         android:text="Days        |"
         android:textSize="24sp" />
@@ -163,7 +255,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginRight="270dp"
         android:text="Input date |"
         android:textSize="24sp" />
@@ -174,7 +266,7 @@
         android:layout_height="51dp"
         android:layout_gravity="center"
         android:layout_marginLeft="60dp"
-        android:layout_marginBottom="260dp">
+        android:layout_marginBottom="300dp">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/habit_title_edit_text"
             android:layout_width="213dp"

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +25,7 @@ public class AddHabit extends AppCompatActivity {
     EditText habitTitle;
     EditText habitReason;
     Switch status;
-    EditText daysOfWeek;
+    LinearLayout daysOfWeek;
     DatePicker startDate;
     ImageButton addButton;
     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
@@ -51,10 +52,10 @@ public class AddHabit extends AppCompatActivity {
                 String privacy;
 
                 if (status.isChecked()){
-                    //privacy =
+                    privacy = "private";
                 }
                 else {
-
+                    privacy = "public";
                 }
 
                 String title = habitTitle.getText().toString();
@@ -63,8 +64,7 @@ public class AddHabit extends AppCompatActivity {
                 int newYear = startDate.getYear();
                 String date = newYear+"-"+newMonth+"-"+newDay;
                 String reason = habitReason.getText().toString();
-                //String privacy = status.getText().toString();
-                String days = daysOfWeek.getText().toString();
+                //String days = daysOfWeek.getText().toString();
 
                 //Habits habit = new Habits(title, date, reason, days, privacy);
                 Habits habit = new Habits(title);
