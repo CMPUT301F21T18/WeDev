@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -17,6 +18,8 @@ import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,7 +88,7 @@ public class HabitInfoDisplay extends Fragment {
         thursdaySwitch = view.findViewById(R.id.thursday_switch);
         fridaySwitch = view.findViewById(R.id.friday_switch);
         saturdaySwitch = view.findViewById(R.id.saturday_switch);
-        HabitInfoFirebase habitInfoFirebase = new HabitInfoFirebase("Walk a dog"); //replace with clicked habit
+        HabitInfoFirebase habitInfoFirebase = new HabitInfoFirebase(); //replace with clicked habit
 
         habitInfoFirebase.getDaysSelected(new HabitInfoFirebase.MyCallBack() {
             @Override
@@ -150,6 +153,11 @@ public class HabitInfoDisplay extends Fragment {
             public void getReason(String reason) {
                 //do nothing yet
             }
+
+            @Override
+            public void getStartDate(String startDate) {
+
+            }
         });
 
         habitInfoFirebase.getHabitReason(new HabitInfoFirebase.MyCallBack() {
@@ -162,9 +170,56 @@ public class HabitInfoDisplay extends Fragment {
             public void getReason(String reason) {
                 textView2.setText("Reason:" + reason);
             }
+
+            @Override
+            public void getStartDate(String startDate) {
+
+            }
         });
 
-        textView.setText("Habit:" + "Walk a dog"); //pass in the clicked habit
+        HabitEventFirebase habitEventFirebase = new HabitEventFirebase();
+        habitEventFirebase.getAllDates(new HabitEventFirebase.MyCallBack() {
+            @Override
+            public void getDescription(String s) {
+
+            }
+
+            @Override
+            public void getAllDates(List<String> list, List<Boolean> dateList) {
+                ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.simpleProgressBar);
+                int totalEvents = list.size();
+                int totalDone = dateList.size();
+                progressBar.setMax(totalEvents);
+                progressBar.setProgress(totalDone);
+                TextView textView = view.findViewById(R.id.progress);
+                textView.setText("Progress: " + "You have completed " + totalDone + " event(s) out of " + totalEvents);
+            }
+
+            @Override
+            public void getHabitDetails(HashMap<String, Object> map) {
+
+            }
+        });
+
+        habitInfoFirebase.getHabitStartDate(new HabitInfoFirebase.MyCallBack() {
+            @Override
+            public void getDays(ArrayList<Long> days) {
+
+            }
+
+            @Override
+            public void getReason(String reason) {
+
+            }
+
+            @Override
+            public void getStartDate(String date) {
+                TextView textView1 = view.findViewById(R.id.start_date);
+                textView1.setText("Start Date:" + date);
+            }
+        });
+
+        textView.setText("Habit:" + HabitInfo.clickedHabit); //pass in the clicked habit
         return view;
     }
 }

@@ -29,7 +29,7 @@ import java.util.List;
 
 public class DailyHabitsMainPageFrag extends Fragment {
 
-    ArrayList<Habits> habitDataList = new ArrayList<>();
+    ArrayList<String> habitDataList = new ArrayList<>();
     ArrayAdapter habitAdaptor;
     public static String email = MainPageTabs.email;
     @Nullable
@@ -61,25 +61,25 @@ public class DailyHabitsMainPageFrag extends Fragment {
 //                    }
 //                }
 //            });
-            String email = "a@gmail.com";
-            final CollectionReference collectionReference = rootRef.collection("Habits");
-            collectionReference
-                    .document(email)
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            habitDataList.clear();
-                            DocumentSnapshot document = task.getResult();
-                            //would recommend populating it to the Habits later on:
-                            //should be completedHabits instead of habitsList 
-                            List<String> arrayListHabit = (List<String>) document.get("HabitsList");
-                            for (String str : arrayListHabit) {
-                                habitDataList.add(new Habits(str));
-                            }
-                            habitAdaptor.notifyDataSetChanged();
-                        }
-                    });
+//            String email = "a@gmail.com";
+//            final CollectionReference collectionReference = rootRef.collection("Habits");
+//            collectionReference
+//                    .document(email)
+//                    .get()
+//                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                            habitDataList.clear();
+//                            DocumentSnapshot document = task.getResult();
+//                            //would recommend populating it to the Habits later on:
+//                            //should be completedHabits instead of habitsList
+//                            List<String> arrayListHabit = (List<String>) document.get("HabitsList");
+//                            for (String str : arrayListHabit) {
+//                                habitDataList.add(str);
+//                            }
+//                            habitAdaptor.notifyDataSetChanged();
+//                        }
+//                    });
             habitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

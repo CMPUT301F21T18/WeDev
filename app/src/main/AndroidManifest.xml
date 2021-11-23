@@ -18,10 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ZoomSoft">
         <activity
+            android:name=".eventInfo.EditEventActivity"
+            android:exported="true" />
+        <activity
             android:name=".AddHabit"
             android:exported="true" />
         <activity
-            android:name=".eventInfo.MapSearch"
+            android:name=".eventInfo.ViewLocationMap"
             android:exported="true" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -37,6 +40,9 @@
 
         <activity
             android:name=".AddFriends"
+            android:exported="true" />
+        <activity
+            android:name=".loginandregister.User"
             android:exported="true" />
         <activity
             android:name=".eventInfo.MapsActivity"
@@ -55,6 +61,9 @@
             android:exported="true" />
         <activity
             android:name=".eventInfo.HabitInfo"
+            android:exported="true" />
+        <activity
+            android:name=".ViewFriend"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

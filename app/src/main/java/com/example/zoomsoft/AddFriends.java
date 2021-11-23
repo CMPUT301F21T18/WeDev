@@ -46,8 +46,6 @@ public class AddFriends extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         final CollectionReference collectionReference = db.collection("User");
-
-
         addFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,8 +61,6 @@ public class AddFriends extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     if (task.getResult().exists()) {
                                         Toast.makeText(AddFriends.this, "Follow request sent", Toast.LENGTH_SHORT).show();
-
-//                                        startActivity(new Intent(AddFriends.this, Profile.class));
 
                                     } else {
                                         Toast.makeText(AddFriends.this, "This user does not exist in the database", Toast.LENGTH_SHORT).show();

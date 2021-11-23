@@ -1,7 +1,9 @@
 package com.example.zoomsoft.eventInfo;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -10,10 +12,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +46,8 @@ public class HabitEventDisplay extends Fragment {
     public HabitEventDisplay() {
         // Required empty public constructor
     }
+
+    public static String clickedDate;
 
     /**
      * Use this factory method to create a new instance of
@@ -65,7 +75,7 @@ public class HabitEventDisplay extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    public static Boolean isDone;
     TextView habitNameTextView;
     TextView descriptionTextView;
     ListView listView;
@@ -79,20 +89,18 @@ public class HabitEventDisplay extends Fragment {
         descriptionTextView = view.findViewById(R.id.description);
         listView = view.findViewById(R.id.listView);
         //Update the habit
-        HabitEventFirebase habitEventFirebase = new HabitEventFirebase("Walk a dog"); //will replace with the clickedHabit
+        HabitEventFirebase habitEventFirebase = new HabitEventFirebase(); //will replace with the clickedHabit
         habitEventFirebase.getHabitDescription(new HabitEventFirebase.MyCallBack() {
             @Override
-            public void updateComment(String s) {
+            public void getDescription(String s) {
                 String description = s;
-                habitNameTextView.setText("Habit:" + "Walk a dog");
+                habitNameTextView.setText("Habit:" + HabitInfo.clickedHabit);
                 descriptionTextView.setText("Description:"+ description);
             }
-
             @Override
-            public void getAllDates(List<String> list) {
+            public void getAllDates(List<String> list, List<Boolean> doneList) {
                 //
             }
-
             @Override
             public void getHabitDetails(HashMap<String, Object> map) {
 
@@ -104,14 +112,14 @@ public class HabitEventDisplay extends Fragment {
             ArrayList<String> dateList;
             HashMap<String, Object> map;
             @Override
-            public void updateComment(String s) {
+            public void getDescription(String s) {
                 //do nothing
             }
 
             @Override
-            public void getAllDates(List<String> list) {
+            public void getAllDates(List<String> list, List<Boolean> doneList) {
                 dateList = new ArrayList<>(list);
-                dateAdapter = new DateCustomListAdapter(getActivity(), dateList);
+                dateAdapter = new DateCustomListAdapter(getActivity(), dateList, doneList);
                 listView.setAdapter(dateAdapter);
             }
 
@@ -124,29 +132,100 @@ public class HabitEventDisplay extends Fragment {
         habitEventFirebase.getHabitClickedDetails(new HabitEventFirebase.MyCallBack() {
             List<String> dateList;
             @Override
-            public void updateComment(String s) {
+            public void getDescription(String s) {
 
             }
 
             @Override
-            public void getAllDates(List<String> list) {
+            public void getAllDates(List<String> list, List<Boolean> doneList) {
                 this.dateList = list;
             }
 
             @Override
             public void getHabitDetails(HashMap<String, Object> map) {
+                isDone = (Boolean) map.get("done");
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                        HashMap<String, Object> objectHashMap = (HashMap<String, Object>) map.get(dateList.get(i));
-//                        String[] objects = (String[]) objectHashMap.get("Location");
-//                        String comment = (String) objectHashMap.get("comment");
                         EventFragment eventFragment = new EventFragment();
+                        clickedDate = (String) listView.getItemAtPosition(i);
                         eventFragment.show(getActivity().getSupportFragmentManager(),"Fragment");
                     }
                 });
             }
         });
+
+        //Added the SnapshotEventlistener for the HabitEventDisplay
+        habitEventFirebase.db.collection("Events").document(email).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                habitEventFirebase.getHabitDescription(new HabitEventFirebase.MyCallBack() {
+                    @Override
+                    public void getDescription(String s) {
+                        String description = s;
+                        habitNameTextView.setText("Habit:" + HabitInfo.clickedHabit);
+                        descriptionTextView.setText("Description:"+ description);
+                    }
+                    @Override
+                    public void getAllDates(List<String> list, List<Boolean> doneList) {
+                        //
+                    }
+                    @Override
+                    public void getHabitDetails(HashMap<String, Object> map) {
+
+                    }
+                });
+
+                habitEventFirebase.getAllDates(new HabitEventFirebase.MyCallBack() {
+                    String description;
+                    ArrayList<String> dateList;
+                    HashMap<String, Object> map;
+                    @Override
+                    public void getDescription(String s) {
+                        //do nothing
+                    }
+
+                    @Override
+                    public void getAllDates(List<String> list, List<Boolean> doneList) {
+                        dateList = new ArrayList<>(list);
+                        dateAdapter = new DateCustomListAdapter(getActivity(), dateList, doneList);
+                        listView.setAdapter(dateAdapter);
+                    }
+
+                    @Override
+                    public void getHabitDetails(HashMap<String,Object> map) {
+
+                    }
+                });
+
+                habitEventFirebase.getHabitClickedDetails(new HabitEventFirebase.MyCallBack() {
+                    List<String> dateList;
+                    @Override
+                    public void getDescription(String s) {
+
+                    }
+
+                    @Override
+                    public void getAllDates(List<String> list, List<Boolean> doneList) {
+                        this.dateList = list;
+                    }
+
+                    @Override
+                    public void getHabitDetails(HashMap<String, Object> map) {
+                        isDone = (Boolean) map.get("done");
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                EventFragment eventFragment = new EventFragment();
+                                clickedDate = (String) listView.getItemAtPosition(i);
+                                eventFragment.show(getActivity().getSupportFragmentManager(),"Fragment");
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
         return view;
     }
 }
