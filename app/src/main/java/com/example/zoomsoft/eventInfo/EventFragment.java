@@ -29,6 +29,7 @@ import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.R;
 import com.example.zoomsoft.loginandregister.Login;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,6 +77,8 @@ public class EventFragment extends DialogFragment {
     private TextView dateView;
     //Comment
     private TextView commentView;
+    private Button SelectImage;
+    private StorageReference Storage;
     //Photo
     //Camera
     //Location
@@ -86,7 +89,9 @@ public class EventFragment extends DialogFragment {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.date_dialog_fragment, null);
         if(DeleteDialogFragment.isDeleted) getActivity().getFragmentManager().popBackStack();
         Button button = view.findViewById(R.id.map_button);
+        SelectImage = (Button) view.findViewById(R.id.bt_gallery);
         Button cameraButton = view.findViewById(R.id.bt_open);
+        //Button
         imageView = view.findViewById(R.id.camera_pic);
         ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
