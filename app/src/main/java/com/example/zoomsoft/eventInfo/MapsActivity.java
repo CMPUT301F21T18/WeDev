@@ -51,7 +51,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ActivityMapsBinding binding;
     private ArrayList<String> list = new ArrayList<>();
     private ArrayList<LatLng> locationArrayList;
-    public static String email = "a@gmail.com";
+    public static String email = MainPageTabs.email;
     public double latitude = 25.2;
     public double longitude = 21.3;
     Button okButton;
@@ -78,9 +78,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Geocoder geocoder = new Geocoder(getApplicationContext());
                         try {
                             addressList = geocoder.getFromLocationName(location, 1);
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                        if(addressList.size() == 0) return false;
                         Address address = addressList.get(0);
                         LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
                         mMap.addMarker(new MarkerOptions().position(latLng).title(location));
@@ -94,13 +96,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                                 final CollectionReference collectionReference = db.collection("Events");
                                 DocumentReference documentReference = collectionReference.document(email);
-                                Map<String, Object> location = new HashMap<>();
                                 ArrayList<String> arrayList = new ArrayList<>();
                                 arrayList.add(latitude+"");
                                 arrayList.add(longitude+"");
-                                location.put("location", arrayList);
                                 Map<String,Object> updates = new HashMap<>();
-                                updates.put("New" + "." + "October 21st, 2021" + "." + "location", arrayList);
+                                updates.put(HabitInfo.clickedHabit + "." + HabitEventDisplay.clickedDate + "." + "location", arrayList);
                                 documentReference.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {

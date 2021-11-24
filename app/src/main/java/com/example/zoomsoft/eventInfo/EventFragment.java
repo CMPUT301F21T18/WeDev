@@ -30,11 +30,15 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.zoomsoft.MainActivity;
+import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
 import com.example.zoomsoft.loginandregister.Login;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -103,7 +107,6 @@ public class EventFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.date_dialog_fragment, null);
-        if(DeleteDialogFragment.isDeleted) getActivity().getFragmentManager().popBackStack();
         Button button = view.findViewById(R.id.map_button);
         Button cameraButton = view.findViewById(R.id.bt_open);
         imageView = view.findViewById(R.id.camera_pic);
@@ -193,7 +196,7 @@ public class EventFragment extends DialogFragment {
             public void onClick(View view) {
                 HabitEventFirebase habitEventFirebase = new HabitEventFirebase();
                 habitEventFirebase.deleteHabitEvent(HabitEventDisplay.clickedDate);
-                getParentFragmentManager().beginTransaction().remove(EventFragment.this).commit();
+                getActivity().getFragmentManager().popBackStack();
             }
         });
         FloatingActionButton edit = view.findViewById(R.id.floatingActionButton2);
@@ -205,12 +208,65 @@ public class EventFragment extends DialogFragment {
                 startActivity(intent);
             }
         });
+
+
+        //snapshot
+        habitEventFirebase.db.collection("Events").document(MainPageTabs.email).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                habitEventFirebase.getHabitClickedDetails(new HabitEventFirebase.MyCallBack() {
+                    @Override
+                    public void getDescription(String s) {
+                        descriptionView.setText("Description:" + s);
+                    }
+                    @Override
+                    public void getAllDates(List<String> list, List<Boolean> list2) {
+
+                    }
+                    @Override
+                    public void getHabitDetails(HashMap<String, Object> map) {
+                        HashMap hashMap = (HashMap) map.get(HabitEventDisplay.clickedDate);
+                        //get the habit comment
+                        String comment  = (String) hashMap.get("comment");
+                        if(comment != null) commentView.setText("Comment:" + comment);
+                        //get the date
+                        dateView.setText("Date:" + HabitEventDisplay.clickedDate);
+                        //get the long and lat
+                        ArrayList<String> list = (ArrayList<String>) hashMap.get("location");
+                        //will need to call on viewLocation
+                        //=============
+                        Button button1 = view.findViewById(R.id.map_button);
+                        button1.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                String[] locationArray = new String[2];
+                                locationArray[0] = list.get(0);
+                                locationArray[1] = list.get(1);
+                                if(locationArray[0].equals("N") && locationArray[1].equals("N")) {
+                                    //set Toast, no location was chosen
+                                    Toast.makeText(getContext(),
+                                            "No Location has been added, click on edit to add", Toast.LENGTH_LONG).show();
+                                }
+                                else {
+                                    Intent intent = new Intent(getContext(), MapsActivity.class);
+                                    intent.putExtra(MainActivity.EXTRA_MESSAGE, locationArray[0] + " " + locationArray[1]);
+                                    intent.putExtra("isSearching", "false");
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        });
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         return builder
                 .setView(view)
                 .setTitle("Events Recorded On:" + HabitEventDisplay.clickedDate)
                 .create();
     }
+
+
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -227,6 +283,8 @@ public class EventFragment extends DialogFragment {
         photoPath = image.getAbsolutePath();
         return image;
     }
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == CAMERA_REQUEST_CODE){

@@ -46,7 +46,7 @@ public class ViewLocationMap extends AppCompatActivity {
     TextView showLocationTxt;
     LocationManager locationManager;
     Double latitude, longitude;
-    String temp = "a@gmail.com";
+    String temp = MainPageTabs.email;
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -103,7 +103,7 @@ public class ViewLocationMap extends AppCompatActivity {
 
                     @Override
                     public void getHabitDetails(HashMap<String, Object> map) {
-                        HashMap hashMap = (HashMap) map.get("October 21st, 2021");
+                        HashMap hashMap = (HashMap) map.get(HabitEventDisplay.clickedDate);
                         ArrayList<String> location;
                         location = (ArrayList<String>) hashMap.get("location");
                         if(location.get(0).equals("N") || location.get(1).equals("N")) return;
@@ -123,6 +123,12 @@ public class ViewLocationMap extends AppCompatActivity {
                             searchLocationMap.setVisibility(View.VISIBLE);
                             confirmButton = findViewById(R.id.confirm_button);
                             confirmButton.setVisibility(View.VISIBLE);
+                            confirmButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    finish();
+                                }
+                            });
                         }
                         catch (Exception e) {
                             Log.d("Exception:", e.getLocalizedMessage());

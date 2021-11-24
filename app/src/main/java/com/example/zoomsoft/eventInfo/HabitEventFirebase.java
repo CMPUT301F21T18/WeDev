@@ -121,7 +121,7 @@ public class HabitEventFirebase {
 
     public void getHabitClickedDetails(MyCallBack myCallBack) {
         final CollectionReference collectionReference = db.collection("Events");
-        DocumentReference documentReference = collectionReference.document("a@gmail.com");
+        DocumentReference documentReference = collectionReference.document(email);
         documentReference.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -129,8 +129,8 @@ public class HabitEventFirebase {
                     DocumentSnapshot documentSnapshot = task.getResult();
                     if(documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
-                        Log.d("Mappy", map.toString());
-                        HashMap<String, Object> hashMap = (HashMap) map.get("New");
+                        Log.d("Map", map.toString());
+                        HashMap<String, Object> hashMap = (HashMap) map.get(habitName);
                         myCallBack.getHabitDetails(hashMap);
                         myCallBack.getDescription((String) hashMap.get("description"));
                     }
