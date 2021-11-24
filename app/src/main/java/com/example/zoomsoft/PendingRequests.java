@@ -47,8 +47,6 @@ public class PendingRequests<dataBase> extends AppCompatActivity{
         pendingRequestsDataList = new ArrayList<>();
         pendingAdapter = new PendingArrayAdapter(this, pendingRequestsDataList);
         pendingRequestsListView.setAdapter(pendingAdapter);
-
-
         setUpListViewListener();
 
     }

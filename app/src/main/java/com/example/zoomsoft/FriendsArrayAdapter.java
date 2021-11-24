@@ -25,29 +25,10 @@ public class FriendsArrayAdapter extends ArrayAdapter<String> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_friend_content,parent,false);
         }
 
-
         TextView item = convertView.findViewById(R.id.friendName);
         item.setText(friends);
-
         return convertView;
+
     }
 }
 
-//    public ProfileAdapter(Context context, ArrayList<Profile> userArrayList) {
-//        super(context, R.layout.profile_content,userArrayList);
-//    }
-//    // Creates the profile page and ad
-//    @NonNull
-//    @Override
-//    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//        Profile profileItem = getItem(position);
-//        if (convertView == null){
-//            convertView = LayoutInflater.from(getContext()).inflate(R.layout.profile_content,parent,false);
-//        }
-//
-//
-//        TextView item = convertView.findViewById(R.id.profile_item);
-//        item.setText(profileItem.item); //error here too
-//
-//        return convertView;
-//    }

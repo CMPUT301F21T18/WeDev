@@ -77,8 +77,18 @@
             android:name=".PendingRequests"
             android:exported="true" />
         <activity
+            android:name=".ViewFriendsHabit"
+            android:parentActivityName=".ViewFriend"
+            android:exported="true" />
+
+        <activity
+            android:name=".FriendsHabitsFirebase"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
+
+
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
