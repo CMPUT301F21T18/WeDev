@@ -1,5 +1,6 @@
 package com.example.zoomsoft.eventInfo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,7 +13,7 @@ import com.example.zoomsoft.databinding.ActivityHabitInfoBinding;
 import com.example.zoomsoft.eventInfo.SectionsPagerAdapterEvent;
 import com.google.android.material.tabs.TabLayout;
 
-public class HabitInfo extends AppCompatActivity  {
+public class HabitInfo extends AppCompatActivity {
 
     private ActivityHabitInfoBinding binding;
     public static String email = MainPageTabs.email;

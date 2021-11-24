@@ -60,6 +60,7 @@ public class AddFriends extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     if (task.getResult().exists()) {
+
                                         Toast.makeText(AddFriends.this, "Follow request sent", Toast.LENGTH_SHORT).show();
 
                                     } else {
