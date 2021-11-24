@@ -45,7 +45,7 @@ public class PendingRequestsFirebase {
                     if (documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
                         Log.d("Map provided: ", map.toString());
-                        ArrayList<String>  pendingRequests = (ArrayList<String>) map.get("Pending Requests"); //an arraylist of friends
+                        ArrayList<String>  pendingRequests = (ArrayList<String>) map.get("pending_requests"); //an arraylist of pending_requests
                         pendingRequestsInterface.callPendingRequests(pendingRequests);
                     }
                 }

@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,12 +28,10 @@ public class PendingRequests<dataBase> extends AppCompatActivity{
     FirebaseFirestore db;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pending_requests);
-
 
         PendingRequestsFirebase pendingRequestsFirebase = new PendingRequestsFirebase();
         pendingRequestsFirebase.getPendingRequests(pendingRequests -> {
@@ -44,7 +41,6 @@ public class PendingRequests<dataBase> extends AppCompatActivity{
         });
 
         pendingRequestsListView = findViewById(R.id.pending_requests);
-        pendingRequestsDataList = new ArrayList<>();
         pendingAdapter = new PendingArrayAdapter(this, pendingRequestsDataList);
         pendingRequestsListView.setAdapter(pendingAdapter);
         setUpListViewListener();
@@ -52,23 +48,20 @@ public class PendingRequests<dataBase> extends AppCompatActivity{
     }
 
     private void setUpListViewListener() {
-        pendingRequestsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        pendingRequestsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long id) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
                 Context context = getApplicationContext();
+                db = db.getInstance();
                 Toast.makeText(context,"Request removed", Toast.LENGTH_LONG).show();
 
-                db = FirebaseFirestore.getInstance();
                 String selectedFromList = (String) (pendingRequestsListView.getItemAtPosition(i));
-                Log.d("123LOP", selectedFromList);
 
-                final CollectionReference collectionReference = db.collection("Pending Requests");
-                DocumentReference documentReference = collectionReference.document(MainPageTabs.email);
-                Log.d("123LP", MainPageTabs.email);
-
+                // update the current user pending requests
+                DocumentReference documentReference = db.collection("Pending Requests").document(MainPageTabs.email);
                 Map<String,Object> updates = new HashMap<>();
-                updates.put(selectedFromList, FieldValue.delete());
-                Log.d("123LOP", selectedFromList);
+                documentReference.update("pending_requests", FieldValue.arrayRemove(selectedFromList));
+
                 documentReference.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -79,9 +72,24 @@ public class PendingRequests<dataBase> extends AppCompatActivity{
                     }
                 });
 
-                pendingRequestsDataList.remove(i);
+                // update the next user received requests
+                DocumentReference documentRef = db.collection("Received Requests").document(selectedFromList);
+                Map<String,Object> updates1 = new HashMap<>();
+                documentRef.update("Received Requests", FieldValue.arrayRemove(MainPageTabs.email));
+
+                documentRef.update(updates1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
+                            Log.w("TAG", "Deleted from firebase");
+                        else
+                            Log.w("TAG", "Error deleting document");
+                    }
+                });
+
+                //pendingRequestsDataList.remove(i);
+                recreate();
                 pendingAdapter.notifyDataSetChanged();
-                return true;
             }
         });
     }
