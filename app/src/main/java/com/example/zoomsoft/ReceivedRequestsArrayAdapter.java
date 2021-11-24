@@ -14,9 +14,10 @@ import java.util.ArrayList;
 
 public class ReceivedRequestsArrayAdapter extends ArrayAdapter<String> {
 
-    public ReceivedRequestsArrayAdapter(Context context, ArrayList<String> recievedRequestsArrayList) {
-        super(context,R.layout.view_request_content,recievedRequestsArrayList);
+    public ReceivedRequestsArrayAdapter(Context context, ArrayList<String> receivedRequestsArrayList) {
+        super(context,R.layout.view_received_request_content,receivedRequestsArrayList);
     }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -29,4 +30,6 @@ public class ReceivedRequestsArrayAdapter extends ArrayAdapter<String> {
         item.setText(requestfriends);
         return convertView;
     }
+
+
 }
