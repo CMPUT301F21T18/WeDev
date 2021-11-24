@@ -5,6 +5,7 @@ import static android.app.Activity.RESULT_OK;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +34,9 @@ import androidx.fragment.app.DialogFragment;
 import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.R;
 import com.example.zoomsoft.loginandregister.Login;
+
 import com.google.android.gms.tasks.OnFailureListener;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.storage.FirebaseStorage;
@@ -94,18 +98,45 @@ public class EventFragment extends DialogFragment {
     private TextView dateView;
     //Comment
     private TextView commentView;
+    private Button SelectImage;
+    private StorageReference Storage;
+    private static final int GALLERY_INTENT = 2;
+    private ProgressDialog ProgressDialog;
     //Photo
     private StorageReference storage;
     //Camera
     //Location
-
+    /* @Override
+    protected void  onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.EventFragment);
+    }*/
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.date_dialog_fragment, null);
         if(DeleteDialogFragment.isDeleted) getActivity().getFragmentManager().popBackStack();
         Button button = view.findViewById(R.id.map_button);
+
+        Storage = FirebaseStorage.getInstance().getReference();
+        SelectImage = (Button) view.findViewById(R.id.bt_gallery);
+        //ProgressDialog = new ProgressDialog(this); this is not working either
+
+        SelectImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+
+                startActivityForResult(intent,GALLERY_INTENT); // need to check here
+
+
+            }
+        });
+
         Button cameraButton = view.findViewById(R.id.bt_open);
+        //Button
         imageView = view.findViewById(R.id.camera_pic);
         storage = FirebaseStorage.getInstance().getReference();
 
@@ -261,3 +292,24 @@ public class EventFragment extends DialogFragment {
         });
     }
 }
+//=======
+//
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) { //also crossed
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK){
+//            ProgressDialog.setMessage("Uploading...");
+//            ProgressDialog.show();
+//            Uri uri = data.getData();
+//            StorageReference filepath = Storage.child("Photos").child(uri.getLastPathSegment());
+//            /*filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                    Toast.makeText(EventFragment.this, "upload done", Toast.LENGTH_LONG.show()); //error
+//                }*/
+//            };//can add failure too
+//        }
+//    }
+//
+//>>>>>>> Sebastian
