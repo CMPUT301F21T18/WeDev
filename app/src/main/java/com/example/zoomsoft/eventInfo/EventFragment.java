@@ -105,6 +105,7 @@ public class EventFragment extends DialogFragment {
         Storage = FirebaseStorage.getInstance().getReference();
         SelectImage = (Button) view.findViewById(R.id.bt_gallery);
         //ProgressDialog = new ProgressDialog(this); this is not working either
+
         SelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -215,12 +216,12 @@ public class EventFragment extends DialogFragment {
             ProgressDialog.show();
             Uri uri = data.getData();
             StorageReference filepath = Storage.child("Photos").child(uri.getLastPathSegment());
-            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            /*filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    //Toast.makeText(EventFragment.this, "upload done", Toast.LENGTH_LONG.show()); //error
-                }
-            });//can add failure too
+                    Toast.makeText(EventFragment.this, "upload done", Toast.LENGTH_LONG.show()); //error
+                }*/
+            };//can add failure too
         }
     }
-}
+
