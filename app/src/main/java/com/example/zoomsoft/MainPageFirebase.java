@@ -26,7 +26,7 @@ public class MainPageFirebase {
 
     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
     //Switch over to Events collection once completed
-    final CollectionReference collectionReference = rootRef.collection("Habits");
+    final CollectionReference collectionReference = rootRef.collection("Events");
     //String email = MainPageTabs.email;
     String email = "a@gmail.com"; //Remove this and uncomment the prior line
     Source source = Source.SERVER;
