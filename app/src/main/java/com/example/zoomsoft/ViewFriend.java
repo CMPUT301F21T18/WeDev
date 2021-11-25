@@ -45,7 +45,7 @@ public class ViewFriend<dataBase> extends AppCompatActivity{
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         db = FirebaseFirestore.getInstance();
-                        final CollectionReference collectionReference = db.collection("Friends");
+                        final CollectionReference collectionReference = db.collection("Habits");
 //                        EditText editText = (EditText) friendsList.getItemAtPosition(position);
 //                        String friendName = editText.getText().toString();
                         String friendName = friendsList.getItemAtPosition(position).toString();
