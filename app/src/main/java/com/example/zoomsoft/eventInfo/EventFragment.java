@@ -103,11 +103,11 @@ public class EventFragment extends DialogFragment {
     //Comment
     private TextView commentView;
     private Button SelectImage;
-    private StorageReference Storage;
     private static final int GALLERY_INTENT = 2;
     private ProgressDialog ProgressDialog;
     //Photo
     private StorageReference storage;
+    private StorageReference refer;
     //Camera
     //Location
     /* @Override
@@ -120,8 +120,9 @@ public class EventFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.date_dialog_fragment, null);
         Button button = view.findViewById(R.id.map_button);
+        storage = FirebaseStorage.getInstance().getReference();
 
-        Storage = FirebaseStorage.getInstance().getReference();
+
         SelectImage = (Button) view.findViewById(R.id.bt_gallery);
         //ProgressDialog = new ProgressDialog(this); this is not working either
 
@@ -141,7 +142,6 @@ public class EventFragment extends DialogFragment {
         Button cameraButton = view.findViewById(R.id.bt_open);
         //Button
         imageView = view.findViewById(R.id.camera_pic);
-        storage = FirebaseStorage.getInstance().getReference();
 
         habitView = view.findViewById(R.id.name);
         textView = view.findViewById(R.id.description);
@@ -150,6 +150,18 @@ public class EventFragment extends DialogFragment {
         descriptionView = view.findViewById(R.id.description);
         habitView.setText("Habit:" + HabitInfo.clickedHabit);//clicked habit
 
+        refer = storage.child("images/events/" + MainPageTabs.email);
+        refer.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).fit().centerCrop().into(imageView);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                //when no picture is made
+            }
+        });
 
         //clicked date needs to be passed
         HabitEventFirebase habitEventFirebase = new HabitEventFirebase();//clicked habit
@@ -333,7 +345,7 @@ public class EventFragment extends DialogFragment {
         }
     }
     private void uploadFirebase(String name, Uri uri) {
-        StorageReference photo = storage.child("images/events/" + name);
+        StorageReference photo = storage.child("images/events/" + MainPageTabs.email);
         photo.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
