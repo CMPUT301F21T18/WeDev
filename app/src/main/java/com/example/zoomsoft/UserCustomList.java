@@ -1,5 +1,6 @@
 package com.example.zoomsoft;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import com.example.zoomsoft.loginandregister.User;
 
 import java.util.ArrayList;
 
-public class UserCustomList extends ArrayAdapter<User> {
+public class UserCustomList extends ArrayAdapter<User>{
     private ArrayList<User> users;
     private Context context;
 
