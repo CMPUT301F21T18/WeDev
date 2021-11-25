@@ -1,13 +1,14 @@
 package com.example.zoomsoft;
 
+import android.Manifest;
 import android.app.Activity;
 import android.widget.EditText;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
+import androidx.test.rule.GrantPermissionRule;
 
-import com.example.zoomsoft.eventInfo.HabitInfo;
 import com.example.zoomsoft.loginandregister.Login;
 import com.robotium.solo.Solo;
 
@@ -31,6 +32,11 @@ public class ActivityHabitInfoTest {
     @Rule
     public ActivityTestRule<MainActivity> rule =
             new ActivityTestRule<>(MainActivity.class, true, true);
+
+    // grant permission
+    @Rule
+    public GrantPermissionRule mRuntimePermissionRule = GrantPermissionRule.grant(Manifest.permission.CAMERA);
+
 
     /**
      * Runs before all tests and creates solo instance.
@@ -60,9 +66,11 @@ public class ActivityHabitInfoTest {
     public void checkHabitInfo(){
         //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+
         // Go to next activity login
         solo.clickOnButton("Login");
         solo.assertCurrentActivity("Wrong Activity", Login.class);
+
 
         // enter the data and test
         solo.enterText((EditText) solo.getView(R.id.email), "asad@gmail.com");
@@ -72,11 +80,10 @@ public class ActivityHabitInfoTest {
         // check if activity switched properly
         solo.assertCurrentActivity("Wrong Activity", MainPageTabs.class);
 
-        solo.clickOnText("Walk");
-        solo.sleep(2000); // 2 seconds
+        solo.clickLongOnText(("Walk"));
 
         // check if activity switched properly
-        solo.assertCurrentActivity("Wrong Activity", HabitInfo.class);
+        //solo.assertCurrentActivity("Wrong Activity", HabitInfo.class);
     }
 
 
@@ -89,8 +96,4 @@ public class ActivityHabitInfoTest {
     public void tearDown() throws Exception{
         solo.finishOpenedActivities();
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/main
