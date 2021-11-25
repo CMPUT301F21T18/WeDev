@@ -40,12 +40,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //Asks for permission to use the camera,
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[] {
-                            Manifest.permission.CAMERA
-                    }, 100);
-        }
+//        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(MainActivity.this,
+//                    new String[] {
+//                            Manifest.permission.CAMERA
+//                    }, 100);
+//        }
         //===================================================
     }
 
