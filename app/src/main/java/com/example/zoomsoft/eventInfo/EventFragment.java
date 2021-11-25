@@ -64,6 +64,7 @@ public class EventFragment extends DialogFragment {
     private String comment;
     private String date;
     private String photoPath;
+    private String firePath = "images/events/" + MainPageTabs.email + HabitInfo.clickedHabit;
     public static final int CAMERA_REQUEST_CODE = 102;
 
     public EventFragment(String longitude, String latitude, String date, String comment) {
@@ -150,18 +151,7 @@ public class EventFragment extends DialogFragment {
         descriptionView = view.findViewById(R.id.description);
         habitView.setText("Habit:" + HabitInfo.clickedHabit);//clicked habit
 
-        refer = storage.child("images/events/" + MainPageTabs.email);
-        refer.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).fit().centerCrop().into(imageView);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                //when no picture is made
-            }
-        });
+        receiveImage(storage);
 
         //clicked date needs to be passed
         HabitEventFirebase habitEventFirebase = new HabitEventFirebase();//clicked habit
@@ -344,8 +334,8 @@ public class EventFragment extends DialogFragment {
             }
         }
     }
-    private void uploadFirebase(String name, Uri uri) {
-        StorageReference photo = storage.child("images/events/" + MainPageTabs.email);
+    public void uploadFirebase(String name, Uri uri) {
+        StorageReference photo = storage.child(firePath);
         photo.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -360,6 +350,21 @@ public class EventFragment extends DialogFragment {
             @Override
             public void onFailure(@NonNull Exception e) {
                 //Error messages
+            }
+        });
+    }
+
+    public void receiveImage(StorageReference storage) {
+        refer = storage.child(firePath);
+        refer.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).fit().centerCrop().into(imageView);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                //when no picture is made
             }
         });
     }
