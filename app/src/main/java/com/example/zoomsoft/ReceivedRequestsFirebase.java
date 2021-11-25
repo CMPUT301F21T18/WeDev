@@ -1,7 +1,5 @@
 package com.example.zoomsoft;
-
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -17,27 +15,27 @@ import com.google.firebase.firestore.Source;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class FriendsFirebase {
-    public String  email = "you@gmail.com";//MainPageTabs.email; //"a@gmail.com"
+public class ReceivedRequestsFirebase {
+
+    public String  email = MainPageTabs.email; //"a@gmail.com"
     Source source = Source.SERVER;
-    ListView friendsListView;
+    ListView recievedRequestsListView;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    interface FriendsInterface{
-        void callBackFriends(ArrayList<String> friends );
+    interface ReceivedRequestsInterface {
+        void callReceivedRequests(ArrayList<String> requestfriends);
     }
 
-    public FriendsFirebase() {
-
+    public ReceivedRequestsFirebase() {
     }
 
     /**
      * Gets the list of friends for each user.
-     * @param friendsInterface
+     * @param receivedRequestsInterface
      */
 
-    public void getFriend(FriendsInterface friendsInterface){
-        final CollectionReference collectionReference = db.collection("Friends");
+    public void getReceivedRequests(ReceivedRequestsInterface receivedRequestsInterface){
+        final CollectionReference collectionReference = db.collection("Received Requests");
         DocumentReference documentReference = collectionReference.document(email);
         documentReference.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -47,15 +45,12 @@ public class FriendsFirebase {
                     if (documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
                         Log.d("Map provided: ", map.toString());
-                        ArrayList<String>  friends = (ArrayList<String>) map.get("friends"); //an arraylist of friends
-                        friendsInterface.callBackFriends(friends);
+
+                        ArrayList<String>  receivedRequests = (ArrayList<String>) map.get("Received Requests"); //an arraylist of received requests
+                        receivedRequestsInterface.callReceivedRequests(receivedRequests);
                     }
                 }
             }
         });
-
     }
-
-
-
 }

@@ -6,20 +6,6 @@
     android:layout_width="match_parent">
 
 
-    <TextView
-        android:id="@+id/listOfFriends"
-        android:layout_width="wrap_content"
-        android:layout_height="34dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="182dp"
-        android:layout_marginEnd="225dp"
-        android:layout_marginBottom="629dp"
-        android:text="List Of Friends" />
-
     <ListView
         android:id="@+id/friends_list"
         android:layout_width="380dp"
@@ -29,6 +15,30 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="31dp"
         android:layout_marginTop="317dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp" />
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginBottom="45dp"
+        tools:listitem="@layout/view_friend_content" />
+
+    <TextView
+        android:id="@+id/listOfFriends"
+        android:layout_width="203dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="103dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="105dp"
+        android:layout_marginBottom="610dp"
+        android:text="Friends"
+        android:textColor="@color/black"
+        android:textSize="35dp" />
+
 
 </RelativeLayout>

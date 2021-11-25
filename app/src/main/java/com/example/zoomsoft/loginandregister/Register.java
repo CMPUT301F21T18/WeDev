@@ -1,5 +1,6 @@
 package com.example.zoomsoft.loginandregister;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
@@ -83,6 +85,17 @@ public class Register extends AppCompatActivity {
                                 else {
                                     //not such document
                                     //create a new document
+                                    // Add a new document with a generated id.
+                                    Map<String, Object> data = new HashMap<>();
+                                    data.put(email, true);
+
+                                    db.collection("Events")
+                                            .add(data).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                                            Log.d(TAG, "Events Created");
+                                        }
+                                    });
                                     collectionReference
                                             .document(email)
                                             .set(data)

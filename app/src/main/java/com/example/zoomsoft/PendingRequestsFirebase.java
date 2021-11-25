@@ -1,7 +1,5 @@
 package com.example.zoomsoft;
-
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -17,27 +15,27 @@ import com.google.firebase.firestore.Source;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class FriendsFirebase {
-    public String  email = "you@gmail.com";//MainPageTabs.email; //"a@gmail.com"
+public class PendingRequestsFirebase {
+
+    public String  email = MainPageTabs.email; //"a@gmail.com"
     Source source = Source.SERVER;
-    ListView friendsListView;
+    ListView pendingRequestsListView;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    interface FriendsInterface{
-        void callBackFriends(ArrayList<String> friends );
+    interface PendingRequestsInterface {
+        void callPendingRequests(ArrayList<String> pendingfriends);
     }
 
-    public FriendsFirebase() {
-
+    public PendingRequestsFirebase() {
     }
 
     /**
      * Gets the list of friends for each user.
-     * @param friendsInterface
+     * @param pendingRequestsInterface
      */
 
-    public void getFriend(FriendsInterface friendsInterface){
-        final CollectionReference collectionReference = db.collection("Friends");
+    public void getPendingRequests(PendingRequestsInterface pendingRequestsInterface){
+        final CollectionReference collectionReference = db.collection("Pending Requests");
         DocumentReference documentReference = collectionReference.document(email);
         documentReference.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -47,15 +45,11 @@ public class FriendsFirebase {
                     if (documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
                         Log.d("Map provided: ", map.toString());
-                        ArrayList<String>  friends = (ArrayList<String>) map.get("friends"); //an arraylist of friends
-                        friendsInterface.callBackFriends(friends);
+                        ArrayList<String>  pendingRequests = (ArrayList<String>) map.get("pending_requests"); //an arraylist of pending_requests
+                        pendingRequestsInterface.callPendingRequests(pendingRequests);
                     }
                 }
             }
         });
-
     }
-
-
-
 }

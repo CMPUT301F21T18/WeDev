@@ -16,7 +16,9 @@ import com.example.zoomsoft.loginandregister.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -60,6 +62,7 @@ public class AddFriends extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     if (task.getResult().exists()) {
+
                                         Toast.makeText(AddFriends.this, "Follow request sent", Toast.LENGTH_SHORT).show();
 
                                     } else {
@@ -67,6 +70,13 @@ public class AddFriends extends AppCompatActivity {
                                     }
                                 }
                             });
+                    // update the pending requests list of current user
+                    DocumentReference documentRef = db.collection("Pending Requests").document(MainPageTabs.email);
+                    documentRef.update("pending_requests", FieldValue.arrayUnion(userName));
+
+                    // update the received requests list of other user
+                    DocumentReference documentRef1 = db.collection("Received Requests").document(userName);
+                    documentRef1.update("Received Requests", FieldValue.arrayUnion(MainPageTabs.email));
                 }
             }
         });

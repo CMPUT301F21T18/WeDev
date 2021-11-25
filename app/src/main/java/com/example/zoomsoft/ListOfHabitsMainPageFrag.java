@@ -90,6 +90,7 @@ public class ListOfHabitsMainPageFrag extends Fragment {
         mainPageFirebase.getListOfHabits(new MainPageFirebase.MainPageInterface() {
             @Override
             public void getHabitInterface(ArrayList<String> habitArrayList) {
+                if(habitArrayList.contains("exists")) habitArrayList.remove("exists");
                 ArrayAdapter habitAdaptor = new HabitCustomList(getContext(), habitArrayList);
                 habitList.setAdapter(habitAdaptor);
             }

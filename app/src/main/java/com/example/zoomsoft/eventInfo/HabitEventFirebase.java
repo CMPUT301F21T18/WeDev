@@ -94,7 +94,7 @@ public class HabitEventFirebase {
                         HashMap hashMap = (HashMap) map.get(habitName);
                         List<Boolean> dateList = new ArrayList<>();
                         for(String str : (Set<String>) hashMap.keySet()) {
-                            if (str.equals("description") || str.equals("reason") || str.equals("days")) continue;
+                            if (str.equals("description") || str.equals("reason") || str.equals("days") || str.equals("startDate") || str.equals("status")) continue;
                             list.add(str); //str is a date that the event occurred
                             HashMap hashMap1 = (HashMap) hashMap.get(str);
                             for(String date : (Set<String>) hashMap1.keySet()){
@@ -129,7 +129,7 @@ public class HabitEventFirebase {
                     DocumentSnapshot documentSnapshot = task.getResult();
                     if(documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
-                        List<String> list = new ArrayList<>();
+                        Log.d("Map", map.toString());
                         HashMap<String, Object> hashMap = (HashMap) map.get(habitName);
                         myCallBack.getHabitDetails(hashMap);
                         myCallBack.getDescription((String) hashMap.get("description"));

@@ -8,7 +8,7 @@ public class Habits {
     private String startDate;
     private String habitReason;
     private ArrayList<Integer> habitWeekDay;
-    private Boolean privacy; //Public or private status for habits
+    private String privacy; //Public or private status for habits
 
     public Habits(String habitTitle) {
         this.habitTitle = habitTitle;
@@ -21,7 +21,7 @@ public class Habits {
         this.habitWeekDay = habitWeekDay;
     }
 
-    public Habits(String habitTitle, String startDate, String habitReason, ArrayList<Integer> habitWeekDay, Boolean privacy) {
+    public Habits(String habitTitle, String startDate, String habitReason, ArrayList<Integer> habitWeekDay, String privacy) {
         this.habitTitle = habitTitle;
         this.startDate = startDate;
         this.habitReason = habitReason;
@@ -61,11 +61,11 @@ public class Habits {
         this.habitWeekDay = habitWeekDay;
     }
 
-    public boolean getPrivacy() {
+    public String getPrivacy() {
         return privacy;
     }
 
-    public void setPrivacy(boolean privacy) {
+    public void setPrivacy(String privacy) {
         this.privacy = privacy;
     }
 }

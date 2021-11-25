@@ -12,23 +12,24 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class FriendsArrayAdapter extends ArrayAdapter<String> {
+public class PendingArrayAdapter extends ArrayAdapter<String> {
 
-    public FriendsArrayAdapter(Context context, ArrayList<String> friendsArrayList) {
-        super(context,R.layout.view_friend_content,friendsArrayList);
+    public PendingArrayAdapter(Context context, ArrayList<String> pendingRequestsArrayList) {
+        super(context,R.layout.view_request_content,pendingRequestsArrayList);
     }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        String friends = getItem(position);
+        String pendingfriends = getItem(position);
         if (convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_friend_content,parent,false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_request_content,parent,false);
         }
 
-        TextView item = convertView.findViewById(R.id.friendName);
-        item.setText(friends);
+        TextView item = convertView.findViewById(R.id.pendingRequestName);
+        item.setText(pendingfriends);
         return convertView;
-
     }
-}
 
+
+}
