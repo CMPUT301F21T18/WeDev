@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +80,7 @@ public class HabitEventDisplay extends Fragment {
     TextView habitNameTextView;
     TextView descriptionTextView;
     ListView listView;
-    ArrayAdapter<String> dateAdapter;
+    public ArrayAdapter<String> dateAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -118,9 +119,11 @@ public class HabitEventDisplay extends Fragment {
 
             @Override
             public void getAllDates(List<String> list, List<Boolean> doneList) {
-                dateList = new ArrayList<>(list);
-                dateAdapter = new DateCustomListAdapter(getActivity(), dateList, doneList);
-                listView.setAdapter(dateAdapter);
+                if(getActivity() != null) {
+                    dateList = new ArrayList<>(list);
+                    dateAdapter = new DateCustomListAdapter(getActivity(), dateList, doneList);
+                    listView.setAdapter(dateAdapter);
+                }
             }
 
             @Override
@@ -187,9 +190,13 @@ public class HabitEventDisplay extends Fragment {
 
                     @Override
                     public void getAllDates(List<String> list, List<Boolean> doneList) {
-                        dateList = new ArrayList<>(list);
-                        dateAdapter = new DateCustomListAdapter(getActivity(), dateList, doneList);
-                        listView.setAdapter(dateAdapter);
+                        Log.d("Sample", list.toString());
+                        Log.d("Sample2", doneList.toString());
+                        if(getActivity() != null) {
+                            dateList = new ArrayList<>(list);
+                            dateAdapter = new DateCustomListAdapter(getActivity(), dateList, doneList);
+                            listView.setAdapter(dateAdapter);
+                        }
                     }
 
                     @Override
