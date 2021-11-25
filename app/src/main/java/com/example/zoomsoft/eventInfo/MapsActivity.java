@@ -14,10 +14,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
+import com.example.zoomsoft.loginandregister.Login;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -72,6 +74,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String s) {
+                    mMap.clear();
                     String location = searchView.getQuery().toString();
                     List<Address> addressList = null;
                     if (location != null || !location.equals("")) {
@@ -110,7 +113,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                             Log.w("TAG", "Error deleting document");
                                     }
                                 });
-                                finish();
+                                Toast.makeText(MapsActivity.this,
+                                        "Location Saved", Toast.LENGTH_LONG).show();
                             }
                         });
                     }

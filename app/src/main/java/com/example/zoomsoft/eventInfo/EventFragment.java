@@ -227,7 +227,8 @@ public class EventFragment extends DialogFragment {
             public void onClick(View view) {
                 HabitEventFirebase habitEventFirebase = new HabitEventFirebase();
                 habitEventFirebase.deleteHabitEvent(HabitEventDisplay.clickedDate);
-                getActivity().getFragmentManager().popBackStack();
+                Toast.makeText(getContext(), "Event Deleted", Toast.LENGTH_LONG).show();
+                dismiss();
             }
         });
         FloatingActionButton edit = view.findViewById(R.id.floatingActionButton2);
@@ -257,6 +258,7 @@ public class EventFragment extends DialogFragment {
                     @Override
                     public void getHabitDetails(HashMap<String, Object> map) {
                         HashMap hashMap = (HashMap) map.get(HabitEventDisplay.clickedDate);
+                        if(hashMap == null) return;
                         //get the habit comment
                         String comment  = (String) hashMap.get("comment");
                         if(comment != null) commentView.setText("Comment:" + comment);

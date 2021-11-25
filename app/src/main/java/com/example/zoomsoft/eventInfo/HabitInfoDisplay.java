@@ -3,6 +3,7 @@ package com.example.zoomsoft.eventInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -16,6 +17,9 @@ import android.widget.TextView;
 
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -253,6 +257,177 @@ public class HabitInfoDisplay extends Fragment {
             public void getStatus(String status) {
                 TextView statusView = view.findViewById(R.id.status);
                 statusView.setText("Status: " + status);
+            }
+        });
+
+        habitEventFirebase.db.collection("Events").document(email).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                habitInfoFirebase.getDaysSelected(new HabitInfoFirebase.MyCallBack() {
+                    @Override
+                    public void getDays(ArrayList<Long> days) {
+//                Log.d(days.toString(), );
+                        for(int i = 0; i < 7; i++) {
+                            switch (i) {
+                                case 0:
+                                    if(days.get(i) == 1) {
+                                        sundaySwitch.toggle();
+                                        sundaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
+                                    }
+                                    sundaySwitch.setEnabled(false);
+                                    break;
+                                case 1:
+                                    if(days.get(i) == 1) {
+                                        mondaySwitch.toggle();
+                                        mondaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
+                                    }
+                                    mondaySwitch.setEnabled(false);
+                                    break;
+                                case 2:
+                                    if(days.get(i) == 1) {
+                                        tuesdaySwitch.toggle();
+                                        tuesdaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
+                                    }
+                                    tuesdaySwitch.setEnabled(false);
+                                    break;
+                                case 3:
+                                    if(days.get(i) == 1) {
+                                        wednesdaySwitch.toggle();
+                                        wednesdaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
+                                    }
+                                    wednesdaySwitch.setEnabled(false);
+                                    break;
+                                case 4:
+                                    if(days.get(i) == 1) {
+                                        thursdaySwitch.toggle();
+                                        thursdaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
+                                    }
+                                    thursdaySwitch.setEnabled(false);
+                                    break;
+                                case 5:
+                                    if(days.get(i) == 1) {
+                                        fridaySwitch.toggle();
+                                        fridaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
+                                    }
+                                    fridaySwitch.setEnabled(false);
+                                    break;
+                                case 6:
+                                    if(days.get(i) == 1) {
+                                        saturdaySwitch.toggle();
+                                        saturdaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
+                                    }
+                                    saturdaySwitch.setEnabled(false);
+                                    break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void getReason(String reason) {
+                        //do nothing yet
+                    }
+
+                    @Override
+                    public void getStartDate(String startDate) {
+
+                    }
+
+                    @Override
+                    public void getStatus(String status) {
+                        //do nothing
+                    }
+                });
+
+                habitInfoFirebase.getHabitReason(new HabitInfoFirebase.MyCallBack() {
+                    @Override
+                    public void getDays(ArrayList<Long> days) {
+                        //do nothing
+                    }
+
+                    @Override
+                    public void getReason(String reason) {
+                        textView2.setText("Reason:" + reason);
+                    }
+
+                    @Override
+                    public void getStartDate(String startDate) {
+
+                    }
+                    @Override
+                    public void getStatus(String status) {
+                        //
+                    }
+                });
+
+                HabitEventFirebase habitEventFirebase = new HabitEventFirebase();
+                habitEventFirebase.getAllDates(new HabitEventFirebase.MyCallBack() {
+                    @Override
+                    public void getDescription(String s) {
+
+                    }
+
+                    @Override
+                    public void getAllDates(List<String> list, List<Boolean> dateList) {
+                        ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.simpleProgressBar);
+                        int totalEvents = list.size();
+                        int totalDone = dateList.size();
+                        progressBar.setMax(totalEvents);
+                        progressBar.setProgress(totalDone);
+                        TextView textView = view.findViewById(R.id.progress);
+                        textView.setText("Progress: " + "You have completed " + totalDone + " event(s) out of " + totalEvents);
+                    }
+
+                    @Override
+                    public void getHabitDetails(HashMap<String, Object> map) {
+
+                    }
+                });
+
+                habitInfoFirebase.getHabitStartDate(new HabitInfoFirebase.MyCallBack() {
+                    @Override
+                    public void getDays(ArrayList<Long> days) {
+
+                    }
+
+                    @Override
+                    public void getReason(String reason) {
+
+                    }
+
+                    @Override
+                    public void getStartDate(String date) {
+                        TextView textView1 = view.findViewById(R.id.start_date);
+                        textView1.setText("Start Date:" + date);
+                    }
+
+                    @Override
+                    public void getStatus(String status) {
+
+                    }
+                });
+
+                habitInfoFirebase.getHabitStatus(new HabitInfoFirebase.MyCallBack() {
+                    @Override
+                    public void getDays(ArrayList<Long> days) {
+
+                    }
+
+                    @Override
+                    public void getReason(String reason) {
+
+                    }
+
+                    @Override
+                    public void getStartDate(String date) {
+
+                    }
+
+                    @Override
+                    public void getStatus(String status) {
+                        TextView statusView = view.findViewById(R.id.status);
+                        statusView.setText("Status: " + status);
+                    }
+                });
             }
         });
 
