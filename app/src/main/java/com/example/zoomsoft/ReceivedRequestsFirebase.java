@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class ReceivedRequestsFirebase {
 
-    public String  email = MainPageTabs.email; //"a@gmail.com"
+    public String  email = "you@gmail.com";//MainPageTabs.email; //
     Source source = Source.SERVER;
     ListView recievedRequestsListView;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -54,3 +54,8 @@ public class ReceivedRequestsFirebase {
         });
     }
 }
+
+
+
+
+

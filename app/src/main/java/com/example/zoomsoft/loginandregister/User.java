@@ -1,6 +1,5 @@
 package com.example.zoomsoft.loginandregister;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
