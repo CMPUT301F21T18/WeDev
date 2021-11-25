@@ -45,7 +45,8 @@ public class ReceivedRequestsFirebase {
                     if (documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
                         Log.d("Map provided: ", map.toString());
-                        ArrayList<String>  receivedRequests = (ArrayList<String>) map.get("Received Requests"); //an arraylist of friends
+
+                        ArrayList<String>  receivedRequests = (ArrayList<String>) map.get("Received Requests"); //an arraylist of received requests
                         receivedRequestsInterface.callReceivedRequests(receivedRequests);
                     }
                 }

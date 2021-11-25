@@ -1,5 +1,4 @@
 package com.example.zoomsoft;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuInflater;
@@ -36,6 +35,7 @@ public class ReceivedRequests extends AppCompatActivity {
             ReceivedRequestsArrayAdapter receivedRequestsArrayAdapter = new ReceivedRequestsArrayAdapter(getApplicationContext(),receivedRequests);
             ListView receivedRequestsList = findViewById(R.id.recieved_requests);
             receivedRequestsList.setAdapter(receivedRequestsArrayAdapter);
+
         });
 
 
