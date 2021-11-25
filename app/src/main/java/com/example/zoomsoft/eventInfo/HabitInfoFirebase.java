@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Source;
 
@@ -131,5 +132,26 @@ public class HabitInfoFirebase {
                 }
             }
         });
+    }
+
+    public void deleteHabit(String clickedHabit){
+        final CollectionReference collectionReference = db.collection("Events");
+        DocumentReference documentReference = collectionReference.document(email);
+        documentReference.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if(documentSnapshot.exists()) {
+                        documentReference.update(clickedHabit, FieldValue.delete());
+                    }
+                }
+            }
+        });
+    }
+
+    public void editHabit(String clickedHabit){
+        final CollectionReference collectionReference = db.collection("Events");
+        DocumentReference documentReference = collectionReference.document(email);
     }
 }
