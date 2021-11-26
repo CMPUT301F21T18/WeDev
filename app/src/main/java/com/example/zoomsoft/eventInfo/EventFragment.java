@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -230,7 +231,6 @@ public class EventFragment extends DialogFragment {
                 HabitEventFirebase habitEventFirebase = new HabitEventFirebase();
                 habitEventFirebase.deleteHabitEvent(HabitEventDisplay.clickedDate);
                 Toast.makeText(getContext(), "Event Deleted", Toast.LENGTH_LONG).show();
-                dismiss();
             }
         });
         FloatingActionButton edit = view.findViewById(R.id.floatingActionButton2);
@@ -259,11 +259,13 @@ public class EventFragment extends DialogFragment {
                     }
                     @Override
                     public void getHabitDetails(HashMap<String, Object> map) {
+                        if(map == null) return;
                         HashMap hashMap = (HashMap) map.get(HabitEventDisplay.clickedDate);
-                        if(hashMap == null) return;
+                        if(hashMap == null) return; //if we deleted
+                        Log.d("NKINGSKE", hashMap.toString());
                         //get the habit comment
                         String comment  = (String) hashMap.get("comment");
-                        if(comment != null) commentView.setText("Comment:" + comment);
+                        commentView.setText("Comment:" + comment);
                         //get the date
                         dateView.setText("Date:" + HabitEventDisplay.clickedDate);
                         //get the long and lat
@@ -297,7 +299,7 @@ public class EventFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         return builder
                 .setView(view)
-                .setTitle("Events Recorded On:" + HabitEventDisplay.clickedDate)
+                .setTitle("Events Recorded")
                 .create();
     }
 

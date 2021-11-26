@@ -167,6 +167,7 @@ public class HabitEventDisplay extends Fragment {
                 habitEventFirebase.getHabitDescription(new HabitEventFirebase.MyCallBack() {
                     @Override
                     public void getDescription(String s) {
+                        if(s == null) return;
                         String description = s;
                         habitNameTextView.setText("Habit:" + HabitInfo.clickedHabit);
                         descriptionTextView.setText("Description:"+ description);

@@ -53,7 +53,6 @@ public class HabitInfoFirebase {
                     DocumentSnapshot documentSnapshot = task.getResult();
                     if (documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
-                        List<String> list = new ArrayList<>();
                         HashMap hashMap = (HashMap) map.get(habitName);
                         ArrayList<Long> dayList = (ArrayList<Long>) hashMap.get("days");
                         myCallBack.getDays(dayList);
