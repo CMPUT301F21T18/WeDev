@@ -432,6 +432,7 @@ public class HabitInfoDisplay extends Fragment {
         });
 
         textView.setText("Habit:" + HabitInfo.clickedHabit); //pass in the clicked habit
+
         return view;
     }
 }

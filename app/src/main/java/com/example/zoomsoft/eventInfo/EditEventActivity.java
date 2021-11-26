@@ -7,6 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 
 import android.app.Activity;
@@ -116,18 +119,27 @@ public class EditEventActivity extends AppCompatActivity {
                         }
                     });
                 }
-                finish();
-                Toast.makeText(EditEventActivity.this,
-                            "Fields updated accordingly", Toast.LENGTH_LONG).show();
                 if (isPictureTaken) {
                     uploadFirebase(file.getName(), imageUri);
                 }
+
+//                Fragment frag = null;
+//                frag = getSupportFragmentManager().findFragmentByTag("EventFragment");
+//                final FragmentTransaction fragTran = getSupportFragmentManager().beginTransaction();
+//                fragTran.detach(frag);
+//                fragTran.attach(frag);
+//                fragTran.commit();
+                finish();
+//                getFragmentManager().beginTransaction().detach(EventFragment.this).attach(EventFragment.this).commit();
+                Toast.makeText(EditEventActivity.this,
+                            "Fields updated accordingly", Toast.LENGTH_LONG).show();
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+
             }
         });
 

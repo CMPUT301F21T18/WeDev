@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class ReceivedRequestsFirebase {
 
-    public String  email = "you@gmail.com";//MainPageTabs.email; //
+    public String  email = MainPageTabs.email; //
     Source source = Source.SERVER;
     ListView recievedRequestsListView;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
