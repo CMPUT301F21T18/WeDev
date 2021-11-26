@@ -2,6 +2,7 @@ package com.example.zoomsoft;
 
 import static android.content.ContentValues.TAG;
 
+import android.Manifest;
 import android.app.Activity;
 import android.util.Log;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
+import androidx.test.rule.GrantPermissionRule;
 
 import com.example.zoomsoft.loginandregister.Register;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,6 +38,10 @@ public class RegistrationActivityTest {
     @Rule
     public ActivityTestRule<MainActivity> rule =
             new ActivityTestRule<>(MainActivity.class, true, true);
+
+    // grant permission
+    @Rule
+    public GrantPermissionRule mRuntimePermissionRule = GrantPermissionRule.grant(Manifest.permission.CAMERA);
 
     /**
      * Runs before all tests and creates solo instance.
@@ -81,6 +87,7 @@ public class RegistrationActivityTest {
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
         db.collection("User").document("asad70@gmail.com")
+
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

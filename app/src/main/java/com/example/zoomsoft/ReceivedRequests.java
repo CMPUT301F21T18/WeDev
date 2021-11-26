@@ -25,6 +25,7 @@ public class ReceivedRequests extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.received_requests);
 
+
         receivedRequestsListView = findViewById(R.id.recieved_requests);
         receivedAdapter = new ReceivedRequestsArrayAdapter(this, receivedRequestsDataList);
         receivedRequestsListView.setAdapter(receivedAdapter);
