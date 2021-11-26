@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.zoomsoft.Habits;
 import com.example.zoomsoft.MainPageTabs;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,7 +27,7 @@ public class HabitInfoFirebase {
     public String habitName = HabitInfo.clickedHabit;
     Source source = Source.SERVER;
 
-    interface MyCallBack {
+    public interface MyCallBack {
         void getDays(ArrayList<Long> days);
         void getReason(String reason);
         void getStartDate(String date);
@@ -150,8 +151,40 @@ public class HabitInfoFirebase {
         });
     }
 
-    public void editHabit(String clickedHabit){
+    public void editHabit(Habits habits){
+
+        //get the title
+        String title = habits.getHabitTitle();
+        //get the reason
+        String reason = habits.getHabitReason();
+        //get the start date
+        String date = habits.getStartDate();
+        //get days of week (Need to change implementation over to ArrayList
+        ArrayList<Integer> days = habits.getHabitWeekDay();
+        //get privacy status
+        String privacy = habits.getPrivacy();
+
+        HashMap<String, Object> temp = new HashMap<>();
+        temp.put("startDate", date);
+        temp.put("reason", reason);
+        temp.put("days", days);
+        temp.put("status", privacy);
+
+        HashMap<String, HashMap<String, Object>> data = new HashMap<>();
+        data.put(title, temp);
+
         final CollectionReference collectionReference = db.collection("Events");
         DocumentReference documentReference = collectionReference.document(email);
+        documentReference.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if(documentSnapshot.exists()) {
+                        documentReference.update(habitName, data);
+                    }
+                }
+            }
+        });
     }
 }

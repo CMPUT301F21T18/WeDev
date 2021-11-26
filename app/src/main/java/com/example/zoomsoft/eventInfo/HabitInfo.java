@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.zoomsoft.EditHabit;
 import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.databinding.ActivityHabitInfoBinding;
@@ -47,8 +48,8 @@ public class HabitInfo extends AppCompatActivity {
         fabEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HabitInfoFirebase habitInfoFirebase = new HabitInfoFirebase();
-                habitInfoFirebase.deleteHabit(clickedHabit);
+                Intent intent = new Intent(HabitInfo.this, EditHabit.class);
+                startActivity(intent);
             }
         });
     }

@@ -28,7 +28,7 @@ public class MainPageFirebase {
     //Switch over to Events collection once completed
     final CollectionReference collectionReference = rootRef.collection("Events");
     String email = MainPageTabs.email;
-    //String email = "a@gmail.com"; //Remove this and uncomment the prior line
+    //String email = "a@gmail.com";
     Source source = Source.SERVER;
 
     public void getListOfHabits(MainPageInterface mainPageInterface){
