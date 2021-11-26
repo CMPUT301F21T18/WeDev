@@ -1,5 +1,6 @@
 package com.example.zoomsoft.eventInfo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -15,8 +16,10 @@ import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.zoomsoft.EditHabit;
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -432,6 +435,25 @@ public class HabitInfoDisplay extends Fragment {
         });
 
         textView.setText("Habit:" + HabitInfo.clickedHabit); //pass in the clicked habit
+
+        FloatingActionButton fabDelete = view.findViewById(R.id.fab_delete);
+        FloatingActionButton fabEdit = view.findViewById(R.id.fab_edit);
+
+        fabDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HabitInfoFirebase habitInfoFirebase = new HabitInfoFirebase();
+                habitInfoFirebase.deleteHabit(HabitInfo.clickedHabit);
+            }
+        });
+
+        fabEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), EditHabit.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

@@ -34,23 +34,23 @@ public class HabitInfo extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapterEvent);
         TabLayout tabs = binding.habitInfoTabs;
         tabs.setupWithViewPager(viewPager);
-        FloatingActionButton fabDelete = binding.fabDelete;
-        FloatingActionButton fabEdit = binding.fabEdit;
-
-        fabDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                HabitInfoFirebase habitInfoFirebase = new HabitInfoFirebase();
-                habitInfoFirebase.deleteHabit(clickedHabit);
-            }
-        });
-
-        fabEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HabitInfo.this, EditHabit.class);
-                startActivity(intent);
-            }
-        });
+//        FloatingActionButton fabDelete = binding.fabDelete;
+//        FloatingActionButton fabEdit = binding.fabEdit;
+//
+//        fabDelete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                HabitInfoFirebase habitInfoFirebase = new HabitInfoFirebase();
+//                habitInfoFirebase.deleteHabit(clickedHabit);
+//            }
+//        });
+//
+//        fabEdit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HabitInfo.this, EditHabit.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 }

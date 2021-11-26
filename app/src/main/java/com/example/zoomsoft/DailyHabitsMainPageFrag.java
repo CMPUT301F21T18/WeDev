@@ -36,7 +36,7 @@ public class DailyHabitsMainPageFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.list_of_habits_main_page_fragment, container, false);
+            View view = inflater.inflate(R.layout.daily_habits_main_page_fragment, container, false);
 
             ListView habitList = view.findViewById(R.id.habit_list);
             habitAdaptor = new HabitCustomList(this.getContext(), habitDataList);
