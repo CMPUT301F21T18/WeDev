@@ -6,35 +6,32 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
-import com.example.zoomsoft.loginandregister.Login;
 
 import com.google.android.gms.tasks.OnFailureListener;
 
@@ -47,8 +44,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -116,6 +111,13 @@ public class EventFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.EventFragment);
     }*/
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        receiveImage(storage);
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -150,8 +152,6 @@ public class EventFragment extends DialogFragment {
         commentView = view.findViewById(R.id.textView9);
         descriptionView = view.findViewById(R.id.description);
         habitView.setText("Habit:" + HabitInfo.clickedHabit);//clicked habit
-
-        receiveImage(storage);
 
         //clicked date needs to be passed
         HabitEventFirebase habitEventFirebase = new HabitEventFirebase();//clicked habit
@@ -316,24 +316,46 @@ public class EventFragment extends DialogFragment {
 
         // Save a file: path for use with ACTION_VIEW intents
         photoPath = image.getAbsolutePath();
+
         return image;
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == CAMERA_REQUEST_CODE){
-            if(resultCode == Activity.RESULT_OK){
-                File file = new File(photoPath);
-                //imageView.setImageURI(Uri.fromFile(file));
+        if(requestCode == CAMERA_REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            File file = new File(photoPath);
+            //imageView.setImageURI(Uri.fromFile(file));
 //                Picasso.get()
 //                        .load(Uri.fromFile(file))
 //                        .into(imageView);
-                Uri contUri = Uri.fromFile(file);
-                uploadFirebase(file.getName(), contUri);
-            }
+            Uri contUri = Uri.fromFile(file);
+            uploadFirebase(file.getName(), contUri);
         }
+        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK){
+//            ProgressDialog.setMessage("Uploading...");
+//            ProgressDialog.show();
+            Uri galUri = data.getData();
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String imageFileName = "JPEG_" + timeStamp + "." + getFileExtension(galUri);
+            uploadFirebase(imageFileName, galUri);
+//            StorageReference filepath = storage.child("Photos").child(uri.getLastPathSegment());
+//            File galleryFile = new File(photoPath);
+//            uploadFirebase(galleryFile.getName(), uri);
+//            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                    //Toast.makeText(EventFragment.this, "upload done", Toast.LENGTH_LONG.show()); //error
+//                }
+//            });
+        }//can add failure too
     }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cont = getActivity().getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cont.getType(uri));
+    }
+
     public void uploadFirebase(String name, Uri uri) {
         StorageReference photo = storage.child(firePath);
         photo.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
