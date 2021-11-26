@@ -11,7 +11,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.Toast;
 
+import com.example.zoomsoft.loginandregister.Login;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -113,15 +115,27 @@ public class AddHabit extends AppCompatActivity {
                 else {
                     days.add(0);
                 }
+                if(!title.isEmpty()) {
+                    Habits habit = new Habits(title, date, reason, days, privacy);
+                    MainPageFirebase mainPageFirebase = new MainPageFirebase();
+                    mainPageFirebase.addNewHabit(habit);
+                    Toast.makeText(AddHabit.this,
+                            "New Habit Added", Toast.LENGTH_LONG).show();
+//COMMENTS FOR AREESH=================================
+                    //To return back to MainPage once the habit has been added
+                    //Yo, please cancel the codes on intent, we won't know who logged in if you just startActivity MainPageTabs
+                    //There is nothing wrong with those functions I wrote in MainPageFirebase
+                    //To close an activity, just call finish()
 
+//                Intent intent = new Intent(AddHabit.this, MainPageTabs.class);
+//                startActivity(intent);
 
-                Habits habit = new Habits(title, date, reason, days, privacy);
-                MainPageFirebase mainPageFirebase = new MainPageFirebase();
-                mainPageFirebase.addNewHabit(habit);
-
-                //To return back to MainPage once the habit has been added
-                Intent intent = new Intent(AddHabit.this, MainPageTabs.class);
-                startActivity(intent);
+                    finish(); //this is the right thing to do.
+                }
+                else {
+                    Toast.makeText(AddHabit.this,
+                            "You must enter a habit title", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

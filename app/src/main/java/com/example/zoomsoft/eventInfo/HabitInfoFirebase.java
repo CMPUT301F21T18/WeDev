@@ -15,6 +15,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
@@ -168,28 +169,22 @@ public class HabitInfoFirebase {
         ArrayList<Integer> days = habits.getHabitWeekDay();
         //get privacy status
         String privacy = habits.getPrivacy();
-
         HashMap<String, Object> temp = new HashMap<>();
         temp.put("startDate", date);
         temp.put("reason", reason);
         temp.put("days", days);
         temp.put("status", privacy);
-
         HashMap<String, HashMap<String, Object>> data = new HashMap<>();
         data.put(title, temp);
-
         final CollectionReference collectionReference = db.collection("Events");
         DocumentReference documentReference = collectionReference.document(email);
-        documentReference.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()) {
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    if(documentSnapshot.exists()) {
-                        documentReference.update(habitName, data);
-                    }
-                }
-            }
-        });
+        //add the new habit first
+        collectionReference
+                .document(email)
+                .set(data, SetOptions.merge());
+        //we delete the old habit
+        deleteHabit(HabitInfo.clickedHabit);
+        //set the global variable to the new habit
+        HabitInfo.clickedHabit = title;
     }
 }

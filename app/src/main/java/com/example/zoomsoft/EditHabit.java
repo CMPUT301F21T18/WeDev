@@ -7,6 +7,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -244,14 +245,11 @@ public class EditHabit extends AppCompatActivity {
                 else {
                     days.add(0);
                 }
-
-
                 Habits habit = new Habits(title, date, reason, days, privacy);
                 habitInfoFirebase.editHabit(habit);
-
-                //To return back to MainPage once the habit has been added
-                Intent intent = new Intent(EditHabit.this, MainPageTabs.class);
-                startActivity(intent);
+                Toast.makeText(EditHabit.this,
+                        "Fields Edited Accordingly", Toast.LENGTH_LONG).show();
+                finish(); //the right thing to do.
             }
         });
 

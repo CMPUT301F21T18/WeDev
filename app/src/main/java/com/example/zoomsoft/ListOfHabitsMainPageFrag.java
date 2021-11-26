@@ -118,6 +118,20 @@ public class ListOfHabitsMainPageFrag extends Fragment {
                 startActivity(intent);
             }
         });
+        mainPageFirebase.rootRef.collection("Events").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                mainPageFirebase.getListOfHabits(new MainPageFirebase.MainPageInterface() {
+                    @Override
+                    public void getHabitInterface(ArrayList<String> habitArrayList) {
+                        if(getActivity() != null) {
+                            ArrayAdapter habitAdaptor = new HabitCustomList(getContext(), habitArrayList);
+                            habitList.setAdapter(habitAdaptor);
+                        }
+                    }
+                });
+            }
+        });
         return view;
     }
 }

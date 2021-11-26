@@ -15,10 +15,12 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zoomsoft.EditHabit;
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
+import com.example.zoomsoft.loginandregister.Login;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -269,6 +271,7 @@ public class HabitInfoDisplay extends Fragment {
                 habitInfoFirebase.getDaysSelected(new HabitInfoFirebase.MyCallBack() {
                     @Override
                     public void getDays(ArrayList<Long> days) {
+
 //                Log.d(days.toString(), );
                         for(int i = 0; i < 7; i++) {
                             switch (i) {
@@ -427,6 +430,7 @@ public class HabitInfoDisplay extends Fragment {
 
                     @Override
                     public void getStatus(String status) {
+                        textView.setText("Habit:" + HabitInfo.clickedHabit);
                         TextView statusView = view.findViewById(R.id.status);
                         statusView.setText("Status: " + status);
                     }
@@ -444,6 +448,9 @@ public class HabitInfoDisplay extends Fragment {
             public void onClick(View view) {
                 HabitInfoFirebase habitInfoFirebase = new HabitInfoFirebase();
                 habitInfoFirebase.deleteHabit(HabitInfo.clickedHabit);
+                Toast.makeText(getContext(),
+                        "Habit Deleted", Toast.LENGTH_LONG).show();
+                getActivity().onBackPressed();
             }
         });
 

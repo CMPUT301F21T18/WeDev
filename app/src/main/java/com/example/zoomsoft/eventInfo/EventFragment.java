@@ -53,6 +53,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class EventFragment extends DialogFragment {
     private double longitude;
@@ -231,6 +232,7 @@ public class EventFragment extends DialogFragment {
                 HabitEventFirebase habitEventFirebase = new HabitEventFirebase();
                 habitEventFirebase.deleteHabitEvent(HabitEventDisplay.clickedDate);
                 Toast.makeText(getContext(), "Event Deleted", Toast.LENGTH_LONG).show();
+                Objects.requireNonNull(getDialog()).dismiss();
             }
         });
         FloatingActionButton edit = view.findViewById(R.id.floatingActionButton2);
