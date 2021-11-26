@@ -77,6 +77,9 @@
             android:name=".PendingRequests"
             android:exported="true" />
         <activity
+            android:name=".EditHabit"
+            android:exported="true" />
+        <activity
             android:name=".ViewFriendsHabit"
             android:parentActivityName=".ViewFriend"
             android:exported="true" />
