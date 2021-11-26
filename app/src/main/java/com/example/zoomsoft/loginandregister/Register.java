@@ -105,7 +105,7 @@ public class Register extends AppCompatActivity {
                                                     Log.d(TAG, "Data has been added successfully!");
                                                     //call the home activity from here
                                                     Intent intent = new Intent(Register.this, MainPageTabs.class);
-                                                    intent.putExtra(MainActivity.EXTRA_MESSAGE, email);
+                                                    intent.putExtra(MainActivity.EXTRA_MESSAGE + "email", email);
                                                     startActivity(intent);
                                                 }
                                             })

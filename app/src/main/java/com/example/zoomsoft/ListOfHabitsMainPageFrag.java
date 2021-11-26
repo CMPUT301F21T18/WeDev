@@ -53,6 +53,7 @@ public class ListOfHabitsMainPageFrag extends Fragment {
 
 
     private String TAG = "SAMPLE";
+    private String email = MainPageTabs.email;
     FloatingActionButton addHabitButton;
     private EditText habitTitle;
     private EditText habitReason;
@@ -90,9 +91,10 @@ public class ListOfHabitsMainPageFrag extends Fragment {
         mainPageFirebase.getListOfHabits(new MainPageFirebase.MainPageInterface() {
             @Override
             public void getHabitInterface(ArrayList<String> habitArrayList) {
-                if(habitArrayList.contains("exists")) habitArrayList.remove("exists");
-                ArrayAdapter habitAdaptor = new HabitCustomList(getContext(), habitArrayList);
-                habitList.setAdapter(habitAdaptor);
+                if(getActivity() != null) {
+                    ArrayAdapter habitAdaptor = new HabitCustomList(getContext(), habitArrayList);
+                    habitList.setAdapter(habitAdaptor);
+                }
             }
         });
 
@@ -112,7 +114,7 @@ public class ListOfHabitsMainPageFrag extends Fragment {
         addHabitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), AddHabit.class);
+                Intent intent = new Intent(getContext(), AddHabit.class);
                 startActivity(intent);
             }
         });

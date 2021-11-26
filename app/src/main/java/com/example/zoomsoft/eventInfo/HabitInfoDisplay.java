@@ -450,7 +450,7 @@ public class HabitInfoDisplay extends Fragment {
         fabEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), EditHabit.class);
+                Intent intent = new Intent(getContext(), EditHabit.class);
                 startActivity(intent);
             }
         });

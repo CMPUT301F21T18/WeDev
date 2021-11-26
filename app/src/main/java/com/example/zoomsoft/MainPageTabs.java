@@ -25,7 +25,7 @@ public class MainPageTabs extends AppCompatActivity {
         binding = ActivityMainPageTabsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Intent intent = getIntent();
-        email = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        email = intent.getStringExtra(MainActivity.EXTRA_MESSAGE + "email");
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);

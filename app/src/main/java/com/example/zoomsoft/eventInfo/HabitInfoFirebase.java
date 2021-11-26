@@ -54,6 +54,7 @@ public class HabitInfoFirebase {
                     if (documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
                         HashMap hashMap = (HashMap) map.get(habitName);
+                        if(hashMap == null) return;
                         ArrayList<Long> dayList = (ArrayList<Long>) hashMap.get("days");
                         myCallBack.getDays(dayList);
                     }
@@ -78,6 +79,7 @@ public class HabitInfoFirebase {
                         Map<String, Object> map = documentSnapshot.getData();
                         Log.d("Map provided: ", map.toString());
                         HashMap hashMap = (HashMap) map.get(habitName);
+                        if(hashMap == null) return;
                         String reason = (String) hashMap.get("reason");
                         myCallBack.getReason(reason);
                     }
@@ -101,6 +103,7 @@ public class HabitInfoFirebase {
                         Map<String, Object> map = documentSnapshot.getData();
                         Log.d("Map provided: ", map.toString());
                         HashMap hashMap = (HashMap) map.get(habitName);
+                        if(hashMap == null) return;
                         String startDate = (String) hashMap.get("startDate");
                         myCallBack.getStartDate(startDate);
                     }
@@ -125,6 +128,7 @@ public class HabitInfoFirebase {
                         Map<String, Object> map = documentSnapshot.getData();
 //                        Log.d("Map provided: ", map.toString());
                         HashMap hashMap = (HashMap) map.get(habitName);
+                        if(hashMap == null) return;
                         String reason = (String) hashMap.get("status");
                         myCallBack.getStatus(reason);
                     }
