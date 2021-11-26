@@ -1,10 +1,12 @@
 package com.example.zoomsoft;
 
+import android.Manifest;
 import android.app.Activity;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
+import androidx.test.rule.GrantPermissionRule;
 
 import com.example.zoomsoft.loginandregister.Login;
 import com.example.zoomsoft.loginandregister.Register;
@@ -26,6 +28,10 @@ public class MainActivityTest {
     @Rule
     public ActivityTestRule<MainActivity> rule =
             new ActivityTestRule<>(MainActivity.class, true, true);
+
+    // grant permission
+    @Rule
+    public GrantPermissionRule mRuntimePermissionRule = GrantPermissionRule.grant(Manifest.permission.CAMERA);
 
     /**
      * Runs before all tests and creates solo instance.
