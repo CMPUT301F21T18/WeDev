@@ -296,5 +296,5 @@
         android:layout_marginBottom="240dp"
         android:inputType="text"
         app:layout_anchor="@+id/custom_end_icon3"
-        app:layout_anchorGravity="center" />
+        app:layout_anchorGravity="center"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

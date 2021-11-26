@@ -44,6 +44,7 @@ public class HabitInfo extends AppCompatActivity {
 //                habitInfoFirebase.deleteHabit(clickedHabit);
 //            }
 //        });
+//
 //        fabEdit.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
