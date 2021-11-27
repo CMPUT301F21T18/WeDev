@@ -1,19 +1,14 @@
 package com.example.zoomsoft.eventInfo;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.zoomsoft.EditHabit;
 import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.databinding.ActivityHabitInfoBinding;
-import com.example.zoomsoft.eventInfo.SectionsPagerAdapterEvent;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 public class HabitInfo extends AppCompatActivity {
