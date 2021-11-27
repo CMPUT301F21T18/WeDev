@@ -27,7 +27,7 @@ import java.util.Set;
 public class HabitInfoFirebase {
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
     public String email = MainPageTabs.email;
-    public String habitName = HabitInfo.clickedHabit;
+//    public static String HabitInfo.clickedHabit = HabitInfo.clickedHabit;
     Source source = Source.SERVER;
 
     public interface MyCallBack {
@@ -54,7 +54,7 @@ public class HabitInfoFirebase {
                     DocumentSnapshot documentSnapshot = task.getResult();
                     if (documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
-                        HashMap hashMap = (HashMap) map.get(habitName);
+                        HashMap hashMap = (HashMap) map.get(HabitInfo.clickedHabit);
                         if(hashMap == null) return;
                         ArrayList<Long> dayList = (ArrayList<Long>) hashMap.get("days");
                         myCallBack.getDays(dayList);
@@ -79,7 +79,7 @@ public class HabitInfoFirebase {
                     if(documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
                         Log.d("Map provided: ", map.toString());
-                        HashMap hashMap = (HashMap) map.get(habitName);
+                        HashMap hashMap = (HashMap) map.get(HabitInfo.clickedHabit);
                         if(hashMap == null) return;
                         String reason = (String) hashMap.get("reason");
                         myCallBack.getReason(reason);
@@ -103,7 +103,7 @@ public class HabitInfoFirebase {
                     if(documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
                         Log.d("Map provided: ", map.toString());
-                        HashMap hashMap = (HashMap) map.get(habitName);
+                        HashMap hashMap = (HashMap) map.get(HabitInfo.clickedHabit);
                         if(hashMap == null) return;
                         String startDate = (String) hashMap.get("startDate");
                         myCallBack.getStartDate(startDate);
@@ -128,7 +128,7 @@ public class HabitInfoFirebase {
                     if(documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
 //                        Log.d("Map provided: ", map.toString());
-                        HashMap hashMap = (HashMap) map.get(habitName);
+                        HashMap hashMap = (HashMap) map.get(HabitInfo.clickedHabit);
                         if(hashMap == null) return;
                         String reason = (String) hashMap.get("status");
                         myCallBack.getStatus(reason);
@@ -179,12 +179,12 @@ public class HabitInfoFirebase {
         final CollectionReference collectionReference = db.collection("Events");
         DocumentReference documentReference = collectionReference.document(email);
         //add the new habit first
-        collectionReference
-                .document(email)
+        collectionReference.document(email)
                 .set(data, SetOptions.merge());
-        //we delete the old habit
-        deleteHabit(HabitInfo.clickedHabit);
+        String previousHabit = HabitInfo.clickedHabit;
         //set the global variable to the new habit
         HabitInfo.clickedHabit = title;
+        //delete the old habit
+        if(!title.equals(previousHabit)) deleteHabit(previousHabit);
     }
 }

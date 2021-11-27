@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.zoomsoft.eventInfo.HabitInfo;
 import com.example.zoomsoft.eventInfo.HabitInfoFirebase;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class EditHabit extends AppCompatActivity {
         startDate = (DatePicker) findViewById(R.id.datePicker);
         ArrayList<Integer> days = new ArrayList<>();
 
-        habitTitle.setText(habitInfoFirebase.habitName);
+        habitTitle.setText(HabitInfo.clickedHabit);
 
         //Get Habit reason
         habitInfoFirebase.getHabitReason(new HabitInfoFirebase.MyCallBack() {

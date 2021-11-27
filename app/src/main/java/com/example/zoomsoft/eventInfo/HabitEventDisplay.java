@@ -121,9 +121,9 @@ public class HabitEventDisplay extends Fragment {
 
             @Override
             public void getAllDates(List<String> list, List<Boolean> doneList) {
-                if(getActivity() != null) {
+                if(getContext() != null) {
                     dateList = new ArrayList<>(list);
-                    dateAdapter = new DateCustomListAdapter(getActivity(), dateList, doneList);
+                    dateAdapter = new DateCustomListAdapter(getContext(), dateList, doneList);
                     listView.setAdapter(dateAdapter);
                 }
             }

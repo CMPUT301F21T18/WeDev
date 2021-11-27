@@ -98,9 +98,11 @@ public class DailyHabitsMainPageFrag extends Fragment {
 
                     @Override
                     public void getAllHabitsForToday(ArrayList<String> habitsToday) {
-                        habitList = view.findViewById(R.id.habit_list);
-                        habitAdaptor = new HabitCustomList(getContext(), habitsToday);
-                        habitList.setAdapter(habitAdaptor);
+                        if(getContext() != null) {
+                            habitList = view.findViewById(R.id.habit_list);
+                            habitAdaptor = new HabitCustomList(getContext(), habitsToday);
+                            habitList.setAdapter(habitAdaptor);
+                        }
                     }
                 });
             }

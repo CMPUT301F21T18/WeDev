@@ -126,8 +126,9 @@ public class EditEventActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()) {
-                                    habitEventFirebase.deleteHabitEvent(HabitEventDisplay.clickedDate);
+                                    String prevDate = HabitEventDisplay.clickedDate;
                                     HabitEventDisplay.clickedDate = dateString;
+                                    if(!dateString.equals(prevDate)) habitEventFirebase.deleteHabitEvent(HabitEventDisplay.clickedDate);
                                     Log.w("TAG", "Date replaced");
                                 }
                                 else
