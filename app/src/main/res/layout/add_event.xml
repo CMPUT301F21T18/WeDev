@@ -75,4 +75,71 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8"
         app:layout_constraintVertical_bias="1.0" />
 
+    <Switch
+        android:id="@+id/progress_status"
+        android:layout_width="124dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="260dp"
+        app:layout_constraintBottom_toTopOf="@+id/add_event_picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/event_add_comment"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="59dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginBottom="14dp"
+        android:text="Status"
+
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/add_event_picture"
+        app:layout_constraintEnd_toStartOf="@+id/progress_status"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+    <ImageButton
+        android:id="@+id/add_habit_event"
+        android:layout_width="78dp"
+        android:layout_height="79dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginStart="229dp"
+        android:layout_marginTop="213dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="16dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/ic_baseline_check_circle_24"
+        android:cropToPadding="false"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintStart_toEndOf="@+id/dont_add_event"
+        app:layout_constraintTop_toBottomOf="@+id/add_event_location" />
+
+    <ImageButton
+        android:id="@+id/dont_add_event"
+        android:layout_width="78dp"
+        android:layout_height="79dp"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="213dp"
+        android:layout_marginBottom="16dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/ic_baseline_remove_circle_24"
+        android:cropToPadding="false"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/add_habit_event"
+
+        app:layout_constraintTop_toBottomOf="@+id/add_event_location" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
