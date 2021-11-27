@@ -72,10 +72,8 @@ public class DailyHabitsMainPageFrag extends Fragment {
         habitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String clickedHabit = (String) habitList.getItemAtPosition(i);
-                Intent intent = new Intent(getActivity(), HabitInfo.class);
-                intent.putExtra(MainActivity.EXTRA_MESSAGE + "1", clickedHabit);
-                startActivity(intent);
+                //if done, then add the events for the onClick here
+
             }
         });
 
