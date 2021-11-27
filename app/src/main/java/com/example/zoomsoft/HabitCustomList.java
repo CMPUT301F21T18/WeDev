@@ -48,7 +48,6 @@ public class HabitCustomList extends ArrayAdapter<String> {
         String habit = habits.get(position); //Gets exact Class entry as reference for its data
         //Creating references to TextViews
         TextView habitName = view.findViewById(R.id.content_habit_name);
-
         //Adds the data from the entries onto the TextViews
         habitName.setText(habit);
         progressBar.setProgress(80);
@@ -81,5 +80,4 @@ public class HabitCustomList extends ArrayAdapter<String> {
 
         return view;
     }
-
 }

@@ -53,6 +53,7 @@ public class ListOfHabitsMainPageFrag extends Fragment {
 
 
     private String TAG = "SAMPLE";
+    ArrayAdapter habitAdaptor;
     private String email = MainPageTabs.email;
     FloatingActionButton addHabitButton;
     private EditText habitTitle;
@@ -67,6 +68,7 @@ public class ListOfHabitsMainPageFrag extends Fragment {
 
         ListView habitList = view.findViewById(R.id.habit_list);
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+
 
 //        Get list of habits and display it
 //        String email = "a@gmail.com";
@@ -92,9 +94,14 @@ public class ListOfHabitsMainPageFrag extends Fragment {
             @Override
             public void getHabitInterface(ArrayList<String> habitArrayList) {
                 if(getActivity() != null) {
-                    ArrayAdapter habitAdaptor = new HabitCustomList(getContext(), habitArrayList);
+                    habitAdaptor = new HabitCustomList(getContext(), habitArrayList);
                     habitList.setAdapter(habitAdaptor);
                 }
+            }
+
+            @Override
+            public void getAllHabitsForToday(ArrayList<String> habitsToday) {
+
             }
         });
 
@@ -108,6 +115,7 @@ public class ListOfHabitsMainPageFrag extends Fragment {
                 startActivity(intent);
             }
         });
+
 
         //OnClickListener for the floating action button to add new entries
         addHabitButton = view.findViewById(R.id.add_habit_button);
@@ -128,6 +136,11 @@ public class ListOfHabitsMainPageFrag extends Fragment {
                             ArrayAdapter habitAdaptor = new HabitCustomList(getContext(), habitArrayList);
                             habitList.setAdapter(habitAdaptor);
                         }
+                    }
+
+                    @Override
+                    public void getAllHabitsForToday(ArrayList<String> habitsToday) {
+
                     }
                 });
             }

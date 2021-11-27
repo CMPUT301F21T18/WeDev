@@ -153,6 +153,7 @@ public class ViewLocationMap extends AppCompatActivity {
                             confirmButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    Toast.makeText(ViewLocationMap.this, "Location saved", Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
                             });

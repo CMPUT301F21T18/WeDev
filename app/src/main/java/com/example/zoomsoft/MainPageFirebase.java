@@ -21,6 +21,7 @@ public class MainPageFirebase {
 
     interface MainPageInterface {
         void getHabitInterface(ArrayList<String> habitArrayList);
+        void getAllHabitsForToday(ArrayList<String> habitsToday);
     }
 
     public MainPageFirebase() {
@@ -79,7 +80,31 @@ public class MainPageFirebase {
                 .set(data, SetOptions.merge());
     }
 
-
-
-
+    public void getDailyHabits(int day, MainPageInterface mainPageInterface) {
+        final CollectionReference collectionReference = rootRef.collection("Events");
+        collectionReference.document(MainPageTabs.email).get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    ArrayList<String> list = new ArrayList<>();
+                    if(documentSnapshot.exists()) {
+                        Map<String, Object> map = documentSnapshot.getData();
+                        Log.d("All habits:", map.toString());
+                        for(String habit : map.keySet()) {
+                            HashMap hashMap = (HashMap) map.get(habit);
+                            ArrayList<Long> listDays = (ArrayList<Long>) hashMap.get("days");
+                            if(listDays.get(day - 1) == 1) {
+                                list.add(habit);
+                            }
+                        }
+                        mainPageInterface.getAllHabitsForToday(list);
+                    }
+                }
+                else {
+                    int x = 6; //will decide on this later
+                }
+            }
+        });
+    }
 }
