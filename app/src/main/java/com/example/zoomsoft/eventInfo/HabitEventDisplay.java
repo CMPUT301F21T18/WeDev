@@ -1,5 +1,6 @@
 package com.example.zoomsoft.eventInfo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -83,6 +85,8 @@ public class HabitEventDisplay extends Fragment {
     TextView descriptionTextView;
     ListView listView;
     public ArrayAdapter<String> dateAdapter;
+    FloatingActionButton addEvent;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -233,6 +237,16 @@ public class HabitEventDisplay extends Fragment {
                         });
                     }
                 });
+            }
+        });
+
+        addEvent = view.findViewById(R.id.add_event_button);
+
+        addEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AddEventActivity.class);
+                startActivity(intent);
             }
         });
 

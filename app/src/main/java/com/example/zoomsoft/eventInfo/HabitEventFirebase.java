@@ -161,6 +161,42 @@ public class HabitEventFirebase {
             }
         });
     }
+
+    public void addHabitEvent(String date, String comment, boolean status){
+
+        Map<String, Object> newData = new HashMap<>();
+
+        newData.put("comment", comment);
+        newData.put("done", status);
+
+        Map<String, Map<String, Object>> newEvent = new HashMap<>();
+
+        newEvent.put(date, newData);
+
+        final CollectionReference collectionReference = db.collection("Events");
+        DocumentReference documentReference = collectionReference.document(email);
+        documentReference.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if(documentSnapshot.exists()) {
+                        Map<String, Object> map = documentSnapshot.getData();
+                        Log.d("Map provided: ", map.toString());
+                        HashMap hashMap = (HashMap) map.get(habitName);
+                        if(hashMap == null) return;
+                        hashMap.put(habitName, newEvent);
+                        documentReference.update(hashMap);
+                        //String description = (String) hashMap.get("description");
+                    }
+                }
+                else {
+                    int x = 6; //will decide on this later
+                }
+            }
+        });
+
+    }
     /*
        Map<String, Object> deleteSong = new HashMap<>();
     deleteSong.put("songList.songName3", FieldValue.delete());

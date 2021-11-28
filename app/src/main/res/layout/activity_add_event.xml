@@ -27,24 +27,21 @@
         app:popupTheme="@style/Theme.ZoomSoft.PopupOverlay" />
 
     <ImageButton
-        android:id="@+id/edit_habit_check"
+        android:id="@+id/add_event_confirm_button"
         android:layout_width="78dp"
         android:layout_height="79dp"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:adjustViewBounds="true"
         android:background="@drawable/ic_baseline_check_circle_24"
         android:cropToPadding="false"
         android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.937"
-        app:layout_constraintStart_toEndOf="@+id/edit_habit_stop" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
-        android:id="@+id/edit_habit_stop"
+        android:id="@+id/add_event_cancel_button"
         android:layout_width="78dp"
         android:layout_height="79dp"
         android:layout_gravity="bottom|start"
@@ -84,70 +81,109 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:text="Date |"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.28" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:text="Done |"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.424" />
+
+    <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
         android:text="Comment |"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.606" />
+        app:layout_constraintVertical_bias="0.56" />
 
     <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="385dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="176dp"
+        android:id="@+id/add_event_datePicker"
+        android:layout_width="319dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="48dp"
         android:calendarViewShown="false"
         android:datePickerMode="spinner"
-        app:layout_anchor="@+id/custom_end_icon5"
         app:layout_anchorGravity="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.836"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/habit_title_edit_text"
+        android:id="@+id/event_comment_edit_text"
         android:layout_width="221dp"
         android:layout_height="43dp"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
         android:hint="Comment (Optional)"
         android:maxLength="20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
+
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.616" />
+        app:layout_constraintVertical_bias="0.56" />
 
     <Button
-        android:id="@+id/add_picture"
-        android:layout_width="189dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="28dp"
-        android:text="Update Picture"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/add_event_picture_button"
+
+        android:layout_width="358dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginBottom="16dp"
+        android:text="Add Picture"
+        app:layout_constraintBottom_toTopOf="@+id/add_event_location_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/habit_title_edit_text"
-        app:layout_constraintVertical_bias="0.174" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/AddLocation"
-        android:layout_width="189dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="124dp"
-        android:text="Update Location"
+        android:id="@+id/add_event_location_button"
+
+        android:layout_width="358dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="132dp"
+        android:text="Add Location"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.636"
-        app:layout_constraintStart_toEndOf="@+id/add_picture"
-        app:layout_constraintTop_toBottomOf="@+id/habit_title_edit_text"
-        app:layout_constraintVertical_bias="0.64" />
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Switch
+        android:id="@+id/done_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="185dp"
+        android:text="Not Done"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/add_event_datePicker" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

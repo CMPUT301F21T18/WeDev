@@ -87,10 +87,16 @@ public class HabitCustomList extends ArrayAdapter<String> {
                                 }
                             }
                         }
+                        int count = 0;
+                        for (int i=0; i< dateList.size(); i++){
+                            if (dateList.get(i) == true){
+                                count++;
+                            }
+                        }
                         totalEvents = list.size();
                         totalDone = dateList.size();
                         progressBar.setMax(totalEvents);
-                        progressBar.setProgress(totalDone);
+                        progressBar.setProgress(count);
                     }
                 }
                 else {
