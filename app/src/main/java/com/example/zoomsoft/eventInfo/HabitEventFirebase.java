@@ -185,8 +185,9 @@ public class HabitEventFirebase {
                         Log.d("Map provided: ", map.toString());
                         HashMap hashMap = (HashMap) map.get(habitName);
                         if(hashMap == null) return;
-                        hashMap.put(habitName, newEvent);
-                        documentReference.update(hashMap);
+                        hashMap.put(date, newData);
+                        map.put(habitName, hashMap);
+                        documentReference.update(map);
                         //String description = (String) hashMap.get("description");
                     }
                 }

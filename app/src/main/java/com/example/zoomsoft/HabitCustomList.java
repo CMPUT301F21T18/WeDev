@@ -34,15 +34,12 @@ import java.util.Set;
 public class HabitCustomList extends ArrayAdapter<String> {
 
     private ArrayList<String> habits;
-    ProgressBar progressBar;
     Context context;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String email = MainPageTabs.email;
     Source source = Source.SERVER;
-    int totalEvents;
     int totalDone;
-    List<String> list = new ArrayList<>();
-    List<Boolean> dateList = new ArrayList<>();
+    int count;
 
     public HabitCustomList(Context context, ArrayList<String> habits){
         super(context,0, habits);
@@ -57,13 +54,16 @@ public class HabitCustomList extends ArrayAdapter<String> {
         if(view == null){
             view = LayoutInflater.from(context).inflate(R.layout.list_of_habits_content, parent,false);
         }
+        ProgressBar progressBar;
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
         String habit = habits.get(position); //Gets exact Class entry as reference for its data
         //Creating references to TextViews
         TextView habitName = view.findViewById(R.id.content_habit_name);
         //Adds the data from the entries onto the TextViews
         habitName.setText(habit);
-        //progressBar.setProgress(80);
+
+        //List<Boolean> dateList = new ArrayList<>();
+        //List<String> list = new ArrayList<>();
 
         final CollectionReference collectionReference = db.collection("Events");
         DocumentReference documentReference = collectionReference.document(email);
@@ -73,9 +73,12 @@ public class HabitCustomList extends ArrayAdapter<String> {
                 if(task.isSuccessful()) {
                     DocumentSnapshot documentSnapshot = task.getResult();
                     if(documentSnapshot.exists()) {
+                        List<String> list = new ArrayList<>();
                         Map<String, Object> map = documentSnapshot.getData();
                         HashMap hashMap = (HashMap) map.get(habit);
                         if(hashMap == null) return;
+                        //dateList.clear();
+                        List<Boolean> dateList = new ArrayList<>();
                         for(String str : (Set<String>) hashMap.keySet()) {
                             if (str.equals("description") || str.equals("reason") || str.equals("days") || str.equals("startDate") || str.equals("status")) continue;
                             list.add(str); //str is a date that the event occurred
@@ -87,15 +90,14 @@ public class HabitCustomList extends ArrayAdapter<String> {
                                 }
                             }
                         }
-                        int count = 0;
+                        count = 0;
                         for (int i=0; i< dateList.size(); i++){
                             if (dateList.get(i) == true){
                                 count++;
                             }
                         }
-                        totalEvents = list.size();
                         totalDone = dateList.size();
-                        progressBar.setMax(totalEvents);
+                        progressBar.setMax(totalDone);
                         progressBar.setProgress(count);
                     }
                 }
