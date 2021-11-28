@@ -249,10 +249,13 @@ public class EditHabit extends AppCompatActivity {
                 Habits habit = new Habits(title, date, reason, days, privacy);
                 if(title.isEmpty()) Toast.makeText(EditHabit.this,
                         "Title must have name", Toast.LENGTH_LONG).show();
-                else habitInfoFirebase.editHabit(habit);
-                Toast.makeText(EditHabit.this,
-                        "Fields Edited Accordingly", Toast.LENGTH_LONG).show();
-                finish(); //the right thing to do.
+                else{
+                    habitInfoFirebase.editHabit(habit);
+
+                    Toast.makeText(EditHabit.this,
+                            "Fields Edited Accordingly", Toast.LENGTH_LONG).show();
+                    finish(); //the right thing to do.
+                }
             }
         });
 

@@ -191,10 +191,12 @@ public class EventFragment extends DialogFragment {
                                     "No Location has been added, click on edit to add", Toast.LENGTH_LONG).show();
                         }
                         else {
-                            Intent intent = new Intent(getContext(), MapsActivity.class);
-                            intent.putExtra(MainActivity.EXTRA_MESSAGE, locationArray[0] + " " + locationArray[1]);
-                            intent.putExtra("isSearching", "false");
-                            startActivity(intent);
+                            if (getContext() != null){
+                                Intent intent = new Intent(getContext(), MapsActivity.class);
+                                intent.putExtra(MainActivity.EXTRA_MESSAGE, locationArray[0] + " " + locationArray[1]);
+                                intent.putExtra("isSearching", "false");
+                                startActivity(intent);
+                            }
                         }
                     }
                 });
