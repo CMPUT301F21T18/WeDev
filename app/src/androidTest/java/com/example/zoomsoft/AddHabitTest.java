@@ -5,9 +5,10 @@ import static org.junit.Assert.assertTrue;
 
 import android.Manifest;
 import android.app.Activity;
-import android.view.View;
+import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -18,6 +19,7 @@ import androidx.test.rule.GrantPermissionRule;
 import com.example.zoomsoft.loginandregister.Login;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,17 +33,20 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
 /**
- * Test class for Add Friend Activity. All the UI tests are written here. Robotium test framework is used
+ * Test class for Add Habit Activity . All the UI tests are written here. Robotium test framework is used
  */
 @RunWith(AndroidJUnit4.class)
-public class AddFriendTest {
+public class AddHabitTest {
+
     private Solo solo;
+
     @Rule
     public ActivityTestRule<MainActivity> rule =
             new ActivityTestRule<>(MainActivity.class, true, true);
@@ -67,14 +72,9 @@ public class AddFriendTest {
     public void start() throws Exception{
         Activity activity = rule.getActivity();
     }
-
-
-    /**
-     * Tests the add Friend to see if the user exists in the databse
-     * and sends friend request
-     */
+//
     @Test
-    public void addFriendTest(){
+    public void addHabitTest() {
         FirebaseFirestore db;
         //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
@@ -90,40 +90,27 @@ public class AddFriendTest {
         // check if activity switched properly
         solo.assertCurrentActivity("Wrong Activity", MainPageTabs.class);
 
-        // profile tab
-        solo.clickOnText("Profile");
 
-        // add friend
-        solo.clickOnText("Add Friend");
-        solo.assertCurrentActivity("Wrong Activity", AddFriends.class);
+        solo.clickOnText("List of Habits");
+        FloatingActionButton fab = (FloatingActionButton) solo.getCurrentActivity().findViewById(R.id.add_habit_button);
 
-        solo.enterText((EditText) solo.getView(R.id.add_friend_field), "you@gmail.com");
-        solo.clickOnButton("Add Friend");     // email shouldn't exist
 
-        db = FirebaseFirestore.getInstance();
-        final CollectionReference collectionReference = db.collection("User");
-        final String userName = "asad@gmail.com";
-        if (userName.length() > 0) {
-            collectionReference
-                    .document(userName)
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.getResult().exists()) {
-                                assertTrue(solo.searchText("asad@gmail.com"));
-                            } else {
-                                assertFalse(solo.searchText("asad@gmail.com"));
-                            }
-                        }
-                    });
-        }
+        solo.clickOnView(fab);
 
-        // back to profile tab
+        solo.enterText((EditText) solo.getView(R.id.habit_title_edit_text), "Bowling");
+
+        solo.clickOnView(solo.getView(R.id.switch_1));
+
+        ImageButton button = (ImageButton) solo.getCurrentActivity().findViewById(R.id.edit_habit_check);
+
+        solo.enterText((EditText) solo.getView(R.id.habit_reason_edit_text), "I like Bowling");
+        solo.clickOnView(button);
+
+
         solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", MainPageTabs.class);
-
+        solo.clickOnButton("Login");
     }
+
 
     /**
      * Close activity after each test
@@ -134,7 +121,5 @@ public class AddFriendTest {
         solo.finishOpenedActivities();
     }
 }
-
-
 
 
