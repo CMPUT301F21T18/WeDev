@@ -15,6 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -40,17 +41,22 @@ public class FriendsHabitsFirebase extends AppCompatActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()){
                             DocumentSnapshot documentSnapshot = task.getResult();
+                            ArrayList<String>  list = new ArrayList<>();
                             if(documentSnapshot.exists()){
                                 Map<String, Object> map = documentSnapshot.getData();
-                                ArrayList<String> friendsHabitsList = new ArrayList<>(map.keySet());
-                                friendsHabitsInterface.callBackFriendsHabits(friendsHabitsList);
+                                Log.d("All friends habits:", map.toString());
+                                for(String friendsHabit: map.keySet()){
+                                    HashMap hashMap = (HashMap) map.get(friendsHabit);
+                                    String status = (String) hashMap.get("status");
+                                    if(status.equals("public")){
+                                        list.add(friendsHabit);
+                                    }
+                                }
+                                friendsHabitsInterface.callBackFriendsHabits(list);
                             }
-                        }else{
-
                         }
                     }
                 });
-
     }
 }
 

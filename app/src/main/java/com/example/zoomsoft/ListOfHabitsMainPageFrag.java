@@ -137,7 +137,6 @@ public class ListOfHabitsMainPageFrag extends Fragment {
                             habitList.setAdapter(habitAdaptor);
                         }
                     }
-
                     @Override
                     public void getAllHabitsForToday(ArrayList<String> habitsToday) {
 
