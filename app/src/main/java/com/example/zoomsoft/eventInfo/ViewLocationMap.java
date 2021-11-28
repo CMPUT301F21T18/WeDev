@@ -17,6 +17,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.SetOptions;
 
 import android.Manifest;
 import android.content.Context;
@@ -76,6 +77,14 @@ public class ViewLocationMap extends AppCompatActivity {
                     //GPS is already on
                     try {
                         getLocation();
+                        //if location does not exist in firebase, then add location
+//                        ArrayList<String> locationList = new ArrayList<>(); locationList.add("N");locationList.add("N");
+//                        Map<String, Object> data = new HashMap<>();
+//                        data.put("location", true);
+
+//                        db.collection("cities").document("BJ")
+//                                .set(data, SetOptions.merge());
+
                         final CollectionReference collectionReference = db.collection("Events");
                         DocumentReference documentReference = collectionReference.document(temp);
                         ArrayList<String> arrayList = new ArrayList<>();

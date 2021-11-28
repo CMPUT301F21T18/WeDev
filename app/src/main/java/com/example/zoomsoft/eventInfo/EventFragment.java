@@ -280,6 +280,11 @@ public class EventFragment extends DialogFragment {
                         button1.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+                                if(list == null) {
+                                    Toast.makeText(getContext(),
+                                            "No Location has been added, click on edit to add", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
                                 String[] locationArray = new String[2];
                                 locationArray[0] = list.get(0);
                                 locationArray[1] = list.get(1);
