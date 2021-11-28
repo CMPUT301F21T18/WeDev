@@ -14,11 +14,17 @@ import androidx.annotation.Nullable;
 import com.example.zoomsoft.loginandregister.User;
 
 import java.util.ArrayList;
-
+/**
+ * UserCustomList
+ */
 public class UserCustomList extends ArrayAdapter<User>{
     private ArrayList<User> users;
     private Context context;
-
+    /**
+     *
+     * @param context
+     * @param user
+     */
     public UserCustomList(@NonNull Context context, ArrayList<User> user) {
         super(context, 0,user);
         this.users = users;
@@ -26,6 +32,12 @@ public class UserCustomList extends ArrayAdapter<User>{
     }
     @NonNull
     @Override
+    /**
+     *
+     * @param position
+     * @param convertView
+     * @return
+     */
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent){
         View view = convertView;
 
