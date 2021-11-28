@@ -162,12 +162,13 @@ public class HabitEventFirebase {
         });
     }
 
-    public void addHabitEvent(String date, String comment, boolean status){
+    public void addHabitEvent(String date, String comment, boolean status, ArrayList<String> locationList){
 
         Map<String, Object> newData = new HashMap<>();
 
         newData.put("comment", comment);
         newData.put("done", status);
+        newData.put("location", locationList);
 
         Map<String, Map<String, Object>> newEvent = new HashMap<>();
 

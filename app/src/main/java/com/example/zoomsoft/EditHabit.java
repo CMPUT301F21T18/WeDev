@@ -20,6 +20,7 @@ public class EditHabit extends AppCompatActivity {
 
     EditText habitTitle;
     EditText habitReason;
+    EditText habitDescription;
     Switch statusSwitch;
     Switch dayOfWeek;
     DatePicker startDate;
@@ -34,6 +35,7 @@ public class EditHabit extends AppCompatActivity {
 
         habitTitle = findViewById(R.id.habit_title_edit_text);
         habitReason = findViewById(R.id.habit_reason_edit_text);
+        habitDescription = findViewById(R.id.habit_description_edit_text);
         statusSwitch = (Switch) findViewById(R.id.public_private_switch);
         startDate = (DatePicker) findViewById(R.id.datePicker);
         ArrayList<Integer> days = new ArrayList<>();

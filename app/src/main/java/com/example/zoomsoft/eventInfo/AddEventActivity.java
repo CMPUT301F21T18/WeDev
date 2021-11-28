@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -12,6 +13,8 @@ import android.widget.Switch;
 import com.example.zoomsoft.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class AddEventActivity extends AppCompatActivity {
 
     Switch doneSwitch;
@@ -19,6 +22,7 @@ public class AddEventActivity extends AppCompatActivity {
     ImageButton cancelButton;
     DatePicker datePicker;
     EditText commentEditText;
+    Button locationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,7 @@ public class AddEventActivity extends AppCompatActivity {
         cancelButton = findViewById(R.id.add_event_cancel_button);
         datePicker = findViewById(R.id.add_event_datePicker);
         commentEditText = findViewById(R.id.event_comment_edit_text);
+        locationButton = findViewById(R.id.add_event_location_button);
 
         //For the switch to change text to done or not done on screen
         doneSwitch.setOnClickListener(new View.OnClickListener() {
@@ -66,8 +71,12 @@ public class AddEventActivity extends AppCompatActivity {
                     completionStatus = false;
                 }
 
+                ArrayList<String> locationList = new ArrayList<>();
+                locationList.add("N");
+                locationList.add("N");
+
                 HabitEventFirebase habitEventFirebase = new HabitEventFirebase();
-                habitEventFirebase.addHabitEvent(date, comment, completionStatus);
+                habitEventFirebase.addHabitEvent(date, comment, completionStatus, locationList);
 
                 finish();
 
@@ -81,6 +90,8 @@ public class AddEventActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
 
 }

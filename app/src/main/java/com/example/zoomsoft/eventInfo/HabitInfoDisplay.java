@@ -207,10 +207,16 @@ public class HabitInfoDisplay extends Fragment {
                 ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.simpleProgressBar);
                 int totalEvents = list.size();
                 int totalDone = dateList.size();
-                progressBar.setMax(totalEvents);
-                progressBar.setProgress(totalDone);
+                int count = 0;
+                for (int i=0; i<totalDone; i++){
+                    if (dateList.get(i) == true){
+                        count++;
+                    }
+                }
+                progressBar.setMax(totalDone);
+                progressBar.setProgress(count);
                 TextView textView = view.findViewById(R.id.progress);
-                textView.setText("Progress: " + "You have completed " + totalDone + " event(s) out of " + totalEvents);
+                textView.setText("Progress: " + "You have completed " + count + " event(s) out of " + totalDone);
             }
 
             @Override
@@ -398,10 +404,16 @@ public class HabitInfoDisplay extends Fragment {
                         ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.simpleProgressBar);
                         int totalEvents = list.size();
                         int totalDone = dateList.size();
-                        progressBar.setMax(totalEvents);
-                        progressBar.setProgress(totalDone);
+                        int count = 0;
+                        for (int i=0; i<totalDone; i++){
+                            if (dateList.get(i) == true){
+                                count++;
+                            }
+                        }
+                        progressBar.setMax(totalDone);
+                        progressBar.setProgress(count);
                         TextView textView = view.findViewById(R.id.progress);
-                        textView.setText("Progress: " + "You have completed " + totalDone + " event(s) out of " + totalEvents);
+                        textView.setText("Progress: " + "You have completed " + count + " event(s) out of " + totalDone);
                     }
 
                     @Override
