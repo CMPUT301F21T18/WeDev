@@ -53,6 +53,8 @@ public class ListOfHabitsMainPageFrag extends Fragment {
 
 
     private String TAG = "SAMPLE";
+    ArrayAdapter habitAdaptor;
+    private String email = MainPageTabs.email;
     FloatingActionButton addHabitButton;
     private EditText habitTitle;
     private EditText habitReason;
@@ -66,6 +68,7 @@ public class ListOfHabitsMainPageFrag extends Fragment {
 
         ListView habitList = view.findViewById(R.id.habit_list);
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+
 
 //        Get list of habits and display it
 //        String email = "a@gmail.com";
@@ -90,9 +93,15 @@ public class ListOfHabitsMainPageFrag extends Fragment {
         mainPageFirebase.getListOfHabits(new MainPageFirebase.MainPageInterface() {
             @Override
             public void getHabitInterface(ArrayList<String> habitArrayList) {
-                if(habitArrayList.contains("exists")) habitArrayList.remove("exists");
-                ArrayAdapter habitAdaptor = new HabitCustomList(getContext(), habitArrayList);
-                habitList.setAdapter(habitAdaptor);
+                if(getActivity() != null) {
+                    habitAdaptor = new HabitCustomList(getContext(), habitArrayList);
+                    habitList.setAdapter(habitAdaptor);
+                }
+            }
+
+            @Override
+            public void getAllHabitsForToday(ArrayList<String> habitsToday) {
+
             }
         });
 
@@ -107,13 +116,32 @@ public class ListOfHabitsMainPageFrag extends Fragment {
             }
         });
 
+
         //OnClickListener for the floating action button to add new entries
         addHabitButton = view.findViewById(R.id.add_habit_button);
         addHabitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), AddHabit.class);
+                Intent intent = new Intent(getContext(), AddHabit.class);
                 startActivity(intent);
+            }
+        });
+        mainPageFirebase.rootRef.collection("Events").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                mainPageFirebase.getListOfHabits(new MainPageFirebase.MainPageInterface() {
+                    @Override
+                    public void getHabitInterface(ArrayList<String> habitArrayList) {
+                        if(getActivity() != null) {
+                            ArrayAdapter habitAdaptor = new HabitCustomList(getContext(), habitArrayList);
+                            habitList.setAdapter(habitAdaptor);
+                        }
+                    }
+                    @Override
+                    public void getAllHabitsForToday(ArrayList<String> habitsToday) {
+
+                    }
+                });
             }
         });
         return view;

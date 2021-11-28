@@ -7,6 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 
 import android.app.Activity;
@@ -18,9 +21,11 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.zoomsoft.MainPageTabs;
@@ -45,10 +50,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EditEventActivity extends AppCompatActivity {
-    EditText status;
     EditText comment;
     ImageButton good;
     ImageButton cancel;
@@ -59,7 +64,7 @@ public class EditEventActivity extends AppCompatActivity {
     boolean isPictureTaken;
     private File file;
     private Uri imageUri;
-
+    private DatePicker datePicker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,10 +73,8 @@ public class EditEventActivity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance().getReference();
         cameraButton = findViewById(R.id.add_picture);
         isPictureTaken = false;
-
-        status = findViewById(R.id.habit_reason_edit_text);
         comment = findViewById(R.id.habit_title_edit_text);
-
+        datePicker = findViewById(R.id.datePicker);
         addLocation = findViewById(R.id.AddLocation);
         good = findViewById(R.id.edit_habit_check);
         cancel = findViewById(R.id.edit_habit_stop);
@@ -79,30 +82,15 @@ public class EditEventActivity extends AppCompatActivity {
         good.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if(comment.getText().toString().isEmpty() || status.getText().toString().isEmpty())
-//                    Toast.makeText(EditEventActivity.this,
-//                            "Please don't leave any field empty", Toast.LENGTH_LONG).show();
-
-                    //save in firebase firebase fireStore
-                String statusString = status.getText().toString();
+                int day = datePicker.getDayOfMonth();
+                int month = datePicker.getMonth() + 1;
+                int year = datePicker.getYear();
+                String dateString = year + "-" + month + "-" + day;
                 String commentString = comment.getText().toString();
+
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 final CollectionReference collectionReference = db.collection("Events");
                 DocumentReference documentReference = collectionReference.document(email);
-                if(!statusString.isEmpty()) {
-                    Map<String,Object> updates = new HashMap<>();
-                    updates.put(HabitInfo.clickedHabit + "." + HabitEventDisplay.clickedDate + "." + "status", statusString);
-                    documentReference.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful())
-                                Log.w("TAG", "Deleted from firebase");
-                            else
-                                Log.w("TAG", "Error deleting document");
-                        }
-                    });
-                }
-
                 if(!commentString.isEmpty()) {
                     Map<String,Object> updates = new HashMap<>();
                     updates.put(HabitInfo.clickedHabit + "." + HabitEventDisplay.clickedDate + "." + "comment", commentString);
@@ -116,18 +104,62 @@ public class EditEventActivity extends AppCompatActivity {
                         }
                     });
                 }
-                finish();
-                Toast.makeText(EditEventActivity.this,
-                            "Fields updated accordingly", Toast.LENGTH_LONG).show();
+
+                HabitEventFirebase habitEventFirebase = new HabitEventFirebase();
+                habitEventFirebase.getHabitClickedDetails(new HabitEventFirebase.MyCallBack() {
+                    @Override
+                    public void getDescription(String s) {
+
+                    }
+
+                    @Override
+                    public void getAllDates(List<String> list, List<Boolean> dateList) {
+
+                    }
+
+                    @Override
+                    public void getHabitDetails(HashMap<String, Object> map) {
+                        Map<String,Object> updates = new HashMap<>();
+                        map.put(dateString, map.get(HabitEventDisplay.clickedDate));
+                        updates.put(HabitInfo.clickedHabit , map);
+                        documentReference.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()) {
+                                    String prevDate = HabitEventDisplay.clickedDate;
+                                    HabitEventDisplay.clickedDate = dateString;
+                                    if(!dateString.equals(prevDate)) habitEventFirebase.deleteHabitEvent(HabitEventDisplay.clickedDate);
+                                    Log.w("TAG", "Date replaced");
+                                }
+                                else
+                                    Log.w("TAG", "Error replacing date");
+                            }
+                        });
+                    }
+                });
+
+
                 if (isPictureTaken) {
                     uploadFirebase(file.getName(), imageUri);
                 }
+
+//                Fragment frag = null;
+//                frag = getSupportFragmentManager().findFragmentByTag("EventFragment");
+//                final FragmentTransaction fragTran = getSupportFragmentManager().beginTransaction();
+//                fragTran.detach(frag);
+//                fragTran.attach(frag);
+//                fragTran.commit();
+                finish();
+//                getFragmentManager().beginTransaction().detach(EventFragment.this).attach(EventFragment.this).commit();
+                Toast.makeText(EditEventActivity.this,
+                            "Fields updated accordingly", Toast.LENGTH_LONG).show();
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+
             }
         });
 

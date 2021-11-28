@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -119,9 +121,9 @@ public class HabitEventDisplay extends Fragment {
 
             @Override
             public void getAllDates(List<String> list, List<Boolean> doneList) {
-                if(getActivity() != null) {
+                if(getContext() != null) {
                     dateList = new ArrayList<>(list);
-                    dateAdapter = new DateCustomListAdapter(getActivity(), dateList, doneList);
+                    dateAdapter = new DateCustomListAdapter(getContext(), dateList, doneList);
                     listView.setAdapter(dateAdapter);
                 }
             }
@@ -165,6 +167,7 @@ public class HabitEventDisplay extends Fragment {
                 habitEventFirebase.getHabitDescription(new HabitEventFirebase.MyCallBack() {
                     @Override
                     public void getDescription(String s) {
+                        if(s == null) return;
                         String description = s;
                         habitNameTextView.setText("Habit:" + HabitInfo.clickedHabit);
                         descriptionTextView.setText("Description:"+ description);

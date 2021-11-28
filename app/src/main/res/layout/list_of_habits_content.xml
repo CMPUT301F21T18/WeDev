@@ -8,7 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
         <TextView
             android:id="@+id/content_habit_name"
@@ -17,13 +18,14 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textSize="25sp"
-            android:clickable="true">
+            >
         </TextView>
 
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            >
         </View>
 
         <ProgressBar
@@ -32,7 +34,8 @@
             android:layout_height="wrap_content"
             android:indeterminateOnly="false"
             android:progressDrawable="@drawable/circle"
-            android:progress="60">
+            android:progress="60"
+            >
         </ProgressBar>
 
     </LinearLayout>

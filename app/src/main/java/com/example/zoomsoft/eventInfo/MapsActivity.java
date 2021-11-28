@@ -108,9 +108,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful())
-                                            Log.w("TAG", "Deleted from firebase");
+                                            Log.w("TAG", "Saved to firebase");
                                         else
-                                            Log.w("TAG", "Error deleting document");
+                                            Log.w("TAG", "Error saving document");
                                     }
                                 });
                                 Toast.makeText(MapsActivity.this,

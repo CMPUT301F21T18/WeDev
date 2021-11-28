@@ -1,5 +1,6 @@
 package com.example.zoomsoft.eventInfo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -14,9 +15,13 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.zoomsoft.EditHabit;
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
+import com.example.zoomsoft.loginandregister.Login;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -102,49 +107,49 @@ public class HabitInfoDisplay extends Fragment {
                     switch (i) {
                         case 0:
                             if(days.get(i) == 1) {
-                                sundaySwitch.toggle();
+                                //sundaySwitch.toggle();
                                 sundaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
                             }
                             sundaySwitch.setEnabled(false);
                             break;
                         case 1:
                             if(days.get(i) == 1) {
-                                mondaySwitch.toggle();
+                                //mondaySwitch.toggle();
                                 mondaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
                             }
                             mondaySwitch.setEnabled(false);
                             break;
                         case 2:
                             if(days.get(i) == 1) {
-                                tuesdaySwitch.toggle();
+                                //tuesdaySwitch.toggle();
                                 tuesdaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
                             }
                             tuesdaySwitch.setEnabled(false);
                             break;
                         case 3:
                             if(days.get(i) == 1) {
-                                wednesdaySwitch.toggle();
+                                //wednesdaySwitch.toggle();
                                 wednesdaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
                             }
                             wednesdaySwitch.setEnabled(false);
                             break;
                         case 4:
                             if(days.get(i) == 1) {
-                                thursdaySwitch.toggle();
+                                //thursdaySwitch.toggle();
                                 thursdaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
                             }
                             thursdaySwitch.setEnabled(false);
                             break;
                         case 5:
                             if(days.get(i) == 1) {
-                                fridaySwitch.toggle();
+                                //fridaySwitch.toggle();
                                 fridaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
                             }
                             fridaySwitch.setEnabled(false);
                             break;
                         case 6:
                             if(days.get(i) == 1) {
-                                saturdaySwitch.toggle();
+                                //saturdaySwitch.toggle();
                                 saturdaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
                             }
                             saturdaySwitch.setEnabled(false);
@@ -266,55 +271,77 @@ public class HabitInfoDisplay extends Fragment {
                 habitInfoFirebase.getDaysSelected(new HabitInfoFirebase.MyCallBack() {
                     @Override
                     public void getDays(ArrayList<Long> days) {
+
 //                Log.d(days.toString(), );
                         for(int i = 0; i < 7; i++) {
                             switch (i) {
                                 case 0:
                                     if(days.get(i) == 1) {
-                                        sundaySwitch.toggle();
+//                                        sundaySwitch.toggle();
                                         sundaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
+                                    }
+                                    else {
+                                        sundaySwitch.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
                                     }
                                     sundaySwitch.setEnabled(false);
                                     break;
                                 case 1:
                                     if(days.get(i) == 1) {
-                                        mondaySwitch.toggle();
+//                                        mondaySwitch.toggle();
                                         mondaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
+                                    }
+                                    else {
+                                        mondaySwitch.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
                                     }
                                     mondaySwitch.setEnabled(false);
                                     break;
                                 case 2:
                                     if(days.get(i) == 1) {
-                                        tuesdaySwitch.toggle();
+//                                        tuesdaySwitch.toggle();
                                         tuesdaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
+                                    }
+                                    else {
+                                        tuesdaySwitch.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
                                     }
                                     tuesdaySwitch.setEnabled(false);
                                     break;
                                 case 3:
                                     if(days.get(i) == 1) {
-                                        wednesdaySwitch.toggle();
+//                                        wednesdaySwitch.toggle();
                                         wednesdaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
+                                    }
+                                    else {
+                                        wednesdaySwitch.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
                                     }
                                     wednesdaySwitch.setEnabled(false);
                                     break;
                                 case 4:
                                     if(days.get(i) == 1) {
-                                        thursdaySwitch.toggle();
+//                                        thursdaySwitch.toggle();
                                         thursdaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
+                                    }
+                                    else {
+                                        thursdaySwitch.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
                                     }
                                     thursdaySwitch.setEnabled(false);
                                     break;
                                 case 5:
                                     if(days.get(i) == 1) {
-                                        fridaySwitch.toggle();
+//                                        fridaySwitch.toggle();
                                         fridaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
+                                    }
+                                    else {
+                                        fridaySwitch.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
                                     }
                                     fridaySwitch.setEnabled(false);
                                     break;
                                 case 6:
                                     if(days.get(i) == 1) {
-                                        saturdaySwitch.toggle();
+//                                        saturdaySwitch.toggle();
                                         saturdaySwitch.setBackgroundColor(Color.parseColor("#31C52E"));
+                                    }
+                                    else {
+                                        saturdaySwitch.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
                                     }
                                     saturdaySwitch.setEnabled(false);
                                     break;
@@ -424,6 +451,7 @@ public class HabitInfoDisplay extends Fragment {
 
                     @Override
                     public void getStatus(String status) {
+                        textView.setText("Habit:" + HabitInfo.clickedHabit);
                         TextView statusView = view.findViewById(R.id.status);
                         statusView.setText("Status: " + status);
                     }
@@ -432,6 +460,31 @@ public class HabitInfoDisplay extends Fragment {
         });
 
         textView.setText("Habit:" + HabitInfo.clickedHabit); //pass in the clicked habit
+
+        FloatingActionButton fabDelete = view.findViewById(R.id.fab_delete);
+        FloatingActionButton fabEdit = view.findViewById(R.id.fab_edit);
+
+        fabDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HabitInfoFirebase habitInfoFirebase = new HabitInfoFirebase();
+                habitInfoFirebase.deleteHabit(HabitInfo.clickedHabit);
+                Toast.makeText(getContext(),
+                        "Habit Deleted", Toast.LENGTH_LONG).show();
+                getActivity().onBackPressed();
+            }
+        });
+
+        fabEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(getContext() != null) {
+                    Intent intent = new Intent(getContext(), EditHabit.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
         return view;
     }
 }

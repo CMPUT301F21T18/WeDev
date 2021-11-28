@@ -1,5 +1,6 @@
 package com.example.zoomsoft.eventInfo;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,10 @@ import androidx.core.app.ActivityCompat;
 import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,6 +40,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class ViewLocationMap extends AppCompatActivity {
 
@@ -70,10 +76,27 @@ public class ViewLocationMap extends AppCompatActivity {
                     //GPS is already on
                     try {
                         getLocation();
+                        final CollectionReference collectionReference = db.collection("Events");
+                        DocumentReference documentReference = collectionReference.document(temp);
+                        ArrayList<String> arrayList = new ArrayList<>();
+                        arrayList.add(latitude+"");
+                        arrayList.add(longitude+"");
+                        Map<String,Object> updates = new HashMap<>();
+                        updates.put(HabitInfo.clickedHabit + "." + HabitEventDisplay.clickedDate + "." + "location", arrayList);
+                        documentReference.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful())
+                                    Log.w("TAG", "Deleted from firebase");
+                                else
+                                    Log.w("TAG", "Error deleting document");
+                            }
+                        });
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
+
             }
         });
         searchLocationMap.setOnClickListener(new View.OnClickListener() {
@@ -103,12 +126,16 @@ public class ViewLocationMap extends AppCompatActivity {
 
                     @Override
                     public void getHabitDetails(HashMap<String, Object> map) {
+                        if(map == null) return;
                         HashMap hashMap = (HashMap) map.get(HabitEventDisplay.clickedDate);
+                        if(hashMap == null) return;
                         ArrayList<String> location;
                         location = (ArrayList<String>) hashMap.get("location");
                         if(location.get(0).equals("N") || location.get(1).equals("N")) return;
                         double lat = Double.parseDouble(location.get(0));
                         double longi = Double.parseDouble(location.get(1));
+                        latitude = lat;
+                        longitude = longi;
                         Geocoder geocoder;
                         List<Address> addresses;
                         geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
@@ -126,6 +153,7 @@ public class ViewLocationMap extends AppCompatActivity {
                             confirmButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    Toast.makeText(ViewLocationMap.this, "Location saved", Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
                             });
@@ -176,7 +204,6 @@ public class ViewLocationMap extends AppCompatActivity {
             {
                 double lat=LocationNetwork.getLatitude();
                 double longi=LocationNetwork.getLongitude();
-
                 latitude = lat;
                 longitude = longi;
                 Geocoder geocoder;

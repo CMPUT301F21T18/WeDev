@@ -1,6 +1,5 @@
 package com.example.zoomsoft.eventInfo;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,7 +9,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.zoomsoft.MainActivity;
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.databinding.ActivityHabitInfoBinding;
-import com.example.zoomsoft.eventInfo.SectionsPagerAdapterEvent;
 import com.google.android.material.tabs.TabLayout;
 
 public class HabitInfo extends AppCompatActivity {
@@ -31,13 +29,22 @@ public class HabitInfo extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapterEvent);
         TabLayout tabs = binding.habitInfoTabs;
         tabs.setupWithViewPager(viewPager);
-//        FloatingActionButton fab = binding.fabDelete;
+//        FloatingActionButton fabDelete = binding.fabDelete;
+//        FloatingActionButton fabEdit = binding.fabEdit;
 //
-//        fab.setOnClickListener(new View.OnClickListener() {
+//        fabDelete.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
+//                HabitInfoFirebase habitInfoFirebase = new HabitInfoFirebase();
+//                habitInfoFirebase.deleteHabit(clickedHabit);
+//            }
+//        });
+//
+//        fabEdit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HabitInfo.this, EditHabit.class);
+//                startActivity(intent);
 //            }
 //        });
     }

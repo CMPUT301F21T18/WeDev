@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class FriendsFirebase {
-    public String  email = "you@gmail.com";//MainPageTabs.email; //"a@gmail.com"
+    public String  email = MainPageTabs.email; //"a@gmail.com"
     Source source = Source.SERVER;
     ListView friendsListView;
     FirebaseFirestore db = FirebaseFirestore.getInstance();

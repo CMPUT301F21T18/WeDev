@@ -1,5 +1,7 @@
 package com.example.zoomsoft;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,6 +21,7 @@ public class MainPageFirebase {
 
     interface MainPageInterface {
         void getHabitInterface(ArrayList<String> habitArrayList);
+        void getAllHabitsForToday(ArrayList<String> habitsToday);
     }
 
     public MainPageFirebase() {
@@ -26,35 +29,32 @@ public class MainPageFirebase {
 
     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
     //Switch over to Events collection once completed
-    final CollectionReference collectionReference = rootRef.collection("Events");
-    //String email = MainPageTabs.email;
-    String email = MainPageTabs.email; //Remove this and uncomment the prior line
+//    final CollectionReference collectionReference = rootRef.collection("Events");
+    private final String email = MainPageTabs.email;
     Source source = Source.SERVER;
 
     public void getListOfHabits(MainPageInterface mainPageInterface){
-        collectionReference
-                .document(email)
-                .get(source)
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful()) {
-                            DocumentSnapshot documentSnapshot = task.getResult();
-                            if(documentSnapshot.exists()) {
-                                Map<String, Object> map = documentSnapshot.getData(); //nameofhabit -> detailsofHaBIT key -> value
-                                ArrayList<String> habitNameList = new ArrayList<>(map.keySet());
-                                mainPageInterface.getHabitInterface(habitNameList);
-                            }
-                        }
-                        else {
-                            //nothing for now
-                        }
+        final CollectionReference collectionReference = rootRef.collection("Events");
+        collectionReference.document(MainPageTabs.email).get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if(documentSnapshot.exists()) {
+                        Map<String, Object> map = documentSnapshot.getData();
+                        ArrayList<String> habitNameList = new ArrayList<>(map.keySet());
+                        mainPageInterface.getHabitInterface(habitNameList);
                     }
-                });
+                }
+                else {
+                    //nothing for now
+                }
+            }
+        });
     }
 
     public void addNewHabit(Habits habits){
-
+        final CollectionReference collectionReference = rootRef.collection("Events");
         //get the title
         String title = habits.getHabitTitle();
         //get the reason
@@ -80,7 +80,31 @@ public class MainPageFirebase {
                 .set(data, SetOptions.merge());
     }
 
-
-
-
+    public void getDailyHabits(int day, MainPageInterface mainPageInterface) {
+        final CollectionReference collectionReference = rootRef.collection("Events");
+        collectionReference.document(MainPageTabs.email).get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    ArrayList<String> list = new ArrayList<>();
+                    if(documentSnapshot.exists()) {
+                        Map<String, Object> map = documentSnapshot.getData();
+                        Log.d("All habits:", map.toString());
+                        for(String habit : map.keySet()) {
+                            HashMap hashMap = (HashMap) map.get(habit);
+                            ArrayList<Long> listDays = (ArrayList<Long>) hashMap.get("days");
+                            if(listDays.get(day - 1) == 1) {
+                                list.add(habit);
+                            }
+                        }
+                        mainPageInterface.getAllHabitsForToday(list);
+                    }
+                }
+                else {
+                    int x = 6; //will decide on this later
+                }
+            }
+        });
+    }
 }

@@ -62,7 +62,7 @@ public class Login extends AppCompatActivity {
                                     String userEmail = email;
                                     //call the home activity
                                     Intent intent = new Intent(Login.this, MainPageTabs.class);
-                                    intent.putExtra(MainActivity.EXTRA_MESSAGE, userEmail);
+                                    intent.putExtra(MainActivity.EXTRA_MESSAGE + "email", userEmail);
                                     startActivity(intent);
                                 } else {
                                     // display toast message to the user about the error
