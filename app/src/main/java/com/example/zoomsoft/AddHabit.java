@@ -27,10 +27,12 @@ public class AddHabit extends AppCompatActivity {
 
     EditText habitTitle;
     EditText habitReason;
+    EditText habitDescription;
     Switch status;
     Switch dayOfWeek;
     DatePicker startDate;
     ImageButton addButton;
+    ImageButton cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class AddHabit extends AppCompatActivity {
 
                 habitTitle = findViewById(R.id.habit_title_edit_text);
                 habitReason = findViewById(R.id.habit_reason_edit_text);
+                habitDescription = findViewById(R.id.habit_description_edit_text);
                 status = (Switch) findViewById(R.id.public_private_switch);
                 startDate = (DatePicker) findViewById(R.id.datePicker);
 
@@ -63,6 +66,7 @@ public class AddHabit extends AppCompatActivity {
                 int newYear = startDate.getYear();
                 String date = newYear+"-"+newMonth+"-"+newDay;
                 String reason = habitReason.getText().toString();
+                String description = habitDescription.getText().toString();
                 ArrayList<Integer> days = new ArrayList<>();
 
                 //Reading the switches and setting days of the week
@@ -118,7 +122,7 @@ public class AddHabit extends AppCompatActivity {
                 if(!title.isEmpty()) {
                     Habits habit = new Habits(title, date, reason, days, privacy);
                     MainPageFirebase mainPageFirebase = new MainPageFirebase();
-                    mainPageFirebase.addNewHabit(habit);
+                    mainPageFirebase.addNewHabit(habit, description);
                     Toast.makeText(AddHabit.this,
                             "New Habit Added", Toast.LENGTH_LONG).show();
 //COMMENTS FOR AREESH=================================
@@ -136,6 +140,15 @@ public class AddHabit extends AppCompatActivity {
                     Toast.makeText(AddHabit.this,
                             "You must enter a habit title", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        cancelButton = findViewById(R.id.edit_habit_stop);
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

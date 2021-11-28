@@ -53,7 +53,7 @@ public class MainPageFirebase {
         });
     }
 
-    public void addNewHabit(Habits habits){
+    public void addNewHabit(Habits habits, String description){
         final CollectionReference collectionReference = rootRef.collection("Events");
         //get the title
         String title = habits.getHabitTitle();
@@ -71,6 +71,7 @@ public class MainPageFirebase {
         temp.put("reason", reason);
         temp.put("days", days);
         temp.put("status", privacy);
+        temp.put("description",description);
 
         HashMap<String, HashMap<String, Object>> data = new HashMap<>();
         data.put(title, temp);
