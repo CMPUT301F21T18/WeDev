@@ -9,14 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-<<<<<<< Updated upstream
 /**
  * ViewFriendsHabit allows a doer to see a certain user's list of Habits
  */
-public class ViewFriendsHabit extends AppCompatActivity{
-=======
 public class ViewFriendsHabit extends AppCompatActivity {
->>>>>>> Stashed changes
+
     ListView friendsHabitList;
     public static String friendEmail;
 
