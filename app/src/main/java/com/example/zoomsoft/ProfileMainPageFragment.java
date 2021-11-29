@@ -23,7 +23,7 @@ public class ProfileMainPageFragment extends Fragment {
     @Nullable
     @Override
     /**
-     *
+     * Creates the view for the profile main page fragment
      */
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile, container, false);

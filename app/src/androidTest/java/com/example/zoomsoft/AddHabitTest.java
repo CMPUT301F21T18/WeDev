@@ -90,25 +90,21 @@ public class AddHabitTest {
         // check if activity switched properly
         solo.assertCurrentActivity("Wrong Activity", MainPageTabs.class);
 
-
         solo.clickOnText("List of Habits");
         FloatingActionButton fab = (FloatingActionButton) solo.getCurrentActivity().findViewById(R.id.add_habit_button);
 
-
         solo.clickOnView(fab);
 
-        solo.enterText((EditText) solo.getView(R.id.habit_title_edit_text), "Bowling");
+        solo.enterText((EditText) solo.getView(R.id.habit_title_edit_text), "Hiking");
 
         solo.clickOnView(solo.getView(R.id.switch_1));
 
         ImageButton button = (ImageButton) solo.getCurrentActivity().findViewById(R.id.edit_habit_check);
 
-        solo.enterText((EditText) solo.getView(R.id.habit_reason_edit_text), "I like Bowling");
+        solo.enterText((EditText) solo.getView(R.id.habit_reason_edit_text), "I like it");
         solo.clickOnView(button);
 
-
         solo.goBack();
-        solo.clickOnButton("Login");
     }
 
 

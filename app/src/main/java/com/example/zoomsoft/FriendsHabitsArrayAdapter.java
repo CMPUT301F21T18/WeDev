@@ -26,7 +26,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
+/**
+ * Gets the view that displays the friends habits with the progress bar
+ */
 public class FriendsHabitsArrayAdapter extends  ArrayAdapter<String>{
     int totalDone;
     int count;
