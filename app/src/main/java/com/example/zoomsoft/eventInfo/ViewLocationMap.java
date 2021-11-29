@@ -172,6 +172,10 @@ public class ViewLocationMap extends AppCompatActivity {
         });
     }
 
+    /**
+     * Gets the location where the habit event occurs.
+     * @throws IOException
+     */
     private void getLocation() throws IOException {
         //Check Permissions again
         if (ActivityCompat.checkSelfPermission(ViewLocationMap.this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ViewLocationMap.this,
@@ -250,6 +254,9 @@ public class ViewLocationMap extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     */
     private void onGPS() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Enable GPS").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {

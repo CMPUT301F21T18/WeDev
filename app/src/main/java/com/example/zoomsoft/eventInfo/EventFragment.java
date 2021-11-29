@@ -359,6 +359,11 @@ public class EventFragment extends DialogFragment {
         }//can add failure too
     }
 
+    /**
+     * Given a file's uri, it finds out what extension it uses.
+     * @param uri of the unknown file
+     * @return the extension
+     */
     private String getFileExtension(Uri uri) {
         ContentResolver cont = getActivity().getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
