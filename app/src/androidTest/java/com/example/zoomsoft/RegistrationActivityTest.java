@@ -59,7 +59,7 @@ public class RegistrationActivityTest {
      */
     @Test
     public void checkRegistrationProcess(){
-        //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        //Asserts that the current activity is the MainActivity. Otherwise, show Wrong Activity
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity register
         solo.clickOnButton("Register");
@@ -98,7 +98,7 @@ public class RegistrationActivityTest {
     @Test
     // invalid login
     public void invalidRegistration(){
-        //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        //Asserts that the current activity is the MainActivity. Otherwise, show Wrong Activity
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity Register
         solo.clickOnButton("Register");

@@ -68,7 +68,7 @@ public class ActivityHabitInfoTest {
     @Test
     // perfect login
     public void checkHabitInfo(){
-        //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        //Asserts that the current activity is the MainActivity. Otherwise, show Wrong Activity
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
         // Go to next activity login

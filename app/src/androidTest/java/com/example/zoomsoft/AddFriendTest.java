@@ -56,7 +56,7 @@ public class AddFriendTest {
     @Test
     public void addFriendTest(){
         FirebaseFirestore db;
-        //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        //Asserts that the current activity is the MainActivity. Otherwise, show Wrong Activity
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity login
         solo.clickOnButton("Login");
