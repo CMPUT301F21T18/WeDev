@@ -55,6 +55,7 @@ import java.util.Map;
 
 /**
  * An activity class that Edits any of the parameters of a habit event.
+ * https://www.youtube.com/watch?v=mSi7bNk4ySM&t=704s This video was used for help on gallery functionality
  */
 public class EditEventActivity extends AppCompatActivity {
     EditText comment;
@@ -151,12 +152,6 @@ public class EditEventActivity extends AppCompatActivity {
                     uploadFirebase(file.getName(), imageUri);
                 }
 
-//                Fragment frag = null;
-//                frag = getSupportFragmentManager().findFragmentByTag("EventFragment");
-//                final FragmentTransaction fragTran = getSupportFragmentManager().beginTransaction();
-//                fragTran.detach(frag);
-//                fragTran.attach(frag);
-//                fragTran.commit();
                 finish();
 //                getFragmentManager().beginTransaction().detach(EventFragment.this).attach(EventFragment.this).commit();
                 Toast.makeText(EditEventActivity.this,

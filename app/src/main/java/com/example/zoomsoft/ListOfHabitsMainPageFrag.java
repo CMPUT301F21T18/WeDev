@@ -110,6 +110,9 @@ public class ListOfHabitsMainPageFrag extends Fragment {
         return view;
     }
 
+    /**
+     * Listens for when a habit is clicked.
+     */
     private void setOnClickListener() {
         listener = new RecyclerAdaptor.RecyclerViewClickListener() {
             @Override

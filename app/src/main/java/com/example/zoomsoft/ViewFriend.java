@@ -29,7 +29,7 @@ public class ViewFriend<dataBase> extends AppCompatActivity {
     @Override
     /**
      * initializes firebase connectivity with friends
-     * @param savedInstanceState
+     * @param savedInstanceState The last saved instance state of the Fragment, or null if this is a freshly created Fragment.
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
