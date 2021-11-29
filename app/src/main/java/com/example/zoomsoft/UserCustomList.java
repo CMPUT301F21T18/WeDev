@@ -33,12 +33,11 @@ public class UserCustomList extends ArrayAdapter<User>{
     @NonNull
     @Override
     /**
-     * not sure if this needs a javadoc
      * getView checks for null, if not get username and return view
      * @param position
      * @param convertView
      * @param ViewGroup
-     * @return view
+     * @return this returns the View for users
      */
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent){
         View view = convertView;

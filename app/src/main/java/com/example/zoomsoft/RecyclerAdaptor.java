@@ -23,6 +23,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ *
+ */
 public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.MyViewHolder> {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -34,6 +37,11 @@ public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.MyView
     private ArrayList<String> habitNames;
     private RecyclerViewClickListener listener;
 
+    /**
+     * initializes 
+     * @param habitNames
+     * @param listener
+     */
     public  RecyclerAdaptor(ArrayList<String> habitNames, RecyclerViewClickListener listener){
         this.habitNames = habitNames;
         this.listener = listener;
@@ -42,7 +50,10 @@ public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView habit;
         private ProgressBar progressBar;
-
+        /**
+         *
+         * @param view
+         */
         public MyViewHolder(final View view){
             super(view);
             habit = view.findViewById(R.id.content_habit_name);
@@ -106,7 +117,7 @@ public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.MyView
                     }
                 }
                 else {
-                    int x = 6; //will decide on this later
+                    int x = 6;
                 }
             }
         });
