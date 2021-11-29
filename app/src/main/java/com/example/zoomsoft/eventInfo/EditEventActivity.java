@@ -53,6 +53,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * An activity class that Edits any of the parameters of a habit event.
+ */
 public class EditEventActivity extends AppCompatActivity {
     EditText comment;
     ImageButton good;
@@ -65,6 +68,11 @@ public class EditEventActivity extends AppCompatActivity {
     private File file;
     private Uri imageUri;
     private DatePicker datePicker;
+    /**
+     * Gives functionality to the checkmark button, the delete button, the camera button and the location button. Also
+     * implements the date picker.
+     * @param savedInstanceState The last saved instance state of the Fragment, or null if this is a freshly created Fragment.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -196,7 +204,14 @@ public class EditEventActivity extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * Creates a new image file
+     * @return a file object called image
+     * @throws IOException Throws:
+     * IllegalArgumentException – If the prefix argument contains fewer than three characters
+     * java.io.IOException – If a file could not be created
+     * SecurityException – If a security manager exists and its SecurityManager.checkWrite(String) method does not allow a file to be created
+     */
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -213,7 +228,12 @@ public class EditEventActivity extends AppCompatActivity {
         photoPath = image.getAbsolutePath();
         return image;
     }
-
+    /**
+     * Activates when a picture is taken.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -229,6 +249,10 @@ public class EditEventActivity extends AppCompatActivity {
             }
         }
     }
+    /**
+     * Uploads an image file to firebase.
+     * @param uri The uri of the file on the system.
+     */
     public void uploadFirebase(String name, Uri uri) {
         StorageReference photo = storage.child("images/events/" + MainPageTabs.email + HabitInfo.clickedHabit + HabitEventDisplay.clickedDate);
         photo.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

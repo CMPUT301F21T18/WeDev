@@ -54,7 +54,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-
+/**
+ * Fragment class for viewing the Event Fragment and adding photos and gallery images.
+ */
 public class EventFragment extends DialogFragment {
     private double longitude;
     private double latitude;
@@ -64,6 +66,9 @@ public class EventFragment extends DialogFragment {
     private String firePath;
     public static final int CAMERA_REQUEST_CODE = 102;
 
+    /**
+     * Event Fragment parameterized constructor
+     */
     public EventFragment(String longitude, String latitude, String date, String comment) {
         this.latitude = Double.parseDouble(longitude);
         this.longitude = Double.parseDouble(latitude);
@@ -71,18 +76,17 @@ public class EventFragment extends DialogFragment {
         this.date = date;
     }
     ImageView imageView;
+
+    /**
+     * Event Fragment parameterless constructor
+     */
     public EventFragment() {super();}
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-//        if(context instanceof OnFragmentInteractionListener) {
-//            listener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString() + "must implement onFragmentInteractionListener");
-//        }
-    }
 
+
+    /**
+     *Called when the fragment is visible to the user and actively running.
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -108,25 +112,20 @@ public class EventFragment extends DialogFragment {
     private StorageReference refer;
     //Camera
     //Location
-    /* @Override
-    protected void  onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.EventFragment);
-    }*/
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        receiveImage(storage);
-    }
-
+    /**
+     * Gives functionality to the checkmark button, the delete button, the camera button and the location button. Also
+     * implements the date picker.
+     * @param savedInstanceState The last saved instance state of the Fragment, or null if this is a freshly created Fragment.
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.date_dialog_fragment, null);
         Button button = view.findViewById(R.id.map_button);
-        storage = FirebaseStorage.getInstance().getReference();
         firePath = "images/events/" + MainPageTabs.email + HabitInfo.clickedHabit + HabitEventDisplay.clickedDate;
+        storage = FirebaseStorage.getInstance().getReference();
+        receiveImage(storage);
 
         SelectImage = (Button) view.findViewById(R.id.bt_gallery);
         //ProgressDialog = new ProgressDialog(this); this is not working either
@@ -312,7 +311,14 @@ public class EventFragment extends DialogFragment {
                 .create();
     }
 
-
+    /**
+     * Creates a new image file
+     * @return a file object called image
+     * @throws IOException Throws:
+     * IllegalArgumentException – If the prefix argument contains fewer than three characters
+     * java.io.IOException – If a file could not be created
+     * SecurityException – If a security manager exists and its SecurityManager.checkWrite(String) method does not allow a file to be created
+     */
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -331,33 +337,25 @@ public class EventFragment extends DialogFragment {
         return image;
     }
 
+    /**
+     * Activates when a picture is taken.
+     * @param resultCode
+     * @param requestCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == CAMERA_REQUEST_CODE && resultCode == Activity.RESULT_OK){
             File file = new File(photoPath);
-            //imageView.setImageURI(Uri.fromFile(file));
-//                Picasso.get()
-//                        .load(Uri.fromFile(file))
-//                        .into(imageView);
             Uri contUri = Uri.fromFile(file);
             uploadFirebase(file.getName(), contUri);
         }
         if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK){
-//            ProgressDialog.setMessage("Uploading...");
-//            ProgressDialog.show();
             Uri galUri = data.getData();
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             String imageFileName = "JPEG_" + timeStamp + "." + getFileExtension(galUri);
             uploadFirebase(imageFileName, galUri);
-//            StorageReference filepath = storage.child("Photos").child(uri.getLastPathSegment());
-//            File galleryFile = new File(photoPath);
-//            uploadFirebase(galleryFile.getName(), uri);
-//            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                    //Toast.makeText(EventFragment.this, "upload done", Toast.LENGTH_LONG.show()); //error
-//                }
-//            });
+
         }//can add failure too
     }
 
@@ -366,7 +364,10 @@ public class EventFragment extends DialogFragment {
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cont.getType(uri));
     }
-
+    /**
+     * Uploads an image file to firebase.
+     * @param uri The uri of the file on the system.
+     */
     public void uploadFirebase(String name, Uri uri) {
         StorageReference photo = storage.child(firePath);
         photo.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -387,6 +388,10 @@ public class EventFragment extends DialogFragment {
         });
     }
 
+    /**
+     * The image for the habit event from firestore is loaded to the imageView.
+     * @param storage is the object holding the firebase storage data.
+     */
     public void receiveImage(StorageReference storage) {
         refer = storage.child(firePath);
         refer.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -402,24 +407,3 @@ public class EventFragment extends DialogFragment {
         });
     }
 }
-//=======
-//
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) { //also crossed
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK){
-//            ProgressDialog.setMessage("Uploading...");
-//            ProgressDialog.show();
-//            Uri uri = data.getData();
-//            StorageReference filepath = Storage.child("Photos").child(uri.getLastPathSegment());
-//            /*filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                    Toast.makeText(EventFragment.this, "upload done", Toast.LENGTH_LONG.show()); //error
-//                }*/
-//            };//can add failure too
-//        }
-//    }
-//
-//>>>>>>> Sebastian
