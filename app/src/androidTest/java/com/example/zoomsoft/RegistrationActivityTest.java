@@ -3,7 +3,6 @@ package com.example.zoomsoft;
 import static android.content.ContentValues.TAG;
 
 import android.Manifest;
-import android.app.Activity;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -52,14 +51,6 @@ public class RegistrationActivityTest {
         solo = new Solo(InstrumentationRegistry.getInstrumentation(),rule.getActivity());
     }
 
-    /**
-     * Gets the Activity
-     * @throws Exception
-     */
-    @Test
-    public void start() throws Exception{
-        Activity activity = rule.getActivity();
-    }
 
 
     /**

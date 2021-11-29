@@ -9,6 +9,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 
+import com.example.zoomsoft.eventInfo.HabitInfo;
 import com.example.zoomsoft.loginandregister.Login;
 import com.robotium.solo.Solo;
 
@@ -38,6 +39,7 @@ public class ActivityHabitInfoTest {
     public GrantPermissionRule mRuntimePermissionRule = GrantPermissionRule.grant(Manifest.permission.CAMERA);
 
 
+
     /**
      * Runs before all tests and creates solo instance.
      * @throws Exception
@@ -46,6 +48,8 @@ public class ActivityHabitInfoTest {
     public void setUp() throws Exception{
         solo = new Solo(InstrumentationRegistry.getInstrumentation(),rule.getActivity());
     }
+
+
 
     /**
      * Gets the Activity
@@ -80,10 +84,18 @@ public class ActivityHabitInfoTest {
         // check if activity switched properly
         solo.assertCurrentActivity("Wrong Activity", MainPageTabs.class);
 
-        solo.clickLongOnText(("Walk"));
+        solo.clickOnText("Bowling");
 
         // check if activity switched properly
-        //solo.assertCurrentActivity("Wrong Activity", HabitInfo.class);
+        solo.assertCurrentActivity("Wrong Activity", HabitInfo.class);
+
+        // title
+        solo.searchText("Bowling");
+        // reason
+        solo.searchText("I like Bowling");
+        // date
+        solo.searchText("2021-11-28");
+
     }
 
 

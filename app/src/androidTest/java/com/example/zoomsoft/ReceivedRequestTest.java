@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import android.Manifest;
-import android.app.Activity;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -28,9 +27,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Test class for received Request Activity. All the UI tests are written here. Robotium test framework is
@@ -57,14 +54,6 @@ public class ReceivedRequestTest {
         solo = new Solo(InstrumentationRegistry.getInstrumentation(),rule.getActivity());
     }
 
-    /**
-     * Gets the Activity
-     * @throws Exception
-     */
-    @Test
-    public void start() throws Exception{
-        Activity activity = rule.getActivity();
-    }
 
 
     /**
@@ -104,7 +93,6 @@ public class ReceivedRequestTest {
         // add the testing email to db
         db = FirebaseFirestore.getInstance();
         DocumentReference documentReference = db.collection("Received Requests").document(MainPageTabs.email);
-        Map<String,Object> updates = new HashMap<>();
         documentReference.update("Received Requests", FieldValue.arrayUnion("asadtest@gmail.com"));
         // second instance email that we will reject later
         documentReference.update("Received Requests", FieldValue.arrayUnion("asadtest1@gmail.com"));

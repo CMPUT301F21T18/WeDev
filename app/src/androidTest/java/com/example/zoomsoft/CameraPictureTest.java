@@ -1,7 +1,9 @@
 package com.example.zoomsoft;
 
+import static org.junit.Assert.assertFalse;
+
 import android.Manifest;
-import android.app.Activity;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -9,6 +11,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 
+import com.example.zoomsoft.eventInfo.HabitInfo;
 import com.example.zoomsoft.loginandregister.Login;
 import com.robotium.solo.Solo;
 
@@ -47,14 +50,7 @@ public class CameraPictureTest {
         solo = new Solo(InstrumentationRegistry.getInstrumentation(),rule.getActivity());
     }
 
-    /**
-     * Gets the Activity
-     * @throws Exception
-     */
-    @Test
-    public void start() throws Exception{
-        Activity activity = rule.getActivity();
-    }
+
 
     /**
      * Clicks on Activity in the event page,
@@ -64,8 +60,6 @@ public class CameraPictureTest {
     @Test
     public void checkCamera(){
 
-        //same code as activehabitinfotest at first
-
         //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
@@ -74,20 +68,24 @@ public class CameraPictureTest {
         solo.assertCurrentActivity("Wrong Activity", Login.class);
 
         // enter the data and test
-        solo.enterText((EditText) solo.getView(R.id.email), "a@gmail.com");
-        solo.enterText((EditText) solo.getView(R.id.password), "1");
+        solo.enterText((EditText) solo.getView(R.id.email), "asad@gmail.com");
+        solo.enterText((EditText) solo.getView(R.id.password), "123456");
         solo.clickOnButton("Login");
 
-        //not sure if this is needed
         // check if activity switched properly
         solo.assertCurrentActivity("Wrong Activity", MainPageTabs.class);
 
-        solo.clickLongOnText(("go outside"));
+        solo.clickOnText("Bowling");
+        solo.assertCurrentActivity("Wrong Activity", HabitInfo.class);
+        solo.clickOnText("EVENT");
+        solo.clickOnText("2022-1-28");
 
-        //not sure how to get to events tab from here, especially if the event is null
-        solo.clickOnButton("Camera");
-        //not sure what to do after the camera is clicked, i looked up that robotium isnt able to run tests outside the app and i wonder if the camera is considered the phone and not the app itself
+        // open camera
+        Button openCamera = (Button) solo.getView(R.id.bt_open);
+        solo.clickOnView(openCamera);
 
+        // if the current activity is diff than prev. camera opened
+        assertFalse(solo.getCurrentActivity().isFinishing());
     }
 
     /**

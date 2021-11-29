@@ -1,7 +1,6 @@
 package com.example.zoomsoft;
 
 import android.Manifest;
-import android.app.Activity;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -47,14 +46,7 @@ public class AddHabitTest {
         solo = new Solo(InstrumentationRegistry.getInstrumentation(),rule.getActivity());
     }
 
-    /**
-     * Gets the Activity
-     * @throws Exception
-     */
-    @Test
-    public void start() throws Exception{
-        Activity activity = rule.getActivity();
-    }
+
 //
     @Test
     public void addHabitTest() {
@@ -87,12 +79,11 @@ public class AddHabitTest {
         solo.enterText((EditText) solo.getView(R.id.habit_reason_edit_text), "I like it");
         solo.clickOnView(button);
 
-<<<<<<< HEAD
-
-
-=======
         solo.goBack();
->>>>>>> main
+        // Habit exists in the list
+        solo.searchText("Hiking");
+
+
     }
 
 
