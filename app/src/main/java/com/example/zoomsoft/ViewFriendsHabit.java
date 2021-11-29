@@ -19,7 +19,7 @@ public class ViewFriendsHabit extends AppCompatActivity {
 
     /**
      * onCreate runs at the start and has firebase connectivity
-     * @param savedInstanceState
+     * @param savedInstanceState The last saved instance state of the Fragment, or null if this is a freshly created Fragment.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

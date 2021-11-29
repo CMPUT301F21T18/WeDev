@@ -33,11 +33,12 @@ public class UserCustomList extends ArrayAdapter<User>{
     @NonNull
     @Override
     /**
-     * getView checks for null, if not get username and return view
-     * @param position
-     * @param convertView
-     * @param ViewGroup
-     * @return this returns the View for users
+     * Gets the view that displays the date custom list adapter's data at specified position.
+     * @param position The position of the item within the adapter's data set of the item whose view
+     *        we want.
+     * @param convertView The old view to reuse, if possible.
+     * @param parent The parent that this view will eventually be attached to
+     * @return A View corresponding to the data at the specified position.
      */
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent){
         View view = convertView;

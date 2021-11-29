@@ -20,11 +20,16 @@ public class ProfileAdapter extends ArrayAdapter<Profile> {
         super(context, R.layout.profile_content,userArrayList);
     }
     // Creates the profile page and ad
+    /**
+     * Gets the view that displays the date custom list adapter's data at specified position.
+     * @param position The position of the item within the adapter's data set of the item whose view
+     *        we want.
+     * @param convertView The old view to reuse, if possible.
+     * @param parent The parent that this view will eventually be attached to
+     * @return A View corresponding to the data at the specified position.
+     */
     @NonNull
     @Override
-    /**
-     * getView holds convertView here
-     */
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Profile profileItem = getItem(position);
         if (convertView == null){
