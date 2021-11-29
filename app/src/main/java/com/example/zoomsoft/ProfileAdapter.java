@@ -12,6 +12,9 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+/**
+ * ProfileAdapter array is defined here
+ */
 public class ProfileAdapter extends ArrayAdapter<Profile> {
     public ProfileAdapter(Context context, ArrayList<Profile> userArrayList) {
         super(context, R.layout.profile_content,userArrayList);
@@ -19,6 +22,9 @@ public class ProfileAdapter extends ArrayAdapter<Profile> {
     // Creates the profile page and ad
     @NonNull
     @Override
+    /**
+     * getView holds convertView here
+     */
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Profile profileItem = getItem(position);
         if (convertView == null){

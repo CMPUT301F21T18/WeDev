@@ -15,6 +15,9 @@ import com.google.firebase.firestore.Source;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * PendingRequestsFirebase connects with firebase
+ */
 public class PendingRequestsFirebase {
 
     public String  email = MainPageTabs.email; //"a@gmail.com"

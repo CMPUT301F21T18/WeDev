@@ -27,7 +27,7 @@ import java.util.Set;
 public class HabitInfoFirebase {
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
     public String email = MainPageTabs.email;
-//    public static String HabitInfo.clickedHabit = HabitInfo.clickedHabit;
+    //    public static String HabitInfo.clickedHabit = HabitInfo.clickedHabit;
     Source source = Source.SERVER;
 
     public interface MyCallBack {
@@ -157,7 +157,7 @@ public class HabitInfoFirebase {
         });
     }
 
-    public void editHabit(Habits habits){
+    public void editHabit(Habits habits, String description){
 
         //get the title
         String title = habits.getHabitTitle();
@@ -174,6 +174,7 @@ public class HabitInfoFirebase {
         temp.put("reason", reason);
         temp.put("days", days);
         temp.put("status", privacy);
+        temp.put("description", description);
         HashMap<String, HashMap<String, Object>> data = new HashMap<>();
         data.put(title, temp);
         final CollectionReference collectionReference = db.collection("Events");

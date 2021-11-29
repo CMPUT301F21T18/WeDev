@@ -12,8 +12,15 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+/**
+ * ReceivedRequestArrayAdapter
+ */
 public class ReceivedRequestsArrayAdapter extends ArrayAdapter<String> {
-
+    /**
+     *
+     * @param context
+     * @param receivedRequestsArrayList
+     */
     public ReceivedRequestsArrayAdapter(Context context, ArrayList<String> receivedRequestsArrayList) {
         super(context,R.layout.view_received_request_content,receivedRequestsArrayList);
     }

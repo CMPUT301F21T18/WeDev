@@ -7,11 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -20,7 +18,6 @@ import android.widget.Toast;
 import com.example.zoomsoft.EditHabit;
 import com.example.zoomsoft.MainPageTabs;
 import com.example.zoomsoft.R;
-import com.example.zoomsoft.loginandregister.Login;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -207,10 +204,16 @@ public class HabitInfoDisplay extends Fragment {
                 ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.simpleProgressBar);
                 int totalEvents = list.size();
                 int totalDone = dateList.size();
-                progressBar.setMax(totalEvents);
-                progressBar.setProgress(totalDone);
+                int count = 0;
+                for (int i=0; i<totalDone; i++){
+                    if (dateList.get(i) == true){
+                        count++;
+                    }
+                }
+                progressBar.setMax(totalDone);
+                progressBar.setProgress(count);
                 TextView textView = view.findViewById(R.id.progress);
-                textView.setText("Progress: " + "You have completed " + totalDone + " event(s) out of " + totalEvents);
+                textView.setText("Progress: " + "You have completed " + count + " event(s) out of " + totalDone);
             }
 
             @Override
@@ -398,10 +401,16 @@ public class HabitInfoDisplay extends Fragment {
                         ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.simpleProgressBar);
                         int totalEvents = list.size();
                         int totalDone = dateList.size();
-                        progressBar.setMax(totalEvents);
-                        progressBar.setProgress(totalDone);
+                        int count = 0;
+                        for (int i=0; i<totalDone; i++){
+                            if (dateList.get(i) == true){
+                                count++;
+                            }
+                        }
+                        progressBar.setMax(totalDone);
+                        progressBar.setProgress(count);
                         TextView textView = view.findViewById(R.id.progress);
-                        textView.setText("Progress: " + "You have completed " + totalDone + " event(s) out of " + totalEvents);
+                        textView.setText("Progress: " + "You have completed " + count + " event(s) out of " + totalDone);
                     }
 
                     @Override

@@ -14,6 +14,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
+/**
+ * ReceivedRequests Class
+ */
 public class ReceivedRequests extends AppCompatActivity {
     ListView receivedRequestsListView;
     FirebaseFirestore db;
@@ -21,6 +24,11 @@ public class ReceivedRequests extends AppCompatActivity {
     ReceivedRequestsArrayAdapter receivedAdapter;
 
     @Override
+    /**
+     * This function runs at the start
+     * @param savedInstanceState
+     * @return
+     */
     protected void onCreate(Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.received_requests);

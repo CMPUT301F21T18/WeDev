@@ -3,7 +3,6 @@ package com.example.zoomsoft;
 import android.Manifest;
 import android.app.Activity;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -11,8 +10,6 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 
 import com.example.zoomsoft.loginandregister.Login;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.robotium.solo.Solo;
 
 import org.junit.After;
@@ -21,15 +18,17 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-
 /**
- * Test class for Add Habit Activity . All the UI tests are written here. Robotium test framework is used
+ * Test class for CameraPicture. All the UI tests are written here. Robotium test framework is
+ used.
+ UI tested: Click on Camera button in edit activity, and takes a picture, waits until it is added, checks firebase?
  */
 @RunWith(AndroidJUnit4.class)
-public class AddHabitTest {
+public class CameraPictureTest {
 
     private Solo solo;
 
+    //launches app
     @Rule
     public ActivityTestRule<MainActivity> rule =
             new ActivityTestRule<>(MainActivity.class, true, true);
@@ -37,6 +36,7 @@ public class AddHabitTest {
     // grant permission
     @Rule
     public GrantPermissionRule mRuntimePermissionRule = GrantPermissionRule.grant(Manifest.permission.CAMERA);
+
 
     /**
      * Runs before all tests and creates solo instance.
@@ -55,46 +55,40 @@ public class AddHabitTest {
     public void start() throws Exception{
         Activity activity = rule.getActivity();
     }
-//
+
+    /**
+     * Clicks on Activity in the event page,
+     * Tests the MainPage UI goes to Login page and checks the activity and adds the data
+     * to the fields and verify change in activity
+     */
     @Test
-    public void addHabitTest() {
-        FirebaseFirestore db;
+    public void checkCamera(){
+
+        //same code as activehabitinfotest at first
+
         //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+
         // Go to next activity login
         solo.clickOnButton("Login");
         solo.assertCurrentActivity("Wrong Activity", Login.class);
 
         // enter the data and test
-        solo.enterText((EditText) solo.getView(R.id.email), "asad@gmail.com");
-        solo.enterText((EditText) solo.getView(R.id.password), "123456");
+        solo.enterText((EditText) solo.getView(R.id.email), "a@gmail.com");
+        solo.enterText((EditText) solo.getView(R.id.password), "1");
         solo.clickOnButton("Login");
 
+        //not sure if this is needed
         // check if activity switched properly
         solo.assertCurrentActivity("Wrong Activity", MainPageTabs.class);
 
-        solo.clickOnText("List of Habits");
-        FloatingActionButton fab = (FloatingActionButton) solo.getCurrentActivity().findViewById(R.id.add_habit_button);
+        solo.clickLongOnText(("go outside"));
 
-        solo.clickOnView(fab);
+        //not sure how to get to events tab from here, especially if the event is null
+        solo.clickOnButton("Camera");
+        //not sure what to do after the camera is clicked, i looked up that robotium isnt able to run tests outside the app and i wonder if the camera is considered the phone and not the app itself
 
-        solo.enterText((EditText) solo.getView(R.id.habit_title_edit_text), "Hiking");
-
-        solo.clickOnView(solo.getView(R.id.switch_1));
-
-        ImageButton button = (ImageButton) solo.getCurrentActivity().findViewById(R.id.edit_habit_check);
-
-        solo.enterText((EditText) solo.getView(R.id.habit_reason_edit_text), "I like it");
-        solo.clickOnView(button);
-
-<<<<<<< HEAD
-
-
-=======
-        solo.goBack();
->>>>>>> main
     }
-
 
     /**
      * Close activity after each test
@@ -105,5 +99,3 @@ public class AddHabitTest {
         solo.finishOpenedActivities();
     }
 }
-
-

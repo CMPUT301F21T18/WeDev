@@ -31,7 +31,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public class AddFriends extends AppCompatActivity {
@@ -46,7 +45,6 @@ public class AddFriends extends AppCompatActivity {
     FirebaseFirestore db;
 
     public static String email = MainPageTabs.email;
-    public static String addFriendEmail ;
 
 
     @Override
@@ -75,6 +73,7 @@ public class AddFriends extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     if (task.getResult().exists()) {
                                         Toast.makeText(AddFriends.this, "Follow request sent", Toast.LENGTH_SHORT).show();
+
                                     } else {
                                         Toast.makeText(AddFriends.this, "This user does not exist in the database", Toast.LENGTH_SHORT).show();
                                     }
@@ -87,6 +86,9 @@ public class AddFriends extends AppCompatActivity {
                     // update the received requests list of other user
                     DocumentReference documentRef1 = db.collection("Received Requests").document(userName);
                     documentRef1.update("Received Requests", FieldValue.arrayUnion(MainPageTabs.email));
+
+
+
                 }
             }
         });

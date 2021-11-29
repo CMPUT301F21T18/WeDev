@@ -8,11 +8,11 @@
     android:orientation="vertical"
     tools:context=".ListOfHabitsMainPageFrag">
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/habit_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </ListView>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_habit_button"

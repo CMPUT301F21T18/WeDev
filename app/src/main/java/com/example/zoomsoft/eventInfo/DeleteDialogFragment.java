@@ -14,6 +14,9 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.zoomsoft.R;
 
+/**
+ * Class of a fragment that asks if the user wants to delete the habit event.
+ */
 public class DeleteDialogFragment extends DialogFragment {
 
     public DeleteDialogFragment() {
@@ -22,6 +25,11 @@ public class DeleteDialogFragment extends DialogFragment {
 
     public static boolean isDeleted = false;
 
+    /**
+     *
+     * @param savedInstanceState The last saved instance state of the Fragment, or null if this is a freshly created Fragment.
+     * @return A new Dialog instance to be displayed by the Fragment.
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

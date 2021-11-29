@@ -19,9 +19,9 @@ public class FriendsHabitsDisplay<dataBase> extends AppCompatActivity {
         friendsHabitsFirebase.getFriendsHabits(new FriendsHabitsFirebase.FriendsHabitsInterface() {
             @Override
             public void callBackFriendsHabits(ArrayList<String> friendsHabits) {
-                FriendsArrayAdapter friendsHabitArrayAdapter = new FriendsArrayAdapter(getApplicationContext(),friendsHabits);
+                FriendsHabitsArrayAdapter friendsHabitsArrayAdapter = new FriendsHabitsArrayAdapter(getApplicationContext(),friendsHabits);
                 friendsHabitsList = findViewById(R.id.friends_habits_list);
-                friendsHabitsList.setAdapter(friendsHabitArrayAdapter);
+                friendsHabitsList.setAdapter(friendsHabitsArrayAdapter);
             }
         });
 

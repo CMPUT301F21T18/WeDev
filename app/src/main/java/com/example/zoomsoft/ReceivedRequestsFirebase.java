@@ -14,7 +14,9 @@ import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
 import java.util.Map;
-
+/**
+ * ReceivedRequestFirebase class
+ */
 public class ReceivedRequestsFirebase {
 
     public String  email = MainPageTabs.email; //

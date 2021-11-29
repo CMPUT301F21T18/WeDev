@@ -1,16 +1,13 @@
 package com.example.zoomsoft;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-
-import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,37 +23,54 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Gets the view that displays the friends habits with the progress bar
- */
-public class FriendsHabitsArrayAdapter extends  ArrayAdapter<String>{
+public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.MyViewHolder> {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String email = MainPageTabs.email;
+    Source source = Source.SERVER;
     int totalDone;
     int count;
-    FirebaseFirestore db;
-    Source source = Source.SERVER;
-    public String  friendsEmail = ViewFriendsHabit.friendEmail;
 
+    private ArrayList<String> habitNames;
+    private RecyclerViewClickListener listener;
 
-    public FriendsHabitsArrayAdapter(Context context, ArrayList<String> friendsHabitsArrayList) {
-        super(context,R.layout.friends_habits_content,friendsHabitsArrayList);
+    public  RecyclerAdaptor(ArrayList<String> habitNames, RecyclerViewClickListener listener){
+        this.habitNames = habitNames;
+        this.listener = listener;
     }
-    @NonNull
-    @Override
-    public View getView(int position, @Nullable View view, @NonNull ViewGroup parent ){
-        String friendsHabit = getItem(position);
-        if(view == null) {
-            view = LayoutInflater.from(getContext()).inflate(R.layout.friends_habits_content, parent, false);
+
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        private TextView habit;
+        private ProgressBar progressBar;
+
+        public MyViewHolder(final View view){
+            super(view);
+            habit = view.findViewById(R.id.content_habit_name);
+            progressBar = view.findViewById(R.id.progress_bar);
+            view.setOnClickListener(this);
         }
 
-        ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.friend_progress_bar);
+        @Override
+        public void onClick(View v) {
+            listener.onClick(v, getAdapterPosition());
+        }
+    }
 
-        TextView item = view.findViewById(R.id.friends_habit_item);
-        item.setText(friendsHabit);
+    @NonNull
+    @Override
+    public RecyclerAdaptor.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        db = FirebaseFirestore.getInstance();
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_of_habits_content, parent, false);
+        return new MyViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerAdaptor.MyViewHolder holder, int position) {
+        String name = habitNames.get(position);
+        holder.habit.setText(name);
 
         final CollectionReference collectionReference = db.collection("Events");
-        DocumentReference documentReference = collectionReference.document(friendsEmail);
+        DocumentReference documentReference = collectionReference.document(email);
         documentReference.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -65,7 +79,7 @@ public class FriendsHabitsArrayAdapter extends  ArrayAdapter<String>{
                     if(documentSnapshot.exists()) {
                         List<String> list = new ArrayList<>();
                         Map<String, Object> map = documentSnapshot.getData();
-                        HashMap hashMap = (HashMap) map.get(friendsHabit);
+                        HashMap hashMap = (HashMap) map.get(name);
                         if(hashMap == null) return;
                         //dateList.clear();
                         List<Boolean> dateList = new ArrayList<>();
@@ -87,8 +101,8 @@ public class FriendsHabitsArrayAdapter extends  ArrayAdapter<String>{
                             }
                         }
                         totalDone = dateList.size();
-                        progressBar.setMax(totalDone);
-                        progressBar.setProgress(count);
+                        holder.progressBar.setMax(totalDone);
+                        holder.progressBar.setProgress(count);
                     }
                 }
                 else {
@@ -96,8 +110,14 @@ public class FriendsHabitsArrayAdapter extends  ArrayAdapter<String>{
                 }
             }
         });
+    }
 
-        return view;
+    @Override
+    public int getItemCount() {
+        return habitNames.size();
+    }
+
+    public interface RecyclerViewClickListener{
+        void onClick(View view, int position);
     }
 }
-

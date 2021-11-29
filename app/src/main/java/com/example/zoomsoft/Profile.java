@@ -1,5 +1,9 @@
 package com.example.zoomsoft;
 // The profile item
+
+/**
+ * Profile Class holds Item
+ */
 public class Profile{
     String item;
 

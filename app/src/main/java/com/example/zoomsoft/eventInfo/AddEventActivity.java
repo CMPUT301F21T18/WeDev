@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -12,6 +13,10 @@ import android.widget.Switch;
 import com.example.zoomsoft.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+/**
+ * This class adds a new habit event.
+ */
 public class AddEventActivity extends AppCompatActivity {
 
     Switch doneSwitch;
@@ -19,7 +24,12 @@ public class AddEventActivity extends AppCompatActivity {
     ImageButton cancelButton;
     DatePicker datePicker;
     EditText commentEditText;
+    Button locationButton;
 
+    /**
+     * Run when the page loads
+     * @param savedInstanceState Gives the ability to restore the previous state under special circumstances.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +76,12 @@ public class AddEventActivity extends AppCompatActivity {
                     completionStatus = false;
                 }
 
+                ArrayList<String> locationList = new ArrayList<>();
+                locationList.add("N");
+                locationList.add("N");
+
                 HabitEventFirebase habitEventFirebase = new HabitEventFirebase();
-                habitEventFirebase.addHabitEvent(date, comment, completionStatus);
+                habitEventFirebase.addHabitEvent(date, comment, completionStatus, locationList);
 
                 finish();
 
@@ -81,6 +95,8 @@ public class AddEventActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
 
 }
