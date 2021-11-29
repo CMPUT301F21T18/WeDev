@@ -56,7 +56,7 @@ public class MainActivityTest {
      */
     @Test
     public void checkChangeActivityToLogin(){
-        //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        //Asserts that the current activity is the MainActivity. Otherwise, show
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity showActivity
         solo.clickOnButton("Login");
@@ -68,7 +68,7 @@ public class MainActivityTest {
      */
     @Test
     public void checkChangeActivityToRegistration(){
-        //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        //Asserts that the current activity is the MainActivity. Otherwise, show
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity showActivity
         solo.clickOnButton("Register");

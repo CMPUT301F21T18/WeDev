@@ -63,7 +63,7 @@ public class LoginActivityTest {
     @Test
     // perfect login
     public void checkLoginProcess(){
-        //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        //Asserts that the current activity is the MainActivity. Otherwise, show
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity login
         solo.clickOnButton("Login");
@@ -82,7 +82,7 @@ public class LoginActivityTest {
     @Test
     // invalid login
     public void invalidLogin(){
-        //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        //Asserts that the current activity is the MainActivity. Otherwise, show
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity login
         solo.clickOnButton("Login");

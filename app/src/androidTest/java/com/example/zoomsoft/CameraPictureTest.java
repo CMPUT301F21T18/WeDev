@@ -60,7 +60,7 @@ public class CameraPictureTest {
     @Test
     public void checkCamera(){
 
-        //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        //Asserts that the current activity is the MainActivity. Otherwise, show
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
         // Go to next activity login

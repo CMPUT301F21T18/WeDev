@@ -54,7 +54,7 @@ public class HabitEventTest {
         solo = new Solo(InstrumentationRegistry.getInstrumentation(),rule.getActivity());
 
         // Goes to event tab before starting each tests
-        //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        //Asserts that the current activity is the MainActivity. Otherwise, show
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity login
         solo.clickOnButton("Login");

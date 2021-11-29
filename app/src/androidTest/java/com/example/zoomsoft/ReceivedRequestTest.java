@@ -63,7 +63,7 @@ public class ReceivedRequestTest {
     @Test
     public void receivedRequestTest(){
         FirebaseFirestore db;
-        //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        //Asserts that the current activity is the MainActivity. Otherwise, show
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         // Go to next activity login
         solo.clickOnButton("Login");
