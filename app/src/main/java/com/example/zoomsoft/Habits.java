@@ -2,6 +2,9 @@ package com.example.zoomsoft;
 
 import java.util.ArrayList;
 
+/**
+ * Stores all the habit information
+ */
 public class Habits {
 
     private String habitTitle;

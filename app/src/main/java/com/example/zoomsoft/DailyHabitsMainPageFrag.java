@@ -36,6 +36,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * @DailyHabitsMainPageFrag
+ * Shows the habits that occur today
+ */
+
 public class DailyHabitsMainPageFrag extends Fragment {
 
     ArrayList<String> habitDataList = new ArrayList<>();
