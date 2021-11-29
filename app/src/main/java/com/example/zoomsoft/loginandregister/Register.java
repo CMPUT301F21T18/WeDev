@@ -26,6 +26,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Activity class for the register screen.
+ */
 public class Register extends AppCompatActivity {
 
     protected EditText usernameEditText;
@@ -93,19 +96,6 @@ public class Register extends AppCompatActivity {
                                     //display alert
                                 }
                                 else {
-                                    //not such document
-                                    //create a new document
-                                    // Add a new document with a generated id.
-//                                    Map<String, Object> data = new HashMap<>();
-//                                    data.put(email, new HashMap<>());
-//
-//                                    db.collection("Events")
-//                                            .add(data).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-//                                        @Override
-//                                        public void onComplete(@NonNull Task<DocumentReference> task) {
-//                                            Log.d(TAG, "Events Created");
-//                                        }
-//                                    });
                                     collectionReference
                                             .document(email)
                                             .set(data)

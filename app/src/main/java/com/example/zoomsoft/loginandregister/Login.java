@@ -23,6 +23,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/**
+ * Activity class for the login screen.
+ */
 public class Login extends AppCompatActivity {
 
     protected EditText emailEditText;
@@ -81,21 +84,3 @@ public class Login extends AppCompatActivity {
         });
     }
 }
-
-
-//    DocumentReference docRef = db.collection("cities").document("SF");
-//docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//@Override
-//public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//        if (task.isSuccessful()) {
-//        DocumentSnapshot document = task.getResult();
-//        if (document.exists()) {
-//        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-//        } else {
-//        Log.d(TAG, "No such document");
-//        }
-//        } else {
-//        Log.d(TAG, "get failed with ", task.getException());
-//        }
-//        }
-//        });
