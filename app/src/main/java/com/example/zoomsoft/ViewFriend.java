@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 /**
- * ViewFriends allows a doer to see a certain user's list of Habits
+ * ViewFriends generates the ability to have a list of friends to see
  */
 public class ViewFriend<dataBase> extends AppCompatActivity {
     public static final String EXTRA_TEXT2 = "com.example.zoomsoft.EXTRA_TEXT";
@@ -28,7 +28,7 @@ public class ViewFriend<dataBase> extends AppCompatActivity {
 
     @Override
     /**
-     *
+     * initializes firebase connectivity with friends
      * @param savedInstanceState
      */
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class ViewFriend<dataBase> extends AppCompatActivity {
         friendsFirebase.getFriend(new FriendsFirebase.FriendsInterface() {
             @Override
             /**
-             *
+             * callBackFriends initializes FriendsArrayAdapter
              * @param friends
              */
             public void callBackFriends(ArrayList<String> friends) {
@@ -50,7 +50,7 @@ public class ViewFriend<dataBase> extends AppCompatActivity {
                 friendsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     /**
-                     *
+                     * database connectivity with friend name
                      * @param parent
                      * @param view
                      * @param position
@@ -66,7 +66,7 @@ public class ViewFriend<dataBase> extends AppCompatActivity {
                                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     /**
-                                     *
+                                     * onComplete check
                                      * @param task
                                      */
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {

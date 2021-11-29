@@ -14,12 +14,17 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
-
+/**
+ *  ProfileMainPageFragment
+ */
 public class ProfileMainPageFragment extends Fragment {
     ArrayList<Profile> profileDataList = new ArrayList<>();
     ArrayAdapter profileAdaptor;
     @Nullable
     @Override
+    /**
+     *
+     */
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile, container, false);
         ListView profileList = view.findViewById(R.id.profile_list);
