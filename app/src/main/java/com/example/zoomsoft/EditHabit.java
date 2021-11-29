@@ -2,6 +2,7 @@ package com.example.zoomsoft;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -9,12 +10,22 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.zoomsoft.eventInfo.HabitInfo;
 import com.example.zoomsoft.eventInfo.HabitInfoFirebase;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EditHabit extends AppCompatActivity {
 
@@ -173,8 +184,33 @@ public class EditHabit extends AppCompatActivity {
             }
         });
 
-        addButton = findViewById(R.id.edit_habit_check);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Source source = Source.SERVER;
+        String email = MainPageTabs.email;
 
+        final CollectionReference collectionReference = db.collection("Events");
+        DocumentReference documentReference = collectionReference.document(email);
+        documentReference.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if(documentSnapshot.exists()) {
+                        Map<String, Object> map = documentSnapshot.getData();
+                        Log.d("Map provided: ", map.toString());
+                        HashMap hashMap = (HashMap) map.get(HabitInfo.clickedHabit);
+                        if(hashMap == null) return;
+                        String description = (String) hashMap.get("description");
+                        habitDescription.setText(description);
+                    }
+                }
+                else {
+                    int x = 6; //will decide on this later
+                }
+            }
+        });
+
+        addButton = findViewById(R.id.edit_habit_check);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,6 +233,7 @@ public class EditHabit extends AppCompatActivity {
                 int newYear = startDate.getYear();
                 String date = newYear+"-"+newMonth+"-"+newDay;
                 String reason = habitReason.getText().toString();
+                String description = habitDescription.getText().toString();
 
                 //Reading the switches and setting days of the week
                 dayOfWeek = findViewById(R.id.switch_1);
@@ -252,7 +289,7 @@ public class EditHabit extends AppCompatActivity {
                 if(title.isEmpty()) Toast.makeText(EditHabit.this,
                         "Title must have name", Toast.LENGTH_LONG).show();
                 else{
-                    habitInfoFirebase.editHabit(habit);
+                    habitInfoFirebase.editHabit(habit, description);
 
                     Toast.makeText(EditHabit.this,
                             "Fields Edited Accordingly", Toast.LENGTH_LONG).show();

@@ -40,7 +40,6 @@ public class AddEventActivity extends AppCompatActivity {
         cancelButton = findViewById(R.id.add_event_cancel_button);
         datePicker = findViewById(R.id.add_event_datePicker);
         commentEditText = findViewById(R.id.event_comment_edit_text);
-        locationButton = findViewById(R.id.add_event_location_button);
 
         //For the switch to change text to done or not done on screen
         doneSwitch.setOnClickListener(new View.OnClickListener() {
