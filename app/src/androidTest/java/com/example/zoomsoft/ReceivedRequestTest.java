@@ -160,6 +160,8 @@ public class ReceivedRequestTest {
         solo.assertCurrentActivity("Wrong Activity", ViewFriend.class);
 
         assertTrue(solo.searchText("asadtest@gmail.com"));  // email should exist in view friend page
+        assertFalse(solo.searchText("asadtest1@gmail.com"));  // email shouldn't exist in view friend page
+
 
 
     }

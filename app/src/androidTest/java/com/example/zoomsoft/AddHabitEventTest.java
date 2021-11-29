@@ -2,14 +2,16 @@ package com.example.zoomsoft;
 
 import android.Manifest;
 import android.app.Activity;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 
+import com.example.zoomsoft.eventInfo.AddEventActivity;
+import com.example.zoomsoft.eventInfo.HabitInfo;
 import com.example.zoomsoft.loginandregister.Login;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,10 +25,10 @@ import org.junit.runner.RunWith;
 
 
 /**
- * Test class for Add Habit Activity . All the UI tests are written here. Robotium test framework is used
+ * Test class for Add Habit Event Activity . All the UI tests are written here. Robotium test framework is used
  */
 @RunWith(AndroidJUnit4.class)
-public class AddHabitTest {
+public class AddHabitEventTest {
 
     private Solo solo;
 
@@ -55,9 +57,13 @@ public class AddHabitTest {
     public void start() throws Exception{
         Activity activity = rule.getActivity();
     }
-//
+
+    /**
+     * Tests the Add habit event activity, and checks if database
+     * is updated accordingly at each instance
+     */
     @Test
-    public void addHabitTest() {
+    public void addHabitEventTest() {
         FirebaseFirestore db;
         //Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
@@ -74,20 +80,29 @@ public class AddHabitTest {
         solo.assertCurrentActivity("Wrong Activity", MainPageTabs.class);
 
 
+        // profile tab
         solo.clickOnText("List of Habits");
-        FloatingActionButton fab = (FloatingActionButton) solo.getCurrentActivity().findViewById(R.id.add_habit_button);
 
+        // habit
+        solo.clickOnText("Bowling");
+        solo.assertCurrentActivity("Wrong Activity", HabitInfo.class);
 
-        solo.clickOnView(fab);
+        // profile tab
+        solo.clickOnText("EVENT");
 
-        solo.enterText((EditText) solo.getView(R.id.habit_title_edit_text), "Bowling");
+        // click on add floating button
+        FloatingActionButton addFab = (FloatingActionButton) solo.getCurrentActivity().findViewById(R.id.add_event_button);
+        solo.clickOnView(addFab);
 
-        solo.clickOnView(solo.getView(R.id.switch_1));
+        // changed activity
+        solo.assertCurrentActivity("Wrong Activity", AddEventActivity.class);
 
-        ImageButton button = (ImageButton) solo.getCurrentActivity().findViewById(R.id.edit_habit_check);
+        // set the date
+        DatePicker datePicker = (DatePicker) solo.getCurrentActivity().findViewById(R.id.add_event_datePicker);
+        solo.setDatePicker(datePicker, 2012, 2, 16);
 
-        solo.enterText((EditText) solo.getView(R.id.habit_reason_edit_text), "I like Bowling");
-        solo.clickOnView(button);
+        solo.enterText((EditText) solo.getView(R.id.event_comment_edit_text), "Finished the Event");
+
 
 
 
