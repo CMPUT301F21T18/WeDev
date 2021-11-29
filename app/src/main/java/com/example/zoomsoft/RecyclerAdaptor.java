@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
+ * RecyclerAdaptor deals with progressbar as well as the editevent details
  */
 public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.MyViewHolder> {
 
@@ -38,7 +38,7 @@ public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.MyView
     private RecyclerViewClickListener listener;
 
     /**
-     * initializes 
+     * initializes habitNames and listener
      * @param habitNames
      * @param listener
      */

@@ -1,5 +1,7 @@
 package com.example.zoomsoft;
 
+import static org.junit.Assert.assertFalse;
+
 import android.Manifest;
 import android.view.View;
 import android.widget.Button;
@@ -88,6 +90,7 @@ public class HabitEventTest {
         // Add habit event test
 
         // click on add floating button
+
         FloatingActionButton addFab = (FloatingActionButton) solo.getCurrentActivity().findViewById(R.id.add_event_button);
         solo.clickOnView(addFab);
 
@@ -109,7 +112,8 @@ public class HabitEventTest {
 
         // verify if the data exists on screen
         solo.assertCurrentActivity("Wrong Activity", AddEventActivity.class);
-        solo.searchText("2012-2-16");
+        solo.sleep(2000);
+        solo.searchText("2012-3-16");
         solo.searchText("Done");
 
     }
@@ -176,9 +180,24 @@ public class HabitEventTest {
      * is updated accordingly at each instance
      */
     @Test
-    public void deleteHabitEvenTest() {
-        // edit habit event test
-        solo.clickOnText("2021-7-28");
+    public void deleteHabitEventTest() {
+        // delete habit event test
+
+        // add event before deleting
+        FloatingActionButton addFab = (FloatingActionButton) solo.getCurrentActivity().findViewById(R.id.add_event_button);
+        solo.clickOnView(addFab);
+
+
+        // set the date
+        DatePicker datePicker12 = (DatePicker) solo.getView(R.id.add_event_datePicker);
+        solo.setDatePicker(datePicker12, 2000, 7, 28);
+
+        solo.enterText((EditText) solo.getView(R.id.event_comment_edit_text), "Finished");
+        // finish adding
+        View doneButton = (View) solo.getCurrentActivity().findViewById(R.id.add_event_confirm_button);
+        solo.clickOnView(doneButton);
+
+        solo.clickOnText("2000-8-28");
         solo.searchText("Bowling");
 
         // edit the event
@@ -186,8 +205,8 @@ public class HabitEventTest {
         solo.clickOnView(deleteFab);
 
         // shouldn't exists
-        solo.searchText("2021-7-28");
-
+        solo.sleep(2000);
+        assertFalse(solo.searchText("2000-8-28"));
     }
 
     /**
