@@ -54,7 +54,7 @@ public class HabitEventFirebase {
 
     /**
      * This function gets the description of the habit that was clicked
-     * @param myCallBack
+     * @param myCallBack Interface for interacting with firebase.
      */
     public void getHabitDescription(MyCallBack myCallBack) {
         String habitDescription = "";
@@ -83,9 +83,8 @@ public class HabitEventFirebase {
 
     /**
      * This function gets all the dates and store them as an arraylist
-     * @param myCallBack
+     * @param myCallBack Interface for interacting with firebase.
      */
-
     public void getAllDates(MyCallBack myCallBack) {
         final CollectionReference collectionReference = db.collection("Events");
         DocumentReference documentReference = collectionReference.document(email);
@@ -124,7 +123,7 @@ public class HabitEventFirebase {
 
     /**
      * This method returns the habit's comment
-     * @param myCallBack
+     * @param myCallBack Interface for interacting with firebase.
      */
 
     public void getHabitClickedDetails(MyCallBack myCallBack) {
@@ -150,7 +149,7 @@ public class HabitEventFirebase {
 
     /**
      * This function deletes an event
-     * @param event
+     * @param event The name of the event to be deleted
      */
     public void deleteHabitEvent(String event) {
         final CollectionReference collectionReference = db.collection("Events");
