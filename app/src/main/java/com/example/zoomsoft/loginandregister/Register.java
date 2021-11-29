@@ -1,6 +1,5 @@
 package com.example.zoomsoft.loginandregister;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,8 +23,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
@@ -53,6 +52,7 @@ public class Register extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password);
         registerButton = findViewById(R.id.register);
         final CollectionReference collectionReference = db.collection("User");
+        final CollectionReference collectionReference2 = db.collection("Friends");
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,9 +62,13 @@ public class Register extends AppCompatActivity {
                 String password = passwordEditText.getText().toString();
                 user = new User(username, email, password);
                 HashMap<String, String> data = new HashMap<>();
+
+                HashMap<String, ArrayList<String>> data2 = new HashMap<>();
                 if(username.length() > 0 && email.length() > 0 && password.length() > 0) {
                     data.put("username", username);
                     data.put("password", password);
+
+                    data2.put("friends", new ArrayList<String>());
 
                     DocumentReference documentReference = db.collection("User").document(email);
                     documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -77,6 +81,7 @@ public class Register extends AppCompatActivity {
                                     // display toast message to the user about the error
                                     Toast.makeText(Register.this,
                                             "User already exists with the email provided", Toast.LENGTH_LONG).show();
+
                                     //use the document to login
 
                                     Log.d(TAG, "User already exists with the email provided");
@@ -107,6 +112,25 @@ public class Register extends AppCompatActivity {
                                                     Intent intent = new Intent(Register.this, MainPageTabs.class);
                                                     intent.putExtra(MainActivity.EXTRA_MESSAGE + "email", email);
                                                     startActivity(intent);
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.d(TAG, "Data could not be added!" + e.toString());
+                                                    //specify an error value
+                                                }
+                                            });
+                                    collectionReference2
+                                            .document(email)
+                                            .set(data2)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Log.d(TAG, "Data has been added successfully!");
+                                                    //call the home activity from here
+                                                    Intent intent = new Intent(Register.this, MainPageTabs.class);
+
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
