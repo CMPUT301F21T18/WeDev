@@ -17,6 +17,13 @@ public class Habits {
         this.habitTitle = habitTitle;
     }
 
+    /**
+     * Holds all parameters for Habits
+     * @param habitTitle
+     * @param startDate
+     * @param habitReason
+     * @param habitWeekDay
+     */
     public Habits(String habitTitle, String startDate, String habitReason, ArrayList<Integer> habitWeekDay) {
         this.habitTitle = habitTitle;
         this.startDate = startDate;
@@ -24,6 +31,14 @@ public class Habits {
         this.habitWeekDay = habitWeekDay;
     }
 
+    /**
+     * Holds all parameters for Habits
+     * @param habitTitle
+     * @param startDate
+     * @param habitReason
+     * @param habitWeekDay
+     * @param privacy
+     */
     public Habits(String habitTitle, String startDate, String habitReason, ArrayList<Integer> habitWeekDay, String privacy) {
         this.habitTitle = habitTitle;
         this.startDate = startDate;
