@@ -32,7 +32,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-
+/**
+ * Sends a friends request to a specified user
+ */
 public class AddFriends extends AppCompatActivity {
 
 
@@ -74,20 +76,20 @@ public class AddFriends extends AppCompatActivity {
                                     if (task.getResult().exists()) {
                                         Toast.makeText(AddFriends.this, "Follow request sent", Toast.LENGTH_SHORT).show();
 
+                                        // update the pending requests list of current user
+                                        DocumentReference documentRef = db.collection("Pending Requests").document(MainPageTabs.email);
+                                        documentRef.update("pending_requests", FieldValue.arrayUnion(userName));
+
+                                        // update the received requests list of other user
+                                        DocumentReference documentRef1 = db.collection("Received Requests").document(userName);
+                                        documentRef1.update("Received Requests", FieldValue.arrayUnion(MainPageTabs.email));
+
+
                                     } else {
                                         Toast.makeText(AddFriends.this, "This user does not exist in the database", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
-                    // update the pending requests list of current user
-                    DocumentReference documentRef = db.collection("Pending Requests").document(MainPageTabs.email);
-                    documentRef.update("pending_requests", FieldValue.arrayUnion(userName));
-
-                    // update the received requests list of other user
-                    DocumentReference documentRef1 = db.collection("Received Requests").document(userName);
-                    documentRef1.update("Received Requests", FieldValue.arrayUnion(MainPageTabs.email));
-
-
 
                 }
             }

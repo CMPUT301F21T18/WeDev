@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 /**
- *  ProfileMainPageFragment
+ *  ProfileMainPageFragment displays the profile page
  */
 public class ProfileMainPageFragment extends Fragment {
     ArrayList<Profile> profileDataList = new ArrayList<>();

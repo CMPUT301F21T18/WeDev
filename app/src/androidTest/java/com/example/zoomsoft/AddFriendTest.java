@@ -3,6 +3,10 @@ package com.example.zoomsoft;
 import android.Manifest;
 import android.widget.EditText;
 
+import android.app.Activity;
+
+import android.widget.EditText;
+
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;

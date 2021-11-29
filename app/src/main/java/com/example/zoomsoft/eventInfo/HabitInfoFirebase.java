@@ -1,11 +1,9 @@
 package com.example.zoomsoft.eventInfo;
 
-import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.zoomsoft.EditHabit;
 import com.example.zoomsoft.Habits;
 import com.example.zoomsoft.MainPageTabs;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,10 +18,11 @@ import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+/**
+ * Firebase class that interacts with events to get the habits and their information.
+ */
 public class HabitInfoFirebase {
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
     public String email = MainPageTabs.email;
@@ -40,9 +39,11 @@ public class HabitInfoFirebase {
     public HabitInfoFirebase() {
     }
 
-    /*
-    This function is responsible for getting the days that the user has selected and populates them
-    in info fragment
+    /**
+     * This function is responsible for getting the days that the user has selected and populates them
+     * in info fragment.
+     *
+     * @param myCallBack Interface for modifying habits in firebase.
      */
     public void getDaysSelected(MyCallBack myCallBack) {
         final CollectionReference collectionReference = db.collection("Events");
@@ -64,8 +65,9 @@ public class HabitInfoFirebase {
         });
     }
 
-    /*
-    This function gets the reason for the clicked Habit
+    /**
+     * This function gets the reason for the clicked Habit
+     * @param myCallBack Interface for modifying habits in firebase.
      */
     public void getHabitReason(MyCallBack myCallBack) {
         String habitReason = "";
@@ -92,6 +94,10 @@ public class HabitInfoFirebase {
         });
     }
 
+    /**
+     * Gets the start date for the habit
+     * @param myCallBack Interface for modifying habits in firebase.
+     */
     public void getHabitStartDate(MyCallBack myCallBack) {
         final CollectionReference collectionReference = db.collection("Events");
         DocumentReference documentReference = collectionReference.document(email);
@@ -116,6 +122,10 @@ public class HabitInfoFirebase {
         });
     }
 
+    /**
+     * Gets the status of the habit.
+     * @param myCallBack Interface for modifying habits in firebase.
+     */
     public void getHabitStatus(MyCallBack myCallBack) {
         String habitReason = "";
         final CollectionReference collectionReference = db.collection("Events");
@@ -141,6 +151,10 @@ public class HabitInfoFirebase {
         });
     }
 
+    /**
+     * Deletes a habit
+     * @param clickedHabit The name of the habit last clicked on
+     */
     public void deleteHabit(String clickedHabit){
         final CollectionReference collectionReference = db.collection("Events");
         DocumentReference documentReference = collectionReference.document(email);
@@ -157,6 +171,11 @@ public class HabitInfoFirebase {
         });
     }
 
+    /**
+     * Edits a habit
+     * @param habits The habit that is being edited.
+     * @param description The description for the habit.
+     */
     public void editHabit(Habits habits, String description){
 
         //get the title

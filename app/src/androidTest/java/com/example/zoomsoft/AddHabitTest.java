@@ -4,6 +4,14 @@ import android.Manifest;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+
+import android.Manifest;
+import android.app.Activity;
+
+import android.widget.EditText;
+import android.widget.ImageButton;
+
+
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
@@ -19,8 +27,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-
 /**
  * Test class for Add Habit Activity . All the UI tests are written here. Robotium test framework is used
  */

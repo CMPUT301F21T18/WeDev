@@ -22,6 +22,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Class to interact with the events collection in firebase to add habit events.
+ */
 public class HabitEventFirebase {
 
     interface MyCallBack {
@@ -49,8 +52,9 @@ public class HabitEventFirebase {
 
     //functions to get different values from firebase:
 
-    /*
-    This function gets the description of the habit that was clicked
+    /**
+     * This function gets the description of the habit that was clicked
+     * @param myCallBack Interface for interacting with firebase.
      */
     public void getHabitDescription(MyCallBack myCallBack) {
         String habitDescription = "";
@@ -77,10 +81,10 @@ public class HabitEventFirebase {
         });
     }
 
-    /*
-    This function gets all the dates and store them as an arraylist
+    /**
+     * This function gets all the dates and store them as an arraylist
+     * @param myCallBack Interface for interacting with firebase.
      */
-
     public void getAllDates(MyCallBack myCallBack) {
         final CollectionReference collectionReference = db.collection("Events");
         DocumentReference documentReference = collectionReference.document(email);
@@ -117,8 +121,9 @@ public class HabitEventFirebase {
     }
 
 
-    /*
-    This method returns the habit's comment
+    /**
+     * This method returns the habit's comment
+     * @param myCallBack Interface for interacting with firebase.
      */
 
     public void getHabitClickedDetails(MyCallBack myCallBack) {
@@ -144,7 +149,7 @@ public class HabitEventFirebase {
 
     /**
      * This function deletes an event
-     * @param event
+     * @param event The name of the event to be deleted
      */
     public void deleteHabitEvent(String event) {
         final CollectionReference collectionReference = db.collection("Events");
@@ -162,6 +167,13 @@ public class HabitEventFirebase {
         });
     }
 
+    /**
+     * Adds a new habit event
+     * @param date Date the event started
+     * @param comment is a short description of the event
+     * @param status Whether the event is done or not
+     * @param locationList A list of the event's locations
+     */
     public void addHabitEvent(String date, String comment, boolean status, ArrayList<String> locationList){
 
         Map<String, Object> newData = new HashMap<>();
@@ -199,13 +211,4 @@ public class HabitEventFirebase {
         });
 
     }
-    /*
-       Map<String, Object> deleteSong = new HashMap<>();
-    deleteSong.put("songList.songName3", FieldValue.delete());
-
-    FirebaseFirestore.getInstance()
-        .collection("yourCollection")
-        .document("yourDocument")
-        .update(deleteSong);
-     */
 }

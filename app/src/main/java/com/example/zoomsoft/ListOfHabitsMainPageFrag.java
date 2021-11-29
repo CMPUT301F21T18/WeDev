@@ -3,15 +3,11 @@ package com.example.zoomsoft;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zoomsoft.eventInfo.HabitInfo;
-import com.example.zoomsoft.eventInfo.HabitInfoDisplay;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -30,6 +25,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+/**
+ * Displays a list of all the users habits
+ */
 
 public class ListOfHabitsMainPageFrag extends Fragment {
 

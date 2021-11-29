@@ -14,6 +14,9 @@ import com.example.zoomsoft.databinding.ActivityHabitInfoBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+/**
+ * Class that interacts with sectionsPagerAdapterEvent to inflate the habit viewal and habit event pages
+ */
 public class HabitInfo extends AppCompatActivity {
 
     private ActivityHabitInfoBinding binding;
@@ -32,23 +35,5 @@ public class HabitInfo extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapterEvent);
         TabLayout tabs = binding.habitInfoTabs;
         tabs.setupWithViewPager(viewPager);
-//        FloatingActionButton fabDelete = binding.fabDelete;
-//        FloatingActionButton fabEdit = binding.fabEdit;
-//
-//        fabDelete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                HabitInfoFirebase habitInfoFirebase = new HabitInfoFirebase();
-//                habitInfoFirebase.deleteHabit(clickedHabit);
-//            }
-//        });
-//
-//        fabEdit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(HabitInfo.this, EditHabit.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 }

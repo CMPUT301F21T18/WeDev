@@ -47,6 +47,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Fragment Activity for the maps page.
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private SearchView searchView;
     private GoogleMap mMap;
@@ -148,6 +151,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
+     * @param googleMap Google maps object
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -160,20 +164,3 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
     }
 }
-
-//Playgrounds
-// inside on map ready method
-// we will be displaying all our markers.
-// for adding markers we are running for loop and
-// inside that we are drawing marker on our map.
-//        for (int i = 0; i < locationArrayList.size(); i++) {
-//
-//            // below line is use to add marker to each location of our array list.
-//            mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(list.get(i)));
-//
-//            // below lin is use to zoom our camera on map.
-//            mMap.animateCamera(CameraUpdateFactory.zoomTo(18.0f));
-//
-//            // below line is use to move our camera to the specific location.
-//            mMap.moveCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
-//        }

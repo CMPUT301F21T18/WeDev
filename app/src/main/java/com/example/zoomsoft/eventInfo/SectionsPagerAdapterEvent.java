@@ -13,7 +13,7 @@ import com.example.zoomsoft.ui.main.PlaceholderFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
+ * one of either the habit viewing tab or the habit event tab.
  */
 public class SectionsPagerAdapterEvent extends FragmentPagerAdapter {
 
