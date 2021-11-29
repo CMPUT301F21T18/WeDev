@@ -1,3 +1,9 @@
+//OnClick implementation for Recycler View
+//https://www.youtube.com/watch?v=vBxNDtyE_Co&ab_channel=BenO%27Brien
+//
+//Drag and Drop feature for Recycler View
+//https://www.youtube.com/watch?v=H9D_HoOeKWM&ab_channel=yoursTRULY
+
 package com.example.zoomsoft;
 
 

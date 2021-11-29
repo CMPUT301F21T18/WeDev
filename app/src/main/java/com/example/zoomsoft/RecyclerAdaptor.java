@@ -1,3 +1,6 @@
+//Recycler View Implementation
+//https://www.youtube.com/watch?v=__OMnFR-wZU&t=611s&ab_channel=BenO%27Brien
+
 package com.example.zoomsoft;
 
 import android.view.LayoutInflater;

@@ -59,7 +59,7 @@ public class DateCustomListAdapter extends ArrayAdapter<String> {
         String val = dataList.get(position);
         TextView textView = view.findViewById(R.id.dateContent);
         TextView textView1 = view.findViewById(R.id.done);
-        if(!doneList.get(position).booleanValue()) textView1.setText("not done");
+        if(!doneList.get(position).booleanValue()) textView1.setText("Not Done");
         textView.setText(val);
         return view;
     }
