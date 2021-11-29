@@ -17,6 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * MainPage firebase connectivity
+ */
 public class MainPageFirebase {
 
     interface MainPageInterface {
@@ -33,6 +36,10 @@ public class MainPageFirebase {
     private final String email = MainPageTabs.email;
     Source source = Source.SERVER;
 
+    /**
+     * Retrieves info for MainPage
+     * @param mainPageInterface
+     */
     public void getListOfHabits(MainPageInterface mainPageInterface){
         final CollectionReference collectionReference = rootRef.collection("Events");
         collectionReference.document(MainPageTabs.email).get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -53,6 +60,11 @@ public class MainPageFirebase {
         });
     }
 
+    /**
+     * generates all temp strings
+     * @param habits
+     * @param description
+     */
     public void addNewHabit(Habits habits, String description){
         final CollectionReference collectionReference = rootRef.collection("Events");
         //get the title
@@ -81,6 +93,11 @@ public class MainPageFirebase {
                 .set(data, SetOptions.merge());
     }
 
+    /**
+     * DailyHabits added to Firebase
+     * @param day
+     * @param mainPageInterface
+     */
     public void getDailyHabits(int day, MainPageInterface mainPageInterface) {
         final CollectionReference collectionReference = rootRef.collection("Events");
         collectionReference.document(MainPageTabs.email).get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

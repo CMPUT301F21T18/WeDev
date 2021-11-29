@@ -12,6 +12,9 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+/**
+ * PendingArrayAdapter holds pending info
+ */
 public class PendingArrayAdapter extends ArrayAdapter<String> {
 
     public PendingArrayAdapter(Context context, ArrayList<String> pendingRequestsArrayList) {

@@ -21,6 +21,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * PendingRequest Values are held here
+ * @param <dataBase>
+ */
 public class PendingRequests<dataBase> extends AppCompatActivity{
     ListView pendingRequestsListView;
     ArrayList<String> pendingRequestsDataList = new ArrayList<>();
@@ -29,6 +33,7 @@ public class PendingRequests<dataBase> extends AppCompatActivity{
 
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pending_requests);

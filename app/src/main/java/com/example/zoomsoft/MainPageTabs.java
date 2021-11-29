@@ -14,11 +14,15 @@ import com.example.zoomsoft.databinding.ActivityMainPageTabsBinding;
 import com.example.zoomsoft.ui.main.SectionsPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
+/**
+ * MainPageTabs holds tab layout information
+ */
 public class MainPageTabs extends AppCompatActivity {
 
     private ActivityMainPageTabsBinding binding;
     public static String email;
     @Override
+    
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
