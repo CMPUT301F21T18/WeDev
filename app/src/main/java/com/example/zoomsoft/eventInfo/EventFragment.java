@@ -61,7 +61,7 @@ public class EventFragment extends DialogFragment {
     private String comment;
     private String date;
     private String photoPath;
-    private String firePath = "images/events/" + MainPageTabs.email + HabitInfo.clickedHabit;
+    private String firePath;
     public static final int CAMERA_REQUEST_CODE = 102;
 
     public EventFragment(String longitude, String latitude, String date, String comment) {
@@ -126,7 +126,7 @@ public class EventFragment extends DialogFragment {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.date_dialog_fragment, null);
         Button button = view.findViewById(R.id.map_button);
         storage = FirebaseStorage.getInstance().getReference();
-
+        firePath = "images/events/" + MainPageTabs.email + HabitInfo.clickedHabit + HabitEventDisplay.clickedDate;
 
         SelectImage = (Button) view.findViewById(R.id.bt_gallery);
         //ProgressDialog = new ProgressDialog(this); this is not working either
