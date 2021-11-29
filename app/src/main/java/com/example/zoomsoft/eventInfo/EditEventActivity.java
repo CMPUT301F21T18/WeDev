@@ -230,7 +230,7 @@ public class EditEventActivity extends AppCompatActivity {
         }
     }
     public void uploadFirebase(String name, Uri uri) {
-        StorageReference photo = storage.child("images/events/" + MainPageTabs.email + HabitInfo.clickedHabit);
+        StorageReference photo = storage.child("images/events/" + MainPageTabs.email + HabitInfo.clickedHabit + HabitEventDisplay.clickedDate);
         photo.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
