@@ -2,22 +2,23 @@ package com.example.zoomsoft;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
+<<<<<<< Updated upstream
 /**
  * ViewFriendsHabit allows a doer to see a certain user's list of Habits
  */
 public class ViewFriendsHabit extends AppCompatActivity{
+=======
+public class ViewFriendsHabit extends AppCompatActivity {
+>>>>>>> Stashed changes
     ListView friendsHabitList;
     public static String friendEmail;
-    FirebaseFirestore db;
 
     /**
      * onCreate runs at the start and has firebase connectivity

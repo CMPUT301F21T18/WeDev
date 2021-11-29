@@ -100,24 +100,6 @@ public class AddFriendTest {
         solo.enterText((EditText) solo.getView(R.id.add_friend_field), "you@gmail.com");
         solo.clickOnButton("Add Friend");     // email shouldn't exist
 
-        db = FirebaseFirestore.getInstance();
-        final CollectionReference collectionReference = db.collection("User");
-        final String userName = "asad@gmail.com";
-        if (userName.length() > 0) {
-            collectionReference
-                    .document(userName)
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.getResult().exists()) {
-                                assertTrue(solo.searchText("asad@gmail.com"));
-                            } else {
-                                assertFalse(solo.searchText("asad@gmail.com"));
-                            }
-                        }
-                    });
-        }
 
         // back to profile tab
         solo.goBack();
