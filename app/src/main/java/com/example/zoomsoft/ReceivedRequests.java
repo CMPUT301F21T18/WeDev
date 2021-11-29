@@ -26,7 +26,7 @@ public class ReceivedRequests extends AppCompatActivity {
     @Override
     /**
      * This function runs at the start
-     * @param savedInstanceState
+     * @param savedInstanceState The last saved instance state of the Fragment, or null if this is a freshly created Fragment.
      * @return
      */
     protected void onCreate(Bundle savedInstanceState ) {

@@ -151,12 +151,6 @@ public class EditEventActivity extends AppCompatActivity {
                     uploadFirebase(file.getName(), imageUri);
                 }
 
-//                Fragment frag = null;
-//                frag = getSupportFragmentManager().findFragmentByTag("EventFragment");
-//                final FragmentTransaction fragTran = getSupportFragmentManager().beginTransaction();
-//                fragTran.detach(frag);
-//                fragTran.attach(frag);
-//                fragTran.commit();
                 finish();
 //                getFragmentManager().beginTransaction().detach(EventFragment.this).attach(EventFragment.this).commit();
                 Toast.makeText(EditEventActivity.this,

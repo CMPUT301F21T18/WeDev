@@ -40,6 +40,7 @@ public class FriendsHabitsArrayAdapter extends  ArrayAdapter<String>{
     public FriendsHabitsArrayAdapter(Context context, ArrayList<String> friendsHabitsArrayList) {
         super(context,R.layout.friends_habits_content,friendsHabitsArrayList);
     }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View view, @NonNull ViewGroup parent ){

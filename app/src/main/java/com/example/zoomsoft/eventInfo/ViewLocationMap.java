@@ -255,7 +255,7 @@ public class ViewLocationMap extends AppCompatActivity {
     }
 
     /**
-     *
+     * Function for getting the user's location.
      */
     private void onGPS() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);

@@ -65,16 +65,6 @@ public class ListOfHabitsMainPageFrag extends Fragment {
             }
         });
 
-//        habitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                String clickedHabit = (String) habitList.getItemAtPosition(i); //Getting name of habit
-//                Intent intent = new Intent(getActivity(), HabitInfo.class); //Adding habit name to intent
-//                intent.putExtra(MainActivity.EXTRA_MESSAGE + "1", clickedHabit);
-//                startActivity(intent);
-//            }
-//        });
-
         addHabitButton = view.findViewById(R.id.add_habit_button);
         addHabitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +104,9 @@ public class ListOfHabitsMainPageFrag extends Fragment {
         return view;
     }
 
+    /**
+     * Listens for when a habit is clicked.
+     */
     private void setOnClickListener() {
         listener = new RecyclerAdaptor.RecyclerViewClickListener() {
             @Override

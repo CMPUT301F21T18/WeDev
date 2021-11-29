@@ -22,6 +22,7 @@ public class ProfileMainPageFragment extends Fragment {
     ArrayAdapter profileAdaptor;
     @Nullable
     @Override
+
     /**
      * Creates the view for the profile main page fragment
      */
