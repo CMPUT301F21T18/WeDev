@@ -1,3 +1,9 @@
+//OnClick implementation for Recycler View
+//https://www.youtube.com/watch?v=vBxNDtyE_Co&ab_channel=BenO%27Brien
+//
+//Drag and Drop feature for Recycler View
+//https://www.youtube.com/watch?v=H9D_HoOeKWM&ab_channel=yoursTRULY
+
 package com.example.zoomsoft;
 
 
@@ -64,16 +70,6 @@ public class ListOfHabitsMainPageFrag extends Fragment {
 
             }
         });
-
-//        habitList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                String clickedHabit = (String) habitList.getItemAtPosition(i); //Getting name of habit
-//                Intent intent = new Intent(getActivity(), HabitInfo.class); //Adding habit name to intent
-//                intent.putExtra(MainActivity.EXTRA_MESSAGE + "1", clickedHabit);
-//                startActivity(intent);
-//            }
-//        });
 
         addHabitButton = view.findViewById(R.id.add_habit_button);
         addHabitButton.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,5 @@
-/*Custom adapter to display habits in a list
-
- */
+//For creating and accessing circular progress bar
+//https://www.youtube.com/watch?v=YsHHXg1vbcc&t=791s&ab_channel=CodinginFlow
 package com.example.zoomsoft;
 
 import android.content.Context;

@@ -1,27 +1,16 @@
 package com.example.zoomsoft;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.zoomsoft.loginandregister.Login;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Activity class for adding a new habit
@@ -128,14 +117,6 @@ public class AddHabit extends AppCompatActivity {
                     mainPageFirebase.addNewHabit(habit, description);
                     Toast.makeText(AddHabit.this,
                             "New Habit Added", Toast.LENGTH_LONG).show();
-//COMMENTS FOR AREESH=================================
-                    //To return back to MainPage once the habit has been added
-                    //Yo, please cancel the codes on intent, we won't know who logged in if you just startActivity MainPageTabs
-                    //There is nothing wrong with those functions I wrote in MainPageFirebase
-                    //To close an activity, just call finish()
-
-//                Intent intent = new Intent(AddHabit.this, MainPageTabs.class);
-//                startActivity(intent);
 
                     finish(); //this is the right thing to do.
                 }

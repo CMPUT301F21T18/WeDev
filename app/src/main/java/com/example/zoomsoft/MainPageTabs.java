@@ -1,6 +1,6 @@
-/*The main activity that sets up the tab display
-  It is called when a user logs in or registers
- */
+//Tabbed Activity
+//https://www.youtube.com/watch?v=h4HwU_ENXYM&ab_channel=CodinginFlow
+
 package com.example.zoomsoft;
 
 import android.app.Activity;
