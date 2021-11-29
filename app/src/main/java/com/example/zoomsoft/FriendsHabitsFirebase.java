@@ -18,7 +18,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * Class for checking firebase to get the habits list of friends
+ */
 public class FriendsHabitsFirebase extends AppCompatActivity {
     public String  email = ViewFriendsHabit.friendEmail;
     Source source = Source.SERVER;

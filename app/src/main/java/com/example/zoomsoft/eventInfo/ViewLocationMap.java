@@ -43,6 +43,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * The activity class for adding a new location to the app.
+ */
 public class ViewLocationMap extends AppCompatActivity {
 
     private static final int REQUEST_LOCATION = 1;
@@ -77,13 +80,6 @@ public class ViewLocationMap extends AppCompatActivity {
                     //GPS is already on
                     try {
                         getLocation();
-                        //if location does not exist in firebase, then add location
-//                        ArrayList<String> locationList = new ArrayList<>(); locationList.add("N");locationList.add("N");
-//                        Map<String, Object> data = new HashMap<>();
-//                        data.put("location", true);
-
-//                        db.collection("cities").document("BJ")
-//                                .set(data, SetOptions.merge());
 
                         final CollectionReference collectionReference = db.collection("Events");
                         DocumentReference documentReference = collectionReference.document(temp);

@@ -17,6 +17,9 @@ import com.google.firebase.firestore.Source;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * The class that implements firebase for a list of friends.
+ */
 public class FriendsFirebase {
     public String  email = MainPageTabs.email; //"a@gmail.com"
     Source source = Source.SERVER;
@@ -35,7 +38,6 @@ public class FriendsFirebase {
      * Gets the list of friends for each user.
      * @param friendsInterface
      */
-
     public void getFriend(FriendsInterface friendsInterface){
         final CollectionReference collectionReference = db.collection("Friends");
         DocumentReference documentReference = collectionReference.document(email);
@@ -55,7 +57,4 @@ public class FriendsFirebase {
         });
 
     }
-
-
-
 }

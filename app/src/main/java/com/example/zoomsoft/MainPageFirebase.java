@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * MainPage firebase connectivity
+ * MainPage firebase connectivity for getting lists of habits.
  */
 public class MainPageFirebase {
 

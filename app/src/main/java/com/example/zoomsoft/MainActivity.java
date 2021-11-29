@@ -15,6 +15,9 @@ import androidx.core.content.ContextCompat;
 import com.example.zoomsoft.loginandregister.Login;
 import com.example.zoomsoft.loginandregister.Register;
 
+/**
+ * Activity class for the starting page where a user either logs in or registers.
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.example.zoomsoft";

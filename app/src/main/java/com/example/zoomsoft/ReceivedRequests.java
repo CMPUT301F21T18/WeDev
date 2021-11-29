@@ -15,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 
 /**
- * ReceivedRequests Class
+ * Activity Class for the page where received requests are viewed.
  */
 public class ReceivedRequests extends AppCompatActivity {
     ListView receivedRequestsListView;

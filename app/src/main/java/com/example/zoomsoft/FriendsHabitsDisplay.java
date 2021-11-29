@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+/**
+ * Activity class for displaying a friend's habit list.
+ */
 public class FriendsHabitsDisplay<dataBase> extends AppCompatActivity {
     ListView friendsHabitsList;
     @Override

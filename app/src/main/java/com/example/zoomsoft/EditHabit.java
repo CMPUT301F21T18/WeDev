@@ -27,6 +27,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Activity class for editing a habit
+ */
 public class EditHabit extends AppCompatActivity {
 
     EditText habitTitle;

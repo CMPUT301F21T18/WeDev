@@ -12,6 +12,9 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+/**
+ * An array adapter class for inflating the view_friend_content page.
+ */
 public class FriendsArrayAdapter extends ArrayAdapter<String> {
 
     public FriendsArrayAdapter(Context context, ArrayList<String> friendsArrayList) {

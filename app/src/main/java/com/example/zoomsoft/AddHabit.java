@@ -23,6 +23,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity class for adding a new habit
+ */
 public class AddHabit extends AppCompatActivity {
 
     EditText habitTitle;

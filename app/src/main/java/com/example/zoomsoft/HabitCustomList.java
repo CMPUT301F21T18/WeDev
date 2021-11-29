@@ -31,6 +31,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Class that controls the progress bars for consistency in following habits.
+ */
 public class HabitCustomList extends ArrayAdapter<String> {
 
     private ArrayList<String> habits;
