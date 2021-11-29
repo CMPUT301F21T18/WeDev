@@ -14,7 +14,9 @@ import com.example.zoomsoft.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-
+/**
+ * This class adds a new habit event.
+ */
 public class AddEventActivity extends AppCompatActivity {
 
     Switch doneSwitch;
@@ -24,6 +26,10 @@ public class AddEventActivity extends AppCompatActivity {
     EditText commentEditText;
     Button locationButton;
 
+    /**
+     * Run when the page loads
+     * @param savedInstanceState Gives the ability to restore the previous state under special circumstances.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
